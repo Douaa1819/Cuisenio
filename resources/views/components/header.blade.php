@@ -1,4 +1,4 @@
-<div class="flex gap-5 justify-between items-start px-2 text-sm font-medium leading-5 uppercase bg-white text-stone-300 shadow-lg">
+<div class="flex gap-5 justify-between items-start px-2  py-1 text-sm font-medium leading-5 uppercase bg-white text-stone-300 shadow-lg">
   <div>
     <img src="{{asset('images/logo.png')}}" alt="logo" class="w-48 h-36">
   </div>
@@ -18,7 +18,7 @@
     </div>
 
     <a href="#" class="px-3 py-2  text-black rounded bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black">Blog</a>
-    <a href="#" class="px-3 py-2 rounded text-black bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black">Account</a>
+    <a href="#" class="px-3 py-2 rounded text-black text-blackbg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black">Account</a>
     <a href="#" class="px-3 py-2 rounded text-black bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black">Logout</a>
     
     <!-- Exemple d'icône pour le changement de thème (à remplacer par votre propre solution) -->
