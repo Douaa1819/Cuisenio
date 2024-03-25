@@ -1,5 +1,5 @@
 <x-head></x-head>
-<x-header></x-header>
+<x-header page='home' />
 
 <!-- Sidebar -->
 <aside class="relative">

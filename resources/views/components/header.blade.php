@@ -1,9 +1,10 @@
+@props(['page'])
 <div class="flex gap-5 justify-between items-start px-2  py-1 text-sm font-medium leading-5 uppercase bg-white text-stone-300 shadow-lg">
   <div>
-    <img src="{{asset('images/logo.png')}}" alt="logo" class="w-48 h-36">
+    <img src="{{asset('images/logo.png')}}" alt="logo" class="w-32  h-24">
   </div>
   <div class="flex gap-5 justify-between my-auto">
-    <a href="#" class="px-3 py-2 rounded text-black bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black">Home</a>
+    <a href="{{ route('home') }}" @if($page == 'home') class="px-3 py-2 rounded text-black text-blackbg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @else class="px-3 py-2  text-black rounded bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @endif>Home</a>
 
     <div class="group relative">
       <button class="px-3 py-2 rounded  text-black bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black flex items-center gap-2">
@@ -17,8 +18,10 @@
       </div>
     </div>
 
-    <a href="#" class="px-3 py-2  text-black rounded bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black">Blog</a>
-    <a href="#" class="px-3 py-2 rounded text-black text-blackbg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black">Account</a>
+    <a href="{{ route('blog') }}" @if($page == 'blog') class="px-3 py-2 rounded text-black text-blackbg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @else class="px-3 py-2  text-black rounded bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @endif>Blog</a>
+
+    <a href="#" @if($page == 'account') class="px-3 py-2 rounded text-black text-blackbg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @else class="px-3 py-2  text-black rounded bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @endif>Account</a>
+
     <a href="#" class="px-3 py-2 rounded text-black bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black">Logout</a>
     
     <!-- Exemple d'icône pour le changement de thème (à remplacer par votre propre solution) -->
