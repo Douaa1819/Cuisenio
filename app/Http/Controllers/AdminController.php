@@ -9,13 +9,13 @@ class AdminController extends Controller
     
     public function index()
     {
-       return view('admin.dashboard');
+       return view('admin.Ingrediants');
     }
 
  
-    public function create()
+    public function shwoUserAcces()
     {
-        //
+        return view('admin.User-acces');
     }
 
     /**
