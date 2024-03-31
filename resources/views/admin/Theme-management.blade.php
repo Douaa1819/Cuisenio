@@ -1,6 +1,6 @@
-<x-dashboard></x-dashboard>
-<div class="flex-grow p-6 lg:pl-80">
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+<x-dashboard>
+<div class="flex-grow p-6 lg:pl-80 pt-28">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md ml-10">
         <div class="pb-4 flex justify-between items-center">
             <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Theme Management</h2>
             <div class="flex items-center">
@@ -51,6 +51,7 @@
         </div>
     </div>
 </div>
+</x-dashboard>
 <script>
     function openModal() {
         document.getElementById('addThemeModal').classList.remove('hidden');

@@ -9,7 +9,7 @@ class AdminController extends Controller
     
     public function index()
     {
-       return view('admin.User-acces');
+       return view('admin.Ingrediants');
     }
 
  
