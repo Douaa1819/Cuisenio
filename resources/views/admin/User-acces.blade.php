@@ -1,8 +1,5 @@
 <x-dashboard></x-dashboard>
 
-
-
-
 <div class="flex-grow p-6 lg:pl-80">
     <div class="flex justify-center items-center h-full">
         <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md w-full max-w-4xl">
