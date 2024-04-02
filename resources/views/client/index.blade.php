@@ -1,4 +1,13 @@
 <x-head></x-head>
+
+<x-main-layout>
+  @section("douaaa")
+
+
+
+  @endsection
+
+</x-main-layout>
 <x-header page='home' />
 
 <!-- Sidebar -->
