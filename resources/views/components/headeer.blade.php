@@ -1,3 +1,5 @@
+
+<x-head></x-head>
 @props(['page'])
 <div class="flex gap-5 justify-between items-start px-2 py-1 text-sm font-medium leading-5 uppercase bg-white text-stone-300 shadow-lg font-sans">
   <div>

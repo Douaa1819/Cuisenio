@@ -28,6 +28,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
         <!-- Article 1 -->
+
         <article class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg my-4">
             <img class="w-full h-48 object-cover" src="https://via.placeholder.com/800x400?text=Healthy+Breakfast+Bowl"
                 alt="Healthy Breakfast Bowl">

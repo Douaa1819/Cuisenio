@@ -14,7 +14,7 @@
 <aside class="relative">
 
   <aside class="relative">
-       <img src="{{ asset('images/slide.jpg')}}"  alt="Cooking with Us" class="w-full  h-96 object-cover" />
+       "  alt="Cooking with Us" class="w-full  h-96 object-cover" />
     <p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-pink-200 text-3xl font-bold shadow-md px-4 py-2 bg-black bg-opacity-50 rounded">Learn to cook the most delicious dishes with us!</p>
 </aside>
     <!-- Categories Section -->
