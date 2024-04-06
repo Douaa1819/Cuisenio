@@ -24,12 +24,12 @@
                                         <input type='email' placeholder='Email'
                                         class="w-full rounded py-2.5 px-4 mt-2 border border-gray-300 text-sm focus:outline-none focus:border-red-300 focus:ring-1 focus:ring-red-500" />
                                         <textarea placeholder='Subject' rows="6"
-                                        class="w-full rounded px-4 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-500"></textarea>
+                                        class="w-full rounded px-4 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-red-300 focus:ring-1 focus:ring-red-500"></textarea>
                                     <textarea placeholder='Message' rows="6"
-                                        class="w-full rounded px-4 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-500"></textarea>
+                                        class="w-full rounded px-4 py-2.5 border border-gray-300 text-sm focus:outline-none focus:border-red-300 focus:ring-1 focus:ring-red-500"></textarea>
                                     <div class="col-span-full">
                                         <button type='submit'
-                                            class="text-white bg-red-400 hover:bg-red-300 font-semibold rounded-md text-sm px-4 py-2.5 w-full">Send
+                                            class="text-white bg-red-300 hover:bg-red-400 font-semibold rounded-md text-sm px-4 py-2.5 w-full">Send
                                             Message</button>
                                     </div>
                                 </form>

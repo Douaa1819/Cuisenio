@@ -40,43 +40,44 @@
             <div class="flex flex-wrap justify-center gap-10">
 
                 <!-- Cake Theme -->
-                <a href="/cakes" class="flex flex-col items-center w-40">
-                    <i class="fas fa-birthday-cake text-6xl text-gray-500"></i>
-                    <h3 class="text-lg font-semibold mt-4">Cakes</h3>
+                <a href="/cakes" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
+                    <i class="fas fa-birthday-cake text-6xl text-gray-500 group-hover:text-gray-700"></i>
+                    <h3 class="text-lg font-semibold mt-4 group-hover:text-gray-800">Cakes</h3>
                     <p>Discover delicious cake recipes for all occasions.</p>
                 </a>
+                
 
                 <!-- Dinner Theme -->
-                <a href="/dinner" class="flex flex-col items-center w-40">
-                    <i class="fas fa-utensils text-6xl text-gray-500"></i>
+                <a href="/dinner" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
+                    <i class="fas fa-utensils text-6xl text-gray-500 group-hover:text-gray-700"></i>
                     <h3 class="text-lg font-semibold mt-4">Dinner</h3>
                     <p>Explore dinner ideas that will satisfy everyone at the table.</p>
                 </a>
 
                 <!-- Sportive Cooking Theme -->
-                <a href="/sportive" class="flex flex-col items-center w-40">
-                    <i class="fas fa-running text-6xl text-gray-500"></i>
+                <a href="/sportive" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
+                    <i class="fas fa-running text-6xl text-gray-500 group-hover:text-gray-700"></i>
                     <h3 class="text-lg font-semibold mt-4">Sportive</h3>
                     <p>Nutritious meals designed for active and healthy lifestyles.</p>
                 </a>
 
                 <!-- Quick Desserts Theme -->
-                <a href="/quick-desserts" class="flex flex-col items-center w-40">
-                    <i class="fas fa-ice-cream text-6xl text-gray-500"></i>
+                <a href="/quick-desserts" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
+                    <i class="fas fa-ice-cream text-6xl text-gray-500 group-hover:text-gray-700"></i>
                     <h3 class="text-lg font-semibold mt-4">Easy & Quick</h3>
                     <p>Simple and fast recipes for your busy schedule.</p>
                 </a>
 
                 <!-- Traditional Theme -->
-                <a href="/traditional" class="flex flex-col items-center w-40">
-                    <i class="fas fa-archway text-6xl text-gray-500"></i>
+                <a href="/traditional" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
+                    <i class="fas fa-archway text-6xl text-gray-500 group-hover:text-gray-700"></i>
                     <h3 class="text-lg font-semibold mt-4">Traditional</h3>
                     <p>Explore the rich flavors of traditional cuisines.</p>
                 </a>
 
                 <!-- Gourmet Theme -->
-                <a href="/gourmet" class="flex flex-col items-center w-40">
-                    <i class="fas fa-wine-glass-alt text-6xl text-gray-500"></i>
+                <a href="/gourmet" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
+                    <i class="fas fa-wine-glass-alt text-6xl text-gray-500 group-hover:text-gray-700"></i>
                     <h3 class="text-lg font-semibold mt-4">Gourmet</h3>
                     <p>Discover fine dining recipes for special occasions.</p>
                 </a>
@@ -97,57 +98,55 @@
             <h2 class="text-4xl font-bold mb-16">Check out our latest tips</h2>
             <div class="flex justify-around gap-8">
                 <div class="w-full lg:w-5/12 flex flex-col gap-4">
-                    <div class="flex items-center border-b border-gray-300 pb-4">
+                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
                         <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
                         <div>
                             <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
                             <p class="mb-4">Day of the Week</p>
                         </div>
                     </div>
-                    <div class="flex items-center border-b border-gray-300 pb-4">
+                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
                         <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 2</h3>
+                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
                             <p class="mb-4">Day of the Week</p>
                         </div>
                     </div>
-                    <div class="flex items-center border-b border-gray-300 pb-4">
+                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
                         <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 3</h3>
+                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
                             <p class="mb-4">Day of the Week</p>
                         </div>
-                    </div>
+                    </div>      
                 </div>
 
 
-                <div class="w-full lg:w-5/12 flex flex-col gap-4">
+                <div class="w-full lg:w-5/12 flex flex-col gap-4 ">
                     <!-- Left Column -->
-                    <div class="flex items-center border-b border-gray-300 pb-4">
+                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
                         <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title</h3>
+                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
                             <p class="mb-4">Day of the Week</p>
                         </div>
                     </div>
 
 
-                    <div class="flex items-center border-b border-gray-300 pb-4">
+                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
                         <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title</h3>
+                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
                             <p class="mb-4">Day of the Week</p>
-
                         </div>
                     </div>
 
 
-                    <div class="flex items-center border-b border-gray-300 pb-4">
+                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
                         <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title</h3>
+                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
                             <p class="mb-4">Day of the Week</p>
-
                         </div>
                     </div>
                     <!-- Items 2 and 3 omitted for brevity, similar structure to Item 1 -->
@@ -262,9 +261,18 @@
                 </div>
             </div>
             <div class="text-right">
-                <button type="button"
-                    class="px-6 py-2 mb-5 mt-8 font-semibold rounded text-sm outline-none border-2 border-[#333] hover:bg-[#333] hover:text-white transition-all duration-300">View
-                    More</button>
+                <button
+                class="overflow-hidden px-4 py-2 mt-5 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
+                View More <span
+                    class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
+                <span
+                    class="absolute w-36 h-32 -top-8 -left-2 bg-pink-200 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"></span>
+                <span
+                    class="absolute w-36 h-32 -top-8 -left-2 bg-red-300 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left"></span>
+                <span
+                    class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2 left-4 z-10">Let's
+                    Goo ! </span>
+            </button>
             </div>
 
 
@@ -272,20 +280,29 @@
 
 
 
-    <section class="flex gap-5 max-md:flex-col md:flex-nowrap pl-10">
-        <div class="flex flex-col w-[63%] max-md:ml-0 max-md:w-full">
-            <div class="flex flex-col px-5 mt-44 font-semibold max-md:mt-10 max-md:max-w-full">
-                <h1 class="text-4xl mt-4 font-bold text-gray-900">
+    <section class="flex gap-5 max-md:flex-col md:flex-nowrap pl-10 items-center">
+        <div class="flex flex-col w-[63%] max-md:w-full justify-center">
+            <div class="flex flex-col px-5 font-semibold max-md:mt-10 max-md:max-w-full">
+                <h1 class="text-4xl font-bold text-gray-900">
                     Everyone can be a <br /> chef in their own kitchen
                 </h1>
-                <p class="mt-10  text-gray-600">
+                <p class="mt-5  text-gray-600">
                     Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et
                     dolore magna aliqut enim ad minim
                 </p>
-                <div class="px-6">
-                    <button type="button"
-                        class="px-6 py-2 mt-8 font-semibold rounded text-sm outline-none border-2 border-[#333] hover:bg-[#333] hover:text-white transition-all duration-300">Learn
-                        More</button>
+                <div class="">
+                    <button
+                class="overflow-hidden px-4 py-2 mt-5 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
+                Learn More <span
+                    class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
+                <span
+                    class="absolute w-36 h-32 -top-8 -left-2 bg-pink-200 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"></span>
+                <span
+                    class="absolute w-36 h-32 -top-8 -left-2 bg-red-300 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left"></span>
+                <span
+                    class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2 left-4 z-10">Let's
+                    Goo ! </span>
+            </button>
                 </div>
             </div>
         </div>
@@ -319,9 +336,17 @@
             <form class="flex flex-wrap justify-center gap-4 ">
                 <input type="email" placeholder="Your email address..."
                     class="p-2 w-full md:w-auto border-2 border-gray-300 rounded-md" />
-                <button type="submit"
-                    class="bg-red-400 hover:bg-orange-600 text-white font-bold p-2 rounded-md transition-colors">
-                    Subscribe
+                    <button
+                    class="overflow-hidden px-2 py-2 mt-5 mb-2 bg-red-300 text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
+                    Subscribe<span
+                        class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
+                    <span
+                        class="absolute w-36 h-32 -top-8 -left-2 bg-pink-200 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"></span>
+                    <span
+                        class="absolute w-36 h-32 -top-8 -left-2 bg-black rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left"></span>
+                    <span
+                        class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2 left-4 z-10">Let's
+                        Goo </span>
                 </button>
             </form>
         </div>
