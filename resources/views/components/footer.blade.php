@@ -7,16 +7,30 @@
       </p>
     </div>
     <div class="flex flex-wrap justify-center gap-8 text-gray-700 mb-10">
-      <a href="#" class="text-lg hover:text-red-500 transition-colors duration-300">Recipes</a>
-      <a href="#" class="text-lg hover:text-red-500 transition-colors duration-300">Blog</a>
-      <a href="#" class="text-lg hover:text-red-500 transition-colors duration-300">Contact</a>
-      <a href="#" class="text-lg hover:text-red-500 transition-colors duration-300">About Us</a>
+      <a href="#" class="text-lg hover:text-red-500 transition-colors duration-300 hover:underline">Recipes</a>
+      <a href="#" class="text-lg hover:text-red-500 transition-colors duration-300 hover:underline">Blog</a>
+      <a href="#" class="text-lg hover:text-red-500 transition-colors duration-300 hover:underline">Contact</a>
+      <a href="#" class="text-lg hover:text-red-500 transition-colors duration-300 hover:underline">About Us</a>
+    </div>
+    
+    <!-- Adjusted Social Icons -->
+    <div class="flex justify-center gap-4 mb-4">
+      <a href="https://www.pinterest.com/chefclubnw/" class="text-red-300 hover:text-red-500 transition-colors duration-300">
+        <i class="fab fa-pinterest fa-lg"></i> <!-- Adjusted size to fa-lg -->
+      </a>
+      <a href="https://www.youtube.com/@cuisinehalimafilali" class="text-red-300 hover:text-red-500 transition-colors duration-300">
+        <i class="fab fa-youtube fa-lg"></i> <!-- Adjusted size to fa-lg -->
+      </a>
+      <a href="https://google.com" class="text-red-300 hover:text-red-500 transition-colors duration-300">
+        <i class="fab fa-google fa-lg"></i> <!-- Adjusted size to fa-lg -->
+      </a>
     </div>
     <div class="text-gray-600 text-center text-sm">
       © 2024 Cuisénio. All rights reserved.
     </div>
   </div>
 </footer>
+
 
 
 

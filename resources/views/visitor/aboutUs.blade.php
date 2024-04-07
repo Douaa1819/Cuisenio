@@ -242,90 +242,108 @@
      {{-- FAQ --}}
      <section class="bg-white dark:bg-gray-900 py-20 font-poppins relative"
          style="font-family: 'Poppins', sans-serif;">
-         <div class="absolute top-0 left-0 z-10 w-full h-auto -mt-1">
-             <svg xmlns="http://www.w3.org/2000/svg" class="transform scale-y-[-1] w-full">
-                 <path d="M0,131.3 Q752,0 1504,131.3" fill="#000" />
+         <div class="absolute top-0 left-0 z-10 w-full h-auto ">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1504 131.3" class="transform scale-y-[1]">
+                 <path d="M0,0 Q752,131.3 1504,0" fill="#F2F2F2" />
              </svg>
          </div>
          <div class="py-24 px-8 max-w-5xl mx-auto flex flex-col md:flex-row gap-12">
-          <div class="flex flex-col text-left basis-1/2">
-              <p class="inline-block font-semibold text-primary mb-4">Insurance FAQ</p>
-              <p class="sm:text-4xl text-3xl font-extrabold text-base-content">Frequently Asked Questions</p>
-          </div>
-          <ul class="basis-1/2">
-              <li>
-                  <button class="relative group flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10 focus:outline-none" aria-expanded="false" onclick="toggleFAQ(this)">
-                      <span class="flex-1 text-base-content">How secure is my insurance information?</span>
-                      <span class="transition">
-                        <!-- Chevron Down Icon -->
-                        <svg class="w-5 h-5 text-red-300" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </span>
-                  </button>
-                  <div class="transition-all duration-300 ease-in-out max-h-0 overflow-hidden" style="transition: max-height 0.3s ease-in-out 0s;">
-                      <div class="pb-5 leading-relaxed">
-                          <div class="space-y-2 leading-relaxed">We prioritize the security of your insurance information. We use advanced encryption and strict data protection measures to ensure your data is safe and confidential.</div>
-                      </div>
-                  </div>
-              </li>
-              <li>
-                  <button class="relative group flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10 focus:outline-none" aria-expanded="false" onclick="toggleFAQ(this)">
-                      <span class="flex-1 text-base-content">How secure is my insurance information?</span>
-                      <span id="arrow" class="transition-all ">
-                        <!-- Chevron Down Icon -->
-                        <svg class="w-5 h-5 text-red-300" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </span>
-                  </button>
-                  <div class="transition-all duration-300 ease-in-out max-h-0 overflow-hidden" style="transition: max-height 0.3s ease-in-out 0s;">
-                      <div class="pb-5 leading-relaxed">
-                          <div class="space-y-2 leading-relaxed">We prioritize the security of your insurance information. We use advanced encryption and strict data protection measures to ensure your data is safe and confidential.</div>
-                      </div>
-                  </div>
-              </li>
-              <li>
-                  <button class="relative group flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10 focus:outline-none" aria-expanded="false" onclick="toggleFAQ(this); arrowTwist('arrow1');" >
-                      <span class="flex-1 text-base-content">How secure is my insurance information?</span>
-                      <span id="arrow1" class="transition">
-                        <!-- Chevron Down Icon -->
-                        <svg class="w-5 h-5 text-red-300" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </span>
-                  </button>
-                  <div class="transition-all duration-300 ease-in-out max-h-0 overflow-hidden" style="transition: max-height 0.3s ease-in-out 0s;">
-                      <div class="pb-5 leading-relaxed">
-                          <div class="space-y-2 leading-relaxed">We prioritize the security of your insurance information. We use advanced encryption and strict data protection measures to ensure your data is safe and confidential.</div>
-                      </div>
-                  </div>
-              </li>
-              
-          </ul>
-      </div>
-      
-      <script>
-          function toggleFAQ(button) {
-              const content = button.nextElementSibling;
-              button.setAttribute("aria-expanded", button.getAttribute("aria-expanded") === "false" ? "true" : "false");
-              content.style.maxHeight = button.getAttribute("aria-expanded") === "true" ? content.scrollHeight + "px" : "0";
-          }
+             <div class="flex flex-col text-left basis-1/2">
+                 <p class="inline-block font-semibold text-primary mb-4">Insurance FAQ</p>
+                 <p class="sm:text-4xl text-3xl font-extrabold text-base-content">Frequently Asked Questions</p>
+             </div>
+             <ul class="basis-1/2">
+                 <li>
+                     <button
+                         class="relative group flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10 focus:outline-none"
+                         aria-expanded="false" onclick="toggleFAQ(this); arrowTwist('arrow3');">
+                         <span class="flex-1 text-base-content">How secure is my insurance information?</span>
+                         <span id="arrow3" class="transition-all">
+                             <!-- Chevron Down Icon -->
+                             <svg class="w-5 h-5 text-red-300" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                     d="M19 9l-7 7-7-7"></path>
+                             </svg>
+                         </span>
+                     </button>
+                     <div class="transition-all duration-300 ease-in-out max-h-0 overflow-hidden"
+                         style="transition: max-height 0.3s ease-in-out 0s;">
+                         <div class="pb-5 leading-relaxed">
+                             <div class="space-y-2 leading-relaxed">We prioritize the security of your insurance
+                                 information. We use advanced encryption and strict data protection measures to ensure
+                                 your data is safe and confidential.</div>
+                         </div>
+                     </div>
+                 </li>
+                 <li>
+                     <button
+                         class="relative group flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10 focus:outline-none"
+                         aria-expanded="false" onclick="toggleFAQ(this); arrowTwist('arrow2');">
+                         <span class="flex-1 text-base-content">How secure is my insurance information?</span>
+                         <span id="arrow2" class="transition-all ">
+                             <!-- Chevron Down Icon -->
+                             <svg class="w-5 h-5 text-red-300" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                     d="M19 9l-7 7-7-7"></path>
+                             </svg>
+                         </span>
+                     </button>
+                     <div class="transition-all duration-300 ease-in-out max-h-0 overflow-hidden"
+                         style="transition: max-height 0.3s ease-in-out 0s;">
+                         <div class="pb-5 leading-relaxed">
+                             <div class="space-y-2 leading-relaxed">We prioritize the security of your insurance
+                                 information. We use advanced encryption and strict data protection measures to ensure
+                                 your data is safe and confidential.</div>
+                         </div>
+                     </div>
+                 </li>
+                 <li>
+                     <button
+                         class="relative group flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10 focus:outline-none"
+                         aria-expanded="false" onclick="toggleFAQ(this); arrowTwist('arrow1');">
+                         <span class="flex-1 text-base-content">How secure is my insurance information?</span>
+                         <span id="arrow1" class="transition-all">
+                             <!-- Chevron Down Icon -->
+                             <svg class="w-5 h-5 text-red-300" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                     d="M19 9l-7 7-7-7"></path>
+                             </svg>
+                         </span>
+                     </button>
+                     <div class="transition-all duration-300 ease-in-out max-h-0 overflow-hidden"
+                         style="transition: max-height 0.3s ease-in-out 0s;">
+                         <div class="pb-5 leading-relaxed">
+                             <div class="space-y-2 leading-relaxed">We prioritize the security of your insurance
+                                 information. We use advanced encryption and strict data protection measures to ensure
+                                 your data is safe and confidential.</div>
+                         </div>
+                     </div>
+                 </li>
 
-          function arrowTwist(arrow){
-            console.log('im here');
-            document.getElementById(arrow).classList.toggle('rotate-180');
-          }
-      </script>
-      
+             </ul>
+         </div>
+         <div class="absolute bottom-0 left-0 z-10 w-full h-auto -mb-0.5">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1504 131.3" class="transform scale-y-[-1]">
+                 <path d="M0,0 Q752,131.3 1504,0" fill="#F2F2F2" />
+             </svg>
+         </div>
+
      </section>
 
 
+     <script>
+         function toggleFAQ(button) {
+             const content = button.nextElementSibling;
+             button.setAttribute("aria-expanded", button.getAttribute("aria-expanded") === "false" ? "true" : "false");
+             content.style.maxHeight = button.getAttribute("aria-expanded") === "true" ? content.scrollHeight + "px" : "0";
+         }
+
+         function arrowTwist(arrow) {
+             document.getElementById(arrow).classList.toggle('rotate-180');
+         }
+     </script>
 
      <x-footer></x-footer>
