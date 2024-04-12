@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Theme extends Model
+class Ingrediant extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
@@ -15,6 +15,4 @@ class Theme extends Model
 {
     return $this->morphMany(Image::class, 'imageable');
 }
-
 }
-

@@ -2,63 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ThemeRequest;
-use App\Models\Theme;
-use App\Services\ThemeService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
+use App\Repositories\ThemeRepositoryInterface;
+use Illuminate\Http\Request;
 
 class ThemeController extends Controller
 {
-    protected $themeService;
-
-    public function __construct(ThemeService $themeService)
+    protected $themes;
+// Inversion of Control (IoC) w Dependency Injection.
+    public function __construct(ThemeRepositoryInterface $themes)
     {
-        $this->themeService = $themeService;
+        $this->themes = $themes;
     }
 
-    public function index(): View
+    public function index()
     {
-        $themes = $this->themeService->getAllThemes();
+        $themes = $this->themes->all();
         return view('themes.index', compact('themes'));
     }
 
+    public function store(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'theme_file' => 'file|image|max:2048', 
+    ]);
 
-    public function create(): View
-    {
-        return view('themes.create');
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
     }
 
+    $theme = $this->themes->create($request->only(['name']));
 
-    public function store(ThemeRequest $request): RedirectResponse
-    {
-        $this->themeService->createTheme($request->validated());
-        return redirect()->route('themes.index')->with('success', 'Thème créé avec succès.');
+    if ($request->hasFile('theme_file')) {
+        $path = $request->file('theme_file')->store('public/images', 'public');
+        // Ajout de l'image dans la table des images
+        $theme->images()->create([
+            'url' => $path
+        ]);
     }
 
-    /**
-     * Affiche un thème spécifique.
-     */
-    public function show(Theme $theme): View
-    {
-        return view('themes.show', compact('theme'));
-    }
-
-    public function edit(Theme $theme): View
-    {
-        return view('themes.edit', compact('theme'));
-    }
-
-
-    public function update(ThemeRequest $request, Theme $theme): RedirectResponse
-    {
-        $this->themeService->updateTheme($theme, $request->validated());
-        return redirect()->route('themes.index')->with('success', 'Thème mis à jour avec succès.');
-    }
-
-    public function destroy(Theme $theme): RedirectResponse
-    {
-        $this->themeService->deleteTheme($theme);
-        return back()->with('success', 'Thème supprimé avec succès.');
-    }
+    return redirect()->back()->with('success', 'Theme added successfully!');
 }
+
+}    

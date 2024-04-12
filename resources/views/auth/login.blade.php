@@ -25,16 +25,33 @@
           </a>
       </div>
         <p class="text-center my-8">or use your email account</p>
-        <form class="space-y-6">
-          <div class="flex items-center border bg-custom-color border-red-300 rounded px-3 py-2">
-            <i class="fas fa-envelope text-red-500 mr-2"></i>
-            <input type="email" id="email" name="email" placeholder="Email" class="flex-1 px-3 py-2 focus:outline-none" />
-          </div>
-            <div class="flex items-center border border-red-300 rounded px-3 py-2">
-              <!-- Replace image with Font Awesome icon for password -->
-              <i class="fas fa-lock text-red-500 mr-2"></i>
-            <input type="password" id="password" name="password" placeholder="Password" class="flex-1 px-3 py-2 focus:outline-none" />
-          </div>
+        <form action="{{route('login-user')}}" method="POST" class="space-y-6">
+          @if(Session::has('success'))
+        <div class="text-green-400">{{Session::get('success')}} </div>
+      </div>
+        @endif
+        @if(Session::has('fail'))
+        <div class="text-red-400">{{Session::get('fail')}} </div>
+      </div>
+        @endif
+        @csrf
+          <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+            <span class="px-3"><i class="far fa-envelope text-red-500"></i></span>
+            <input id="email" class="block mt-1 w-full flex-1 p-3 focus:outline-none" placeholder="Enter Email Address" type="email" name="email" value="{{ old('email') }}"  />
+        </div>
+        @if ($errors->has('email'))
+        <span class="text-red-500  text-sm">{{ $errors->first('email') }}</span>
+    @endif
+      
+        <!-- Password Field -->
+        <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+            <span class="px-3"><i class="fas fa-lock text-red-500"></i></span>
+            <input id="password" class="block mt-1 w-full flex-1 p-3 focus:outline-none" placeholder="Enter Password" type="password" name="password"  />
+      
+        </div>
+        @if ($errors->has('password'))
+        <span class="text-red-500 text-sm mt-4">{{ $errors->first('password') }}</span>
+    @endif
           <a href="#" class="text-red-500 hover:underline">Forgot your password?</a>
           <button type="submit" class="mt-4 px-6 py-3 w-full bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300">Sign In</button>
         </form>

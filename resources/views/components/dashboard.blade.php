@@ -55,12 +55,12 @@
                 Theme Management
             </a>
     
-            <a href="#" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
+            <a href="" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
                 <i class="fas fa-pepper-hot mr-3"></i>
                 Ingredients
             </a>
     
-            <a href="#" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
+            <a href="" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
                 <i class="fas fa-users mr-3"></i>
                 Users-Acces
             </a>

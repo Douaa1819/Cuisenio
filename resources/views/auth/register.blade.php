@@ -24,28 +24,30 @@
         <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
           <span class="px-3"><i class="far fa-user text-red-500 mr-2"></i></span>
       <input id="name" class="block mt-1 w-full flex-1 p-3 focus:outline-none" placeholder="Enter Full Name" type="text" name="name" value="{{ old('name') }}" />
-      @if ($errors->has('name'))
-          <span class="text-red-500 text-xs">{{ $errors->first('name') }}</span>
-      @endif
+ 
   </div>
+  @if ($errors->has('name'))
+  <span class="text-red-500 text-sm">{{ $errors->first('name') }}</span>
+@endif
 
   <!-- Email Field -->
   <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
       <span class="px-3"><i class="far fa-envelope text-red-500"></i></span>
       <input id="email" class="block mt-1 w-full flex-1 p-3 focus:outline-none" placeholder="Enter Email Address" type="email" name="email" value="{{ old('email') }}"  />
-      @if ($errors->has('email'))
-          <span class="text-red-500 text-xs">{{ $errors->first('email') }}</span>
-      @endif
+    
   </div>
+  @if ($errors->has('email'))
+  <span class="text-red-500  font-semibold text-sm">{{ $errors->first('email') }}</span>
+@endif
 
   <!-- Password Field -->
   <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
       <span class="px-3"><i class="fas fa-lock text-red-500"></i></span>
       <input id="password" class="block mt-1 w-full flex-1 p-3 focus:outline-none" placeholder="Enter Password" type="password" name="password"  />
-      @if ($errors->has('password'))
-          <span class="text-red-500 text-xs">{{ $errors->first('password') }}</span>
-      @endif
   </div>
+  @if ($errors->has('password'))
+  <span class="text-red-50 text-sm">{{ $errors->first('password') }}</span>
+@endif
 
   <!-- Confirm Password Field -->
   {{-- <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
@@ -56,7 +58,7 @@
       @endif
   </div> --}}
         <!-- Sign Up Button -->
-        <button type="submit" class="mt-4 px-4 py-3 w-full bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors duration-300 ease-in-out">Sign Up</button>
+        <button type="submit" class="mt-4 px-4 py-3 w-full bg-red-500 text-whi rounded-lg hover:bg-red-600 transition-colors duration-300 ease-in-out">Sign Up</button>
       </form>
       <p class="text-center mt-6 text-sm text-gray-600">Already have an account? <a href="#" class="text-red-500 hover:text-red-600">Sign In</a></p>
     </div>
