@@ -19,6 +19,7 @@ class ThemeRepository implements ThemeRepositoryInterface
     public function create($attributes)
     {
         return Theme::create($attributes);
+        
     }
 
     public function update($id, $attributes)

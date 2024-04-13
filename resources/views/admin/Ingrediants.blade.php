@@ -17,32 +17,39 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
+                        <th scope="col" class="py-3 px-6">Image</th>
                         <th scope="col" class="py-3 px-6">Ingrediant Name</th>
                         <th scope="col" class="py-3 px-6">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="IngrediantTable">
-                    <td>
-
-                    </td>
-
-                    <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="py-6 px-6">Sample Ingrediant</td>
+                    @foreach ($ingrediants as $ingrediant)
+                    @if ($ingrediant->images->isNotEmpty()) 
+                        @foreach ($ingrediant->images as $image)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="py-6 px-6">
-                            <button onclick="openModal(true, 'Sample Ingrediant')"
-                                class="text-green-500 hover:text-orange-300">
+                            <img src="{{ Storage::url($image->url) }}" alt="Ingrediant Image" style="width: 100px; height: auto;">
+
+                        <td class="py-6 px-6">{{ $ingrediant->name }}</td>
+
+                        <td class="py-6 px-6">
+                            <button onclick="openModal(true, '{{ $ingrediant->name }}')" class="text-green-500 hover:text-orange-300">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button onclick="deleteIngrediant('Ingrediant ID')" class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
+                            <form action="{{ route('ingrediants.destroy', $ingrediant->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')  {{-- Specify the method as DELETE --}}
+                                <button type="submit"  onclick="return confirm('Are you sure?')" class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash-alt"></i>Delete</button>
+                            </form>
                         </td>
                     </tr>
-
-
+                    @endforeach
+                    @endif
+                @endforeach
                 </tbody>
             </table>
+            
         </div>
     </div>
 

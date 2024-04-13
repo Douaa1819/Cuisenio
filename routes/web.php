@@ -8,16 +8,19 @@ use App\Http\Controllers\IngrediantController;
 use App\Http\Controllers\UserAccesController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/Theme', function () {
-    return view('admin.Theme-management');
-})->name('themes.index');
-Route::get('/ingrediants', function () {
-    return view('admin.Ingrediants');
-    
-})->name('ho');
+
 Route::post('/Theme', [ThemeController::class, 'store'])->name('themes.store');
 Route::post('/ingrediants', [IngrediantController::class, 'store'])->name('ingrediants.store');
-return view('admin.Ingrediants');
+Route::delete('/ingrediants/{id}', [IngrediantController::class, 'destroy'])->name('ingrediants.destroy');
+Route::get('/ingrediants', [IngrediantController::class, 'see'])->name('ingrediants.index');
+Route::get('/Theme', [ThemeController::class, 'see'])->name('Theme.index');
+
+
+
+Route::put('/Theme/{theme}', [ThemeController::class, 'update'])->name('themes.update');
+Route::delete('/Theme/{id}', [ThemeController::class, 'destroy'])->name('themes.destroy');
+
+
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/register', [CustomAuthController::class, 'register']);
