@@ -15,4 +15,10 @@ class Ingrediant extends Model
 {
     return $this->morphMany(Image::class, 'imageable');
 }
+
+
+public function recipes()
+{
+    return $this->belongsToMany(Recipe::class);  
+}
 }

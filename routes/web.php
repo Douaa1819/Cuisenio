@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngrediantController;
+use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\UserAccesController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +37,13 @@ Route::delete('/ingrediants/{id}', [IngrediantController::class, 'destroy'])->na
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
     Route::get('/user', [HomeController::class, 'see'])->name('user.index');
+    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+    Route::get('/urblog', [HomeController::class, 'urblog'])->name('urblog');
+    Route::get('/More', [HomeController::class, 'more'])->name('more');
+    Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
+//--------------------------------Recipes---------------------------------------------------
 
+Route::get('/Add-recipe', [RecipeController::class, 'index'])->name('recipe.index');
 
 //------------------------------------auth---------------------------------------
     Route::get('/register', [CustomAuthController::class, 'register']);

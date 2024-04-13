@@ -9,7 +9,7 @@
         <a href="{{ route('home') }}" class="{{ $page == 'home' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
             Home
         </a>
-        <a href="" class="{{ $page == 'blog' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
+        <a href="{{ route('urblog') }}" class="{{ $page == 'blog' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
             Blog
         </a>
         <a href="{{ route('about') }}" class="{{ $page == 'about' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
@@ -28,7 +28,8 @@
             <i class="fas fa-chevron-down text-gray-700"></i>
         </button>
         <div id="dropdownContent" class="hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+            <a href="{{ route('user.profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"> Edite Profile</a>
+            <a href="{{ route('recipe.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Add recipes</a>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
         </div>
     </div>

@@ -24,6 +24,22 @@ class HomeController extends Controller
 
         return view('user.index');
     }
+    public function blog(){
+
+        return view('visitor.blog');
+    }
+    public function urblog(){
+
+        return view('user.blog');
+    }
+    public function more(){
+
+        return view('user.readMore');
+    }
+    public function profile(){
+
+        return view('user.profile');
+    }
 
     public function create()
     {
