@@ -16,8 +16,9 @@ Route::get('/ingrediants', [IngrediantController::class, 'see'])->name('ingredia
 Route::get('/Theme', [ThemeController::class, 'see'])->name('Theme.index');
 
 
-
+Route::put('/ingrediants/{ingrediant}', [IngrediantController::class, 'update'])->name('ingredians.update');
 Route::put('/Theme/{theme}', [ThemeController::class, 'update'])->name('themes.update');
+
 Route::delete('/Theme/{id}', [ThemeController::class, 'destroy'])->name('themes.destroy');
 
 
