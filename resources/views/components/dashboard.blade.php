@@ -86,24 +86,8 @@
 </main>
 
 
-    <script>
-      document.getElementById('darkModeToggle').addEventListener('click', () => {
-    const isDarkMode = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
-});
-
-// Initialize dark mode from localStorage
-if (localStorage.getItem('darkMode') === 'true') {
-    document.documentElement.classList.add('dark');
-}
-
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
-            document.getElementById('sidebar').classList.toggle('hidden');
-        }
-
-        // Dark mode toggle
-    </script>
+  
+    
 
 <script>
     document.getElementById('profileDropdown').onclick = function() {

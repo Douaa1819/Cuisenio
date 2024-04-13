@@ -20,6 +20,10 @@ class HomeController extends Controller
 
     }
 
+    public function see(){
+
+        return view('user.index');
+    }
 
     public function create()
     {

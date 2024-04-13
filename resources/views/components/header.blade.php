@@ -1,30 +1,41 @@
 @props(['page'])
-<div class="flex gap-5 justify-between items-start px-2  py-1 text-sm font-medium leading-5 uppercase bg-white text-stone-300 shadow-lg">
-  <div>
-    <img src="{{asset('images/logo.png')}}" alt="logo" class="w-32  h-24">
-  </div>
-  <div class="flex gap-5 justify-between my-auto">
-    <a href="{{ route('home') }}" @if($page == 'home') class="px-3 py-2 rounded text-black text-blackbg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @else class="px-3 py-2  text-black rounded bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @endif>Home</a>
-
-    <div class="group relative">
-      <button class="px-3 py-2 rounded  text-black bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black flex items-center gap-2">
-        THÈMES
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e3aa57455f79d55148f8d7f5ac8a40297bab341b0ca1b49a38a017ede619d540?" class="shrink-0 w-5 h-5">
-      </button>
-      <div class="absolute hidden group-hover:block mt-1 bg-stone-300 text-black rounded shadow-lg">
-        <a href="#" class="block px-4 py-2 hover:bg-stone-400">Thème 1</a>
-        <a href="#" class="block px-4 py-2 hover:bg-stone-400">Thème 2</a>
-        <a href="#" class="block px-4 py-2 hover:bg-stone-400">Thème 3</a>
-      </div>
+<div class="flex justify-between items-center px-4 py-3 bg-white shadow-lg">
+    <div>
+        <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-32 h-24">
+    </div>
+    
+    <div class="flex gap-5">
+        <!-- Navigation Links -->
+        <a href="{{ route('home') }}" class="{{ $page == 'home' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
+            Home
+        </a>
+        <a href="" class="{{ $page == 'blog' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
+            Blog
+        </a>
+        <a href="{{ route('about') }}" class="{{ $page == 'about' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
+            About US
+        </a>
+        <a href="{{ route('contact') }}" class="{{ $page == 'contact' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
+            Contact US
+        </a>
     </div>
 
-    <a href="" @if($page == 'blog') class="px-3 py-2 rounded text-black text-blackbg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @else class="px-3 py-2  text-black rounded bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @endif>Blog</a>
-
-    <a href="#" @if($page == 'account') class="px-3 py-2 rounded text-black text-blackbg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @else class="px-3 py-2  text-black rounded bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black" @endif>Account</a>
-
-    <a href="#" class="px-3 py-2 rounded text-black bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black">Logout</a>
-    
-    <!-- Exemple d'icône pour le changement de thème (à remplacer par votre propre solution) -->
-    
-  </div>
+    <!-- Profile Dropdown -->
+    <div class="relative">
+        <button id="profileDropdown" class="flex items-center space-x-2 bg-white rounded-full p-2 hover:bg-gray-100 focus:outline-none transition-colors">
+            <img class="w-8 h-8 rounded-full" src="https://i.pravatar.cc/300" alt="Profile">
+            <p class="hidden lg:block text-gray-700">Dev</p> <!-- Changed text from 'Chef' to 'Dev' -->
+            <i class="fas fa-chevron-down text-gray-700"></i>
+        </button>
+        <div id="dropdownContent" class="hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+        </div>
+    </div>
 </div>
+
+<script>
+  document.getElementById('profileDropdown').addEventListener('click', function() {
+    document.getElementById('dropdownContent').classList.toggle('hidden');
+  });
+</script>
