@@ -21,7 +21,6 @@ Route::delete('/Theme/{id}', [ThemeController::class, 'destroy'])->name('themes.
 Route::get('/ingrediants', [IngrediantController::class, 'see'])->name('ingrediants.index');
 Route::post('/ingrediants', [IngrediantController::class, 'store'])->name('ingrediants.store');
 Route::put('/ingrediants/{ingrediant}', [IngrediantController::class, 'update'])->name('ingredians.update');
-
 Route::delete('/ingrediants/{id}', [IngrediantController::class, 'destroy'])->name('ingrediants.destroy');
 
 //------------------------------------------------------------------------------------------
@@ -29,9 +28,6 @@ Route::delete('/ingrediants/{id}', [IngrediantController::class, 'destroy'])->na
 
 
 //---------------------------------------Visiteur-----------------------------------------
-
-
-
 
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -44,10 +40,11 @@ Route::delete('/ingrediants/{id}', [IngrediantController::class, 'destroy'])->na
 //--------------------------------Recipes---------------------------------------------------
 
 Route::get('/Add-recipe', [RecipeController::class, 'index'])->name('recipe.index');
+Route::post('/Add-recipe', [RecipeController::class, 'store'])->name('recipe.store');
 
 //------------------------------------auth---------------------------------------
-    Route::get('/register', [CustomAuthController::class, 'register']);
-    Route::get('/login', [CustomAuthController::class, 'login']);
+    Route::get('/register', [CustomAuthController::class, 'register'])->name('register');
+    Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
     Route::post('/register-user', [CustomAuthController::class, 'registerUser'])->name('register-user');
     Route::post('/login-user', [CustomAuthController::class, 'loginUser'])->name('login-user');
  

@@ -48,7 +48,6 @@ class ThemeController extends Controller
     $theme->images()->create([
         'url' => $path
     ]);
-    
 
     return redirect()->back()->with('success', 'Theme added successfully!');
 }

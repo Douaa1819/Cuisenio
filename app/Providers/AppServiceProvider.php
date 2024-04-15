@@ -20,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
         \App\Repositories\IngrediantRepositoryInterface::class,
         \App\Repositories\IngrediantRepository::class
     );
+
+    $this->app->bind(
+        \App\Repositories\RecipeRepositoryInterface::class,
+        \App\Repositories\RecipeRepository::class
+    );
     }
     
     

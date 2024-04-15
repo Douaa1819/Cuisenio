@@ -31,7 +31,7 @@ $user->email =$request->email;
 $user->password = Hash::make($request->password);
 $res = $user->save();
 if($res){
-return back()->with('succes','You have registered successful');
+    return redirect()->route('home')->with('success', 'You have registered successfully');
 }else{
     return back()->with('fail','Somthing wrong                                                                                           ');
 }
@@ -39,26 +39,28 @@ return back()->with('succes','You have registered successful');
 public function loginUser(Request $request){
     $request->validate([
         'email'=>'required|email',
-        'password'=>'required|min:6|max:20',
+        'password'=>'required|min:6',
 
     ]);
     $user=User::where('email','=',$request->email)->first();
     if($user){
         if(Hash::check($request->password,$user->password)){
             $request->session()->put('loginId',$user->id);
-            if($user->role === 'admin') {
+            if ($user->role === 'admin') {
                 return redirect('dashboard');
+            } elseif ($user->role === 'user') {
+                return redirect()->route('user.index')->with('success', 'You have registered successfully');
             } else {
-                return redirect('contact');
+                return redirect('home');
             }
-        }else{
-            return back()->with('fail','password not matches');
-            }
-        
-        return back()->with('succes','You have logine successful');
-        }else{
-            return back()->with('fail','This email not Registered');
+        } else {
+
+            return back()->with('fail', 'Password does not match');
         }
+    } else {
+        // Return back if email is not registered
+        return back()->with('fail', 'This email is not registered');
+    }
 }
 
 }

@@ -20,16 +20,15 @@ class Recipe extends Model
         'season'
     ];
 
-    // If you have relationships e.g., with Theme or Ingredient, you might want to define them as well
     public function theme()
     {
         return $this->belongsTo(Theme::class, 'theme_id');
     }
 
-    public function ingredient()
-    {
-        return $this->belongsTo(Ingrediant::class, 'ingredient_id');
+    public function ingredients() {
+        return $this->belongsToMany(Ingrediant::class);
     }
+    
 
     public function images()
     {
