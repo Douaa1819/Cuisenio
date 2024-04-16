@@ -8,6 +8,7 @@
         "php": "^8.2",
         "drewm/mailchimp-api": "^2.5",
         "laravel/framework": "^11.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "spatie/laravel-mailcoach-sdk": "^1.2",
         "spatie/laravel-newsletter": "^5.1"

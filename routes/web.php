@@ -59,6 +59,7 @@ Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('
     //----------------------------------------------------------------------------
     Route::get('/user-acces', [UserAccesController::class, 'index'])->name('user');
     Route::post('/user-acces/{user}/toggle-block', [UserAccesController::class, 'toggleBlock'])->name('user.toggle-block');
+    Route::get('/logout', [UserAccesController::class, 'logout'])->name('logout');
 
 
 
