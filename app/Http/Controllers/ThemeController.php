@@ -55,28 +55,19 @@ class ThemeController extends Controller
 
 public function update(Request $request, Theme $theme)
 {
-    // Step 1: Validate the incoming request
     $validated = $request->validate([
-        'name' => 'required|string|max:255',  // Validate that 'name' is required and is a string of max length 255
-        'theme_file' => 'nullable|file|image|max:2048',  // 'theme_file' must be a file, specifically an image, and optionally present, with a max size
+        'name' => 'required|string|max:255',  
+        'theme_file' => 'nullable|file|image|max:2048',  
     ]);
 
-    // Step 2: Update the theme's name
+   
     $theme->name = $validated['name'];
 
-    // Step 3: Check if a new file has been uploaded
     if ($request->hasFile('theme_file')) {
-        // Store the file in the 'public/themes' directory within the public disk and get the path
         $path = $request->file('theme_file')->store('themes', 'public');
-
-        // Update the image_url attribute with the new file path
         $theme->image_url = $path;
     }
-
-    // Step 4: Save the changes to the database
     $theme->save();
-
-    // Step 5: Redirect to a given route with a success message
     return redirect()->back()->with('success', 'Theme updated successfully!');
 }
 

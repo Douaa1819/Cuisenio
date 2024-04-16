@@ -7,29 +7,32 @@
         <i class="fa-solid fa-backward fa-2xl"></i>
     </a>
 </div>
+@foreach ($recipes as $recipe)
     <div class="max-w-4xl mx-auto p-8">
-        <form action="{{ route('recipe.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-lg"enctype="multipart/form-data">
+        <form action="{{ route('recipes.update', ['recipe' => $recipe->id]) }}" method="POST" class="bg-white p-6 rounded-lg shadow-lg" enctype="multipart/form-data">
             @csrf
-            
+            @method('PUT')
+
+            @if (session('success'))
+            <div class="p-3 bg-green-300 text-green-800 rounded shadow-sm mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="p-3 bg-red-300 text-red-800 rounded shadow-sm mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+                @endforeach
             <div class="flex justify-between items-center mb-6">
           
                 
-                <h1 class="text-xl font-bold text-gray-700">Add a New Recipe</h1>
+                <h1 class="text-xl font-bold text-gray-700">Edite Recipe</h1>
                 <div>
-                    @if (session('success'))
-                    <div class="p-3 bg-green-300 text-green-800 rounded shadow-sm mb-4">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="p-3 bg-red-300 text-red-800 rounded shadow-sm mb-4">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                     <a href="/" class="text-red-500 hover:text-red-600 mr-4">
                         <i class="fas fa-home fa-lg"></i> Home  /
                     </a>
@@ -102,11 +105,12 @@
                     class="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black rounded" />
                 <p class="text-xs text-gray-400  mb-5 mt-2">PNG, JPG SVG, WEBP, and GIF are Allowed.</p>
             </div>
+       
 
             <div class="mb-4">
                 <label for="duration_preparation" class="block text-sm font-medium text-gray-700">Durée de préparation
                     (en minutes)</label>
-                <input type="number" id="duration_preparation" name="duration_preparation" 
+                <input type="number" id="duration_preparation" name="duration_preparation"
                     class="focus:ring-red-300 focus:border-red-300 block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md"
                     placeholder="Entrez la durée de préparation en minutes">
             </div>

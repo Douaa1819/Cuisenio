@@ -417,10 +417,13 @@
             <p class="text-gray-700 mb-8">
                 Join our newsletter to stay updated with the latest recipes and cooking tips.
             </p>
-            <form class="flex flex-wrap justify-center gap-4 ">
-                <input type="email" placeholder="Your email address..."
+          
+            <form class="flex flex-wrap justify-center gap-4 " method="POST" action="{{ route('news.store')}}">
+                @csrf
+                @method('POST')
+                <input type="email" name="user_email" placeholder="Your email address..."
                     class="p-2 w-full md:w-auto border-2 border-gray-300 rounded-md" />
-                    <button
+                    <button type="submit"
                     class="overflow-hidden px-2 py-2 mt-5 mb-2 bg-red-300 text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
                     Subscribe<span
                         class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
@@ -435,7 +438,20 @@
             </form>
         </div>
     </section>
+    @if (session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">Success!</strong>
+        <span class="block sm:inline">{{ session('success') }}</span>
+    </div>
+@endif
 
+<!-- Session Message for Errors -->
+@if (session('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">Error!</strong>
+        <span class="block sm:inline">{{ session('error') }}</span>
+    </div>
+@endif
 
 
 

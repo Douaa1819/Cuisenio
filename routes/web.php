@@ -6,9 +6,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngrediantController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\UserAccesController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Newsletter\Facades\Newsletter;
 
 //--------------------------Themes------------------------------------------//
 Route::get('/Theme', [ThemeController::class, 'see'])->name('Theme.index');
@@ -39,8 +41,14 @@ Route::delete('/ingrediants/{id}', [IngrediantController::class, 'destroy'])->na
     Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
 //--------------------------------Recipes---------------------------------------------------
 
-Route::get('/Add-recipe', [RecipeController::class, 'index'])->name('recipe.index');
+Route::get('/Add', [RecipeController::class, 'index'])->name('recipes');
+Route::get('/recipe', [RecipeController::class, 'recipe'])->name('recipe');
 Route::post('/Add-recipe', [RecipeController::class, 'store'])->name('recipe.store');
+Route::get('/Edite/recipe', [RecipeController::class, 'see'])->name('recipes.edit');
+Route::put('/Edite/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
+
+Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+
 
 //------------------------------------auth---------------------------------------
     Route::get('/register', [CustomAuthController::class, 'register'])->name('register');
@@ -52,3 +60,6 @@ Route::post('/Add-recipe', [RecipeController::class, 'store'])->name('recipe.sto
     Route::get('/user-acces', [UserAccesController::class, 'index'])->name('user');
 
 
+//---------------------------news.store--------------------------------------------
+Route::get('/newsletter/details', [NewsletterController::class, 'showListDetails']);
+Route::post('/', [NewsletterController::class, 'store'])->name('news.store');

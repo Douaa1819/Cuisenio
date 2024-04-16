@@ -26,6 +26,8 @@ class RecipeRequest extends FormRequest
             'description' => 'required|string',
             'theme_id'=> 'required|exists:themes,id',
             'list_ingredients' => 'required',
+            'image' => 'required|file|image|max:2048',
+            'duration_preparation'=>'required|int',
             'ingredients.*' => 'exists:ingrediants,id',
             'steps' => 'required|string',
             'level' => 'required|in:easy,average,advanced',

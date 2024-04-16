@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ingrediant;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RecipeRequest;
 use App\Models\Recipe;
 use App\Repositories\IngrediantRepositoryInterface;
 use App\Repositories\RecipeRepositoryInterface;
 use App\Repositories\ThemeRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
 {
@@ -17,53 +18,71 @@ class RecipeController extends Controller
      * Display a listing of the resource.
      */
 
-     protected $recipes;
-     protected $themes;
-     protected $ingrediant;
-     // Inversion of Control (IoC) w Dependency Injection.
-         public function __construct(RecipeRepositoryInterface $recipes, ThemeRepositoryInterface $themes,IngrediantRepositoryInterface $ingrediant)
-         {
-          
-            $this->themes = $themes;
-             $this->recipes = $recipes;
-             $this->ingrediant = $ingrediant;
-         }
+    protected $recipes;
+    protected $themes;
+    protected $ingrediant;
+    // Inversion of Control (IoC) w Dependency Injection.
+    public function __construct(RecipeRepositoryInterface $recipes, ThemeRepositoryInterface $themes, IngrediantRepositoryInterface $ingrediant)
+    {
+
+        $this->themes = $themes;
+        $this->recipes = $recipes;
+        $this->ingrediant = $ingrediant;
+    }
 
 
-     
+
     public function index()
     {
         $themes = $this->themes->all();
         $ingrediants = $this->ingrediant->all();
-        
-      return view('user.AddRecipes', compact('themes','ingrediants'));
+
+        return view('user.AddRecipes', compact('themes', 'ingrediants'));
+    }
+    public function see()
+    {   $recipes = Recipe::all();
+        $themes = $this->themes->all();
+        $ingrediants = $this->ingrediant->all();
+
+        return view('user.EditeRecipe', compact('themes', 'recipes','ingrediants'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function recipe()
+    {
+        $recipes = Recipe::all();
+        return view('user.ownRecipe', compact('recipes'));
+    }
+
+
+
     public function create()
     {
-        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(RecipeRequest $request)
-{
-        $recipe = Recipe::create($request->validated());
-        if ($request->filled('ingredients')) {
-            $ingredientIds = Ingrediant::whereIn('name', $request->ingredients)->pluck('id');
-            $recipe->ingredients()->sync($ingredientIds);
-        }
+    {
+    $recipe = Recipe::create($request->validated());
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('recipe_images', 'public');
-            $recipe->images()->create(['url' => $path]);
-        }
-        return redirect()->route('recipe.index')->with('success', 'Recipe added successfully!');
+    // Check and sync ingredients if provided
+    if ($request->filled('ingredients')) {
+        $ingredientIds = Ingrediant::whereIn('name', $request->ingredients)->pluck('id');
+        $recipe->ingredients()->sync($ingredientIds);
     }
+
+    // Handle image upload
+    if ($request->hasFile('image')) {
+        try {
+            $path = $request->file('image')->store('images', 'public');
+            $recipe->images()->create(['url' => $path]);
+        } catch (\Exception $e) {
+           Log::error("Failed to upload image: " . $e->getMessage());
+        }
+    }
+    
+    return redirect()->route('recipes')->with('success', 'Recipe added successfully!');
+}
+
+
 
     /**
      * Display the specified resource.
@@ -86,14 +105,49 @@ class RecipeController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        //
-    }
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'theme_id' => 'required|integer|exists:themes,id',
+            'list_ingredients' => 'sometimes|string',
+            'duration_preparation' => 'required|integer',
+            'steps' => 'required|string',
+            'level' => 'required|in:easy,average,advanced',
+            'season' => 'required|in:winter,spring,summer,autumn',
+            'image' => 'sometimes|file|image|max:2048',
+        ]);
+        $recipe->update($validated);
+       
+        if ($request->hasFile('image')) { 
+            try {
+                foreach ($recipe->images as $image) {
+                    Storage::delete($image->url);
+                    $image->delete();
+                }
+                $path = $request->file('image')->store('public/recipe_images');
+                $recipe->images()->create(['url' => $path]);
+    
+                return redirect()->route('recipes.edit', $recipe->id)->with('success', 'Recipe and images updated successfully!');
+            } catch (\Exception $e) {
+                return redirect()->route('recipes.edit', $recipe->id)->with('error', 'Failed to update images: ' . $e->getMessage());
+            }
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+        return redirect()->route('recipes.edit');
+    }
+        
+
     public function destroy(Recipe $recipe)
     {
-        //
+        foreach ($recipe->images as $image) {
+            Storage::disk('public')->delete($image->url);
+            $image->delete();
+        }
+
+
+        $recipe->ingredients()->detach();
+        $recipe->delete();
+
+        return redirect()->route('recipe')->with('success', 'Recipe deleted successfully!');
     }
 }

@@ -14,6 +14,7 @@ class Recipe extends Model
         'description',
         'theme_id',
         'ingredient_id',
+        'duration_preparation',
         'steps',
         'list_ingredients',
         'level',
@@ -29,7 +30,6 @@ class Recipe extends Model
         return $this->belongsToMany(Ingrediant::class);
     }
     
-
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
