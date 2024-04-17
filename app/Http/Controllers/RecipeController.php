@@ -57,6 +57,14 @@ class RecipeController extends Controller
 
     public function create()
     {
+        $recipes = Recipe::all();
+        return view('visitor.ViewMore', compact('recipes'));
+    }
+
+    public function ReadMore()
+    {
+        $recipes = Recipe::all();
+        return view('visitor.ReadMore', compact('recipes'));
     }
 
     public function store(RecipeRequest $request)

@@ -8,13 +8,10 @@
 </x-main-layout>
 <x-header page='blog' />
 
-<div class="bg-gray-100 pl-96">
+<div class="bg-gray-100 pl-96 ">
     <div class="flex">
 
-        <div class="py-5 text-center fixed top-30 left-20">
-
-
-
+        <div class="py-5 text-center fixed mt-5 top-30 left-5 items-center flex-col w-80 bg-white shadow-lg rounded-lg">
             <div class="pt-2 relative text-gray-600">
                 <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none"
                     type="search" name="search" placeholder="Search">
@@ -28,53 +25,47 @@
                     </svg>
                 </button>
             </div>
-
-        </div>
-
-        <div class="w-3/5 border border-gray-600 h-auto  border-t-0">
-            <!--middle wall-->
-
-            <div class="flex">
-                <div class="flex-1 m-2">
-                    <h2 class="px-4 py-2 text-xl font-semibold text-black">Home</h2>
+            <div>
+                <div class="flex items-center">
+                    <div class="flex-1">
+                        <h2 class="px-4 py-2 text-xl font-semibold text-black">Home</h2>
+                    </div>
+                    <div class="flex-1 px-4 py-2">
+                        <a href=""
+                            class=" text-2xl font-medium rounded-full text-black  hover:text-red-300 float-right transition-all duration-300">
+                            <svg class="m-2 h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <g>
+                                    <path
+                                        d="M22.772 10.506l-5.618-2.192-2.16-6.5c-.102-.307-.39-.514-.712-.514s-.61.207-.712.513l-2.16 6.5-5.62 2.192c-.287.112-.477.39-.477.7s.19.585.478.698l5.62 2.192 2.16 6.5c.102.306.39.513.712.513s.61-.207.712-.513l2.16-6.5 5.62-2.192c.287-.112.477-.39.477-.7s-.19-.585-.478-.697zm-6.49 2.32c-.208.08-.37.25-.44.46l-1.56 4.695-1.56-4.693c-.07-.21-.23-.38-.438-.462l-4.155-1.62 4.154-1.622c.208-.08.37-.25.44-.462l1.56-4.693 1.56 4.694c.07.212.23.382.438.463l4.155 1.62-4.155 1.622zM6.663 3.812h-1.88V2.05c0-.414-.337-.75-.75-.75s-.75.336-.75.75v1.762H1.5c-.414 0-.75.336-.75.75s.336.75.75.75h1.782v1.762c0 .414.336.75.75.75s.75-.336.75-.75V5.312h1.88c.415 0 .75-.336.75-.75s-.335-.75-.75-.75zm2.535 15.622h-1.1v-1.016c0-.414-.335-.75-.75-.75s-.75.336-.75.75v1.016H5.57c-.414 0-.75.336-.75.75s.336.75.75.75H6.6v1.016c0 .414.335.75.75.75s.75-.336.75-.75v-1.016h1.098c.414 0 .75-.336.75-.75s-.336-.75-.75-.75z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
-                <div class="flex-1 px-4 py-2 m-2">
-                    <a href=""
-                        class=" text-2xl font-medium rounded-full text-black hover:bg-blue-800 hover:text-red-300 float-right">
-                        <svg class="m-2 h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <g>
-                                <path
-                                    d="M22.772 10.506l-5.618-2.192-2.16-6.5c-.102-.307-.39-.514-.712-.514s-.61.207-.712.513l-2.16 6.5-5.62 2.192c-.287.112-.477.39-.477.7s.19.585.478.698l5.62 2.192 2.16 6.5c.102.306.39.513.712.513s.61-.207.712-.513l2.16-6.5 5.62-2.192c.287-.112.477-.39.477-.7s-.19-.585-.478-.697zm-6.49 2.32c-.208.08-.37.25-.44.46l-1.56 4.695-1.56-4.693c-.07-.21-.23-.38-.438-.462l-4.155-1.62 4.154-1.622c.208-.08.37-.25.44-.462l1.56-4.693 1.56 4.694c.07.212.23.382.438.463l4.155 1.62-4.155 1.622zM6.663 3.812h-1.88V2.05c0-.414-.337-.75-.75-.75s-.75.336-.75.75v1.762H1.5c-.414 0-.75.336-.75.75s.336.75.75.75h1.782v1.762c0 .414.336.75.75.75s.75-.336.75-.75V5.312h1.88c.415 0 .75-.336.75-.75s-.335-.75-.75-.75zm2.535 15.622h-1.1v-1.016c0-.414-.335-.75-.75-.75s-.75.336-.75.75v1.016H5.57c-.414 0-.75.336-.75.75s.336.75.75.75H6.6v1.016c0 .414.335.75.75.75s.75-.336.75-.75v-1.016h1.098c.414 0 .75-.336.75-.75s-.336-.75-.75-.75z">
-                                </path>
-                            </g>
-                        </svg>
-                    </a>
+                <div class="flex w-full justify-center">
+                    <hr class="border-gray-600 w-10/12">
                 </div>
-            </div>
+                <!--middle creat tweet-->
+                <div class="flex justify-center px-3">
+                    <div class="m-2 w-10 py-1">
+                        <img class="inline-block h-10 w-10 rounded-full"
+                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                            alt="" />
+                    </div>
+                    <div class="flex-1 px-2 pt-2 mt-2">
+                        <input class=" bg-transparent text-gray-400 focus:outline-none font-medium text-lg w-full"
+                            placeholder="What's happening?">
+                    </div>
+                </div>
+                <!--middle creat tweet below icons-->
+                <div class="flex justify-around px-6">
 
-            <hr class="border-gray-600">
-            <!--middle creat tweet-->
-            <div class="flex">
-                <div class="m-2 w-10 py-1">
-                    <img class="inline-block h-10 w-10 rounded-full"
-                        src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                        alt="" />
-                </div>
-                <div class="flex-1 px-2 pt-2 mt-2">
-                    <textarea class=" bg-transparent text-gray-400 font-medium text-lg w-full" rows="2" cols="50"
-                        placeholder="What's happening?"></textarea>
-                </div>
-            </div>
-            <!--middle creat tweet below icons-->
-            <div class="flex">
-                <div class="w-10"></div>
-
-                <div class="w-64 px-2">
 
                     <div class="flex items-center">
                         <div class="flex-1 text-center px-1 py-1 m-2">
                             <a href="#"
-                                class="mt-1 group flex items-center text-red-300 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-red-300">
+                                class="mt-1 group flex items-center text-red-300 px-2 py-2 text-base leading-6 font-medium rounded-full transition-all duration-300 hover:text-red-600">
                                 <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                                     <path
@@ -86,7 +77,7 @@
 
                         <div class="flex-1 text-center py-2 m-2">
                             <a href="#"
-                                class="mt-1 group flex items-center text-red-300 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-red-300">
+                                class="mt-1 group flex items-center text-red-300 px-2 py-2 text-base leading-6 font-medium rounded-full transition-all duration-300 hover:text-red-600">
                                 <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                                     <path
@@ -99,7 +90,7 @@
 
                         <div class="flex-1 text-center py-2 m-2">
                             <a href="#"
-                                class="mt-1 group flex items-center text-red-300 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-red-300">
+                                class="mt-1 group flex items-center text-red-300 px-2 py-2 text-base leading-6 font-medium rounded-full transition-all duration-300 hover:text-red-600">
                                 <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                                     <path
@@ -111,7 +102,7 @@
 
                         <div class="flex-1 text-center py-2 m-2">
                             <a href="#"
-                                class="mt-1 group flex items-center text-red-300 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-red-300">
+                                class="mt-1 group flex items-center text-red-300 px-2 py-2 text-base leading-6 font-medium rounded-full transition-all duration-300 hover:text-red-600">
                                 <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                                     <path
@@ -122,16 +113,22 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="flex-1">
-                    <button
-                        class="bg-red-300 mt-5 hover:bg-pink-200 text-black font-bold py-2 px-8 rounded-full mr-8 float-right">
+                <div class="">
+                    <button class="bg-red-300 mt-5 hover:bg-pink-200 text-black font-bold py-2 px-8 rounded-full mr-8">
                         Add
                     </button>
                 </div>
             </div>
 
-            <hr class="border-blue-800 border-4">
+
+
+
+        </div>
+
+        <div class="w-3/5 border-2 border-red-300 shadow-lg h-auto rounded-lg mt-5">
+            <!--middle wall-->
+
+
 
 
             <div>
@@ -175,18 +172,7 @@
                     <div class="w-full">
 
                         <div class="flex items-center">
-                            <div class="flex-1 text-center">
-                                <a href="#"
-                                    class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-red-300">
-                                    <svg class="text-center h-6 w-6" fill="none" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
-                                        </path>
-                                    </svg>
-                                </a>
-                            </div>
+
 
 
 
@@ -198,6 +184,19 @@
                                         viewBox="0 0 24 24">
                                         <path
                                             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <div class="flex-1 text-center">
+                                <a href="#"
+                                    class="w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-red-300">
+                                    <svg class="text-center h-6 w-6" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
                                         </path>
                                     </svg>
                                 </a>

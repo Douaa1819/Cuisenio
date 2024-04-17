@@ -32,7 +32,7 @@
                 <i class="fas fa-chevron-down text-white"></i>
             </button>
             <div id="dropdownContent" class="hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"> Edit Profile</a>
                 <a href="{{ route('logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
             </div>
         </div>
@@ -45,17 +45,17 @@
             <p class="text-xl font-bold text-gray-800 dark:text-white">Cuisénio</p>
         </div>
         <nav class="mt-10">
-            <a href="#" class="flex items-center mt-4 py-2 px-6 bg-orange-500 text-gray-600 rounded-md hover:bg-orange-300">
+            <a href="{{ route('dashboard')}}" class="flex items-center mt-4 py-2 px-6 bg-orange-500 text-gray-600 rounded-md hover:bg-orange-300">
                 <i class="fas fa-chart-pie mr-3"></i>
                 Dashboard
             </a>
     
-            <a href="#" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
+            <a href="{{ route('Theme.index')}}" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
                 <i class="fas fa-utensils mr-3"></i>
                 Theme Management
             </a>
     
-            <a href="" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
+            <a href="{{ route('ingrediants.index')}}" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
                 <i class="fas fa-pepper-hot mr-3"></i>
                 Ingredients
             </a>
@@ -65,10 +65,6 @@
                 Users-Acces
             </a>
     
-            <a href="#" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
-                <i class="fas fa-cog mr-3"></i>
-                Settings
-            </a>
         </nav>
         
     </aside>
