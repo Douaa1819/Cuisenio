@@ -52,11 +52,9 @@
                       <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
                           <i class="fas fa-heart"></i>
                       </div>
-                      @if ($recipe->images->isNotEmpty())
-                          @foreach ($recipe->images as $image)
-                              <img src="{{ Storage::url($image->url) }}" alt="Recipe Image" class="w-full h-56 object-cover">
-                          @endforeach
-                      @endif
+                      @if ($recipe->image)
+                      <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image" class="w-full h-56 object-cover">
+                  @endif
                       <div class="p-4">
                           <h3 class="text-lg font-semibold text-gray-800 flex items-center">
                               <i class="fas fa-utensils text-gray-500 mr-2"></i>{{ $recipe->title }}

@@ -10,6 +10,7 @@ use App\Repositories\IngrediantRepositoryInterface;
 use App\Repositories\RecipeRepositoryInterface;
 use App\Repositories\ThemeRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,12 +41,12 @@ class RecipeController extends Controller
 
         return view('user.AddRecipes', compact('themes', 'ingrediants'));
     }
-    public function see()
-    {   $recipes = Recipe::all();
+    public function see( Recipe $recipe)
+    { 
         $themes = $this->themes->all();
         $ingrediants = $this->ingrediant->all();
 
-        return view('user.EditeRecipe', compact('themes', 'recipes','ingrediants'));
+        return view('user.EditeRecipe', compact('themes','recipe','ingrediants'));
     }
 
     public function filtreParTheme(Theme $theme)
@@ -88,12 +89,13 @@ class RecipeController extends Controller
 
     public function store(RecipeRequest $request)
     {
-    $recipe = Recipe::create($request->validated());
+        $data =$request->validated();
+        $userID= Auth::user()->id;
+        $validatedData['user_id'] = $userID;
+    $recipe = Recipe::create($data);
+    $recipe->ingredients()->attach($data['ingredients']);
 
-    if ($request->filled('ingredients')) {
-        $ingredientIds = Ingrediant::whereIn('name', $request->ingredients)->pluck('id');
-        $recipe->ingredients()->sync($ingredientIds);
-    }
+
 
     if ($request->hasFile('image')) {
         try {
@@ -120,7 +122,7 @@ class RecipeController extends Controller
      */
     public function edit(Recipe $recipe)
     {
-        //
+        
     }
 
     /**

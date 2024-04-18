@@ -35,9 +35,10 @@ class Recipe extends Model
         return $this->belongsToMany(Ingrediant::class);
     }
     
-    public function images()
+    public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+    
     
 }
