@@ -80,10 +80,10 @@ class RecipeController extends Controller
     }
 
 
-        public function details()
+
+        public function details(Recipe $recipe)
     {
- 
-        return view('user.readMore');
+        return view('user.readMore',compact('recipe'));
     }
 
     public function store(RecipeRequest $request)
@@ -94,7 +94,7 @@ class RecipeController extends Controller
         $ingredientIds = Ingrediant::whereIn('name', $request->ingredients)->pluck('id');
         $recipe->ingredients()->sync($ingredientIds);
     }
-    
+
     if ($request->hasFile('image')) {
         try {
             $path = $request->file('image')->store('images', 'public');

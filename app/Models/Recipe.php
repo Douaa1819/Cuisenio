@@ -26,13 +26,18 @@ class Recipe extends Model
         return $this->belongsTo(Theme::class, 'theme_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function ingredients() {
         return $this->belongsToMany(Ingrediant::class);
     }
     
     public function images()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable');
     }
     
 }

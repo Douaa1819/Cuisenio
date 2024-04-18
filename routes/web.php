@@ -33,7 +33,7 @@ Route::get('/Add/Recipe', [RecipeController::class, 'index'])->name('recipes');
 Route::get('/Show/Recipe', [RecipeController::class, 'show'])->name('My.recipe');
 Route::get('/Recipe', [RecipeController::class, 'create'])->name('view');
 
-Route::get('/Recipe', [RecipeController::class, 'ReadMore'])->name('more');
+ Route::get('/Recipe/{recipe}', [RecipeController::class, 'details'])->name('recipes.more');
 Route::post('/Add-recipe', [RecipeController::class, 'store'])->name('recipe.store');
 Route::get('/Edite/recipe', [RecipeController::class, 'see'])->name('recipes.edit');
 Route::put('/Edite/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');

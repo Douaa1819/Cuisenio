@@ -13,15 +13,17 @@
 </head>
 
 <body class="bg-gray-50">
-
-    
-    
     <main class="container mx-auto px-4 py-8">
+        
+
         <div class="bg-white shadow-lg rounded-lg p-6">
             <div class="flex flex-col lg:flex-row gap-8">
                 <div class="lg:w-3/4">
-                    <h2 class="text-3xl font-bold text-center mb-4">Riz Frit Japonais Sain</h2>
-                    <img src="https://via.placeholder.com/600x400" alt="Riz Frit Japonais" class="rounded-lg mb-6">
+                    <h2 class="text-3xl font-bold text-center mb-4">{{ $recipe->title }}</h2>
+                    @foreach ($recipe->images as $image)
+                    <img src="{{ Storage::url($image->url) }}" alt="Recipe Image"
+                        class="w-full rounded-lg mb-6 h-56 object-cover">
+                @endforeach
                     
                     <div class="flex justify-between items-center mb-4 text-gray-700">
                         <div>
@@ -33,17 +35,11 @@
                             </button>
                         </div>
                         <div>
-                            <button class="text-red-500 hover:text-red-600">
-                                <i class="fas fa-share-alt"></i> Partager
-                            </button>
                             <button class="text-red-500 hover:text-red-600 ml-4">
                                 <i class="fas fa-print"></i> Imprimer
                             </button>
                         </div>
                     </div>
-    
-                    <p class="text-gray-700 mb-4">Commencez votre journée avec ce bol de petit déjeuner énergisant et sain, plein de saveurs fraîches et de nutriments pour démarrer votre matinée. Cette recette apporte une touche japonaise au riz frit classique, la rendant unique.</p>
-                    
                     <div class="flex gap-2 mb-4">
                         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a3c7ef5181ee5c1ad23c7937e6ea4baf3a77710354bfd433e5c0a0cc919391c9?apiKey=93bb9bcd81d443648999334442ead41e&" alt="Author avatar" class="w-10 h-10 rounded-full">
                         <div>
@@ -52,17 +48,21 @@
                         </div>
                     </div>
     
+
+                    <h3 class="text-xl mb-2  font-semibold">description</h3>
+                    <p class="text-gray-600 mb-8 text-sm">
+                        {{ $recipe->description }}
+                    </p>
+                    
+                    </ul>
                     <h3 class="text-xl font-semibold">Ingredients</h3>
                     <ul class="list-disc pl-5 mb-4">
-                        <li>1 cup of cooked rice</li>
-                        <li>1 tablespoon of olive oil</li>
-                        <!-- More ingredients -->
+                        {{ $recipe->list_ingredients}}
                     </ul>
     
-                    <h3 class="text-xl font-semibold">Instructions</h3>
+                    <h3 class="text-xl font-semibold">steps</h3>
                     <ol class="list-decimal pl-5 mb-4">
-                        <li>Heat olive oil in a large skillet.</li>
-                        <!-- More instructions -->
+                        <li> {{ $recipe->steps}}</li>
                     </ol>
     
                     <div class="flex justify-end items-center">
