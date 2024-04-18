@@ -9,41 +9,89 @@
 
 </x-main-layout>
 <x-header page='home' />
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recette de Cuisine - Riz Frit Japonais</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { font-family: 'Poppins', sans-serif; }
-    </style>
+
 </head>
+
 <body class="bg-gray-50">
 
-
-<main class="container mx-auto px-4 py-8">
-    <article class="flex flex-wrap md:flex-nowrap gap-10">
-        <div class="md:flex-1">
-            <h2 class="text-3xl font-bold mb-4">Riz Frit Japonais Sain</h2>
-            <img src="https://via.placeholder.com/600x400" alt="Riz Frit Japonais" class="w-full rounded-lg mb-6">
-            <p class="mb-6">Commencez votre journée avec ce bol de petit déjeuner énergisant et sain, plein de saveurs fraîches et de nutriments pour démarrer votre matinée. Cette recette apporte une touche japonaise au riz frit classique, la rendant unique.</p>
-            <!--Ingredients, Instructions -->
-        </div>
-        <aside class="w-full md:w-80 p-6 bg-white rounded-lg shadow">
-            <h3 class="text-xl font-semibold mb-4">Informations Nutritionnelles</h3>
-            <!-- Nutrition  here -->
-            <div class="mt-8">
-                <h3 class="text-xl font-semibold mb-4">Autres Recettes</h3>
-                <!-- Other recipes l-->
+    
+    
+    <main class="container mx-auto px-4 py-8">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-3/4">
+                    <h2 class="text-3xl font-bold text-center mb-4">Riz Frit Japonais Sain</h2>
+                    <img src="https://via.placeholder.com/600x400" alt="Riz Frit Japonais" class="rounded-lg mb-6">
+                    
+                    <div class="flex justify-between items-center mb-4 text-gray-700">
+                        <div>
+                            <button class="text-red-500 hover:text-red-600">
+                                <i class="fas fa-heart"></i> Favoris
+                            </button>
+                            <button class="text-red-500 hover:text-red-600 ml-4">
+                                <i class="fas fa-comment-alt"></i> Commenter
+                            </button>
+                        </div>
+                        <div>
+                            <button class="text-red-500 hover:text-red-600">
+                                <i class="fas fa-share-alt"></i> Partager
+                            </button>
+                            <button class="text-red-500 hover:text-red-600 ml-4">
+                                <i class="fas fa-print"></i> Imprimer
+                            </button>
+                        </div>
+                    </div>
+    
+                    <p class="text-gray-700 mb-4">Commencez votre journée avec ce bol de petit déjeuner énergisant et sain, plein de saveurs fraîches et de nutriments pour démarrer votre matinée. Cette recette apporte une touche japonaise au riz frit classique, la rendant unique.</p>
+                    
+                    <div class="flex gap-2 mb-4">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a3c7ef5181ee5c1ad23c7937e6ea4baf3a77710354bfd433e5c0a0cc919391c9?apiKey=93bb9bcd81d443648999334442ead41e&" alt="Author avatar" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-bold">John Smith</p>
+                            <p class="text-sm text-gray-500">15 March 2022</p>
+                        </div>
+                    </div>
+    
+                    <h3 class="text-xl font-semibold">Ingredients</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>1 cup of cooked rice</li>
+                        <li>1 tablespoon of olive oil</li>
+                        <!-- More ingredients -->
+                    </ul>
+    
+                    <h3 class="text-xl font-semibold">Instructions</h3>
+                    <ol class="list-decimal pl-5 mb-4">
+                        <li>Heat olive oil in a large skillet.</li>
+                        <!-- More instructions -->
+                    </ol>
+    
+                    <div class="flex justify-end items-center">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                            <span>4.8 (250)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <aside class="lg:w-1/4 bg-gray-100 p-4 rounded-lg">
+                    <h4 class="font-semibold text-lg mb-2">Nutritional Information</h4>
+                    <p>Approximate calories per serving: 250 kcal</p>
+                    
+                    <h4 class="font-semibold text-lg mt-4 mb-2">Other Recipes</h4>
+                    <ul>
+                        <li><a href="#" class="text-red-500 hover:text-red-600">Vegetable Stir Fry</a></li>
+                        <!-- More recipes -->
+                    </ul>
+                </aside>
             </div>
-        </aside>
-    </article>
-</main>
-
-<x-footer></x-footer>
-
-</body>
-</html>
+        </div>
+    </main>
+    
+    <footer class="bg-white shadow-md py-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-700">© 2023 Recettes Gourmandes. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    </body>
+    </html>

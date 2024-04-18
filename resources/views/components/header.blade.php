@@ -6,7 +6,7 @@
     
     <div class="flex gap-5">
         <!-- Navigation Links -->
-        <a href="{{ route('home') }}" class="{{ $page == 'home' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
+        <a href="{{ route('user.index') }}" class="{{ $page == 'home' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
             Home
         </a>
         <a href="{{ route('urblog') }}" class="{{ $page == 'blog' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">

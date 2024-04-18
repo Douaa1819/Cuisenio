@@ -2,13 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingrediant;
+use App\Models\Theme;
+use App\Repositories\IngrediantRepositoryInterface;
+use App\Repositories\RecipeRepositoryInterface;
+use App\Repositories\ThemeRepositoryInterface;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    protected $recipes;
+    protected $themes;
+    protected $ingrediant;
+
+    public function __construct(RecipeRepositoryInterface $recipes, ThemeRepositoryInterface $themes, IngrediantRepositoryInterface $ingrediant)
+    {
+
+        $this->themes = $themes;
+        $this->recipes = $recipes;
+        $this->ingrediant = $ingrediant;
+    }
     public function index()
     {
-    return view('visitor.index');
+        $this->themes = Theme::query();
+        $themes = Theme::paginate(6);
+        $this->ingrediant = Theme::query();
+        $ingrediant = Ingrediant::paginate(6);
+    return view('visitor.index', compact('themes', 'ingrediant'));
     }
     public function contact()
     {
@@ -21,8 +41,11 @@ class HomeController extends Controller
     }
 
     public function see(){
-
-        return view('user.index');
+        $this->themes = Theme::query();
+        $themes = Theme::paginate(6);
+        $this->ingrediant = Theme::query();
+        $ingrediant = Ingrediant::paginate(6);
+        return view('user.index', compact('themes', 'ingrediant'));
     }
     public function blog(){
 

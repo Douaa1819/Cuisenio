@@ -33,53 +33,30 @@
     </div>
 
 
-    <!-- Inspiration Thematic Section -->
-    <section id="inspiration" class="pt-16 pb-20 px-6 bg-white  ">
+     <!-- Inspiration Thematic Section -->
+     <section id="inspiration" class="pt-16 pb-20 px-6 bg-white  ">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold mb-16">Thematic Inspiration</h2>
             <div class="flex flex-wrap justify-center gap-10">
-
-                <!-- Cake Theme -->
-                <a href="/cakes" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                    <i class="fas fa-birthday-cake text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                    <h3 class="text-lg font-semibold mt-4 group-hover:text-gray-800">Cakes</h3>
-                    <p>Discover delicious cake recipes for all occasions.</p>
-                </a>
-                
-
-                <!-- Dinner Theme -->
-                <a href="/dinner" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                    <i class="fas fa-utensils text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                    <h3 class="text-lg font-semibold mt-4">Dinner</h3>
-                </a>
-
-                <!-- Sportive Cooking Theme -->
-                <a href="/sportive" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                    <i class="fas fa-running text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                    <h3 class="text-lg font-semibold mt-4">Sportive</h3>
-                </a>
-
-                <!-- Quick Desserts Theme -->
-                <a href="/quick-desserts" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                    <i class="fas fa-ice-cream text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                    <h3 class="text-lg font-semibold mt-4">Easy & Quick</h3>
-                </a>
-
-                <!-- Traditional Theme -->
-                <a href="/traditional" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                    <i class="fas fa-archway text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                    <h3 class="text-lg font-semibold mt-4">Traditional</h3>
-                </a>
-
-                <!-- Gourmet Theme -->
-                <a href="/gourmet" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                    <i class="fas fa-wine-glass-alt text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                    <h3 class="text-lg font-semibold mt-4">Gourmet</h3>
-                </a>
-
+    
+    
+              <div class="container mx-auto px-4 py-8">
+                <div class="grid grid-cols-6 gap-4">
+                    @foreach ($themes as $theme)
+                        @if ($theme->images->isNotEmpty())
+                            @foreach ($theme->images as $image)
+                                <a href="/cakes" class="flex flex-col items-center transition duration-300 ease-in-out hover:scale-110 group">
+                                    <img src="{{ Storage::url($image->url) }}" alt="{{ $theme->name }} Image" class="w-24 h-24 object-cover rounded-full shadow-md hover:shadow-lg">
+                                    <h3 class="text-sm font-semibold mt-2 text-gray-700 group-hover:text-gray-800">{{ $theme->name }}</h3>
+                                </a>
+                            @endforeach
+                        @endif
+                    @endforeach
+                </div>
+              </div>
             </div>
         </div>
-    </section>
+       </section>
 
 
 
@@ -278,48 +255,25 @@
     <div class="container mx-auto text-center">
         <h2 class="text-4xl font-bold mb-16">Découvrez nos ingrédients de saison</h2>
         <div class="flex flex-wrap justify-center gap-10">
-
-            <!-- Potatoes Theme -->
-            <a href="/potatoes" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                <i class="fas fa-seedling text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                <h3 class="text-lg font-semibold mt-4 group-hover:text-gray-800">Pommes de Terre</h3>
-            </a>
-            
-            <!-- Fish Theme -->
-            <a href="/fish" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                <i class="fas fa-fish text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                <h3 class="text-lg font-semibold mt-4">Poisson</h3>
-            </a>
-
-            <!-- Honey Theme -->
-            <a href="/honey" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                <i class="fas fa-tint text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                <h3 class="text-lg font-semibold mt-4">Miel</h3>
-            </a>
-
-            <!-- Cheese Theme -->
-            <a href="/cheese" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                <i class="fas fa-cheese text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                <h3 class="text-lg font-semibold mt-4">Fromage</h3>
-            </a>
-
-            <!-- Chocolate Theme -->
-            <a href="/chocolate" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                <i class="fas fa-candy-cane text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                <h3 class="text-lg font-semibold mt-4">Chocolat</h3>
-               
-            </a>
-
-            <!-- Gourmet Ingredients Theme -->
-            <a href="/gourmet-ingredients" class="flex flex-col items-center w-40 transition duration-300 ease-in-out hover:scale-105 group">
-                <i class="fas fa-pepper-hot text-6xl text-gray-500 group-hover:text-gray-700"></i>
-                <h3 class="text-lg font-semibold mt-4">Ingrédients Gourmet</h3>
-              
-            </a>
-
+  
+          <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-6 gap-4">
+                @foreach ($ingrediant as $ingrediant)
+                    @if ($ingrediant->images->isNotEmpty())
+                        @foreach ($ingrediant->images as $image)
+                            <a href="/cakes" class="flex flex-col items-center transition duration-300 ease-in-out hover:scale-110 group">
+                                <img src="{{ Storage::url($image->url) }}" alt="{{ $ingrediant->name }} Image" class="w-24 h-24 object-cover rounded-full shadow-md hover:shadow-lg">
+                                <h3 class="text-sm font-semibold mt-2 text-gray-700 group-hover:text-gray-800">{{ $ingrediant->name }}</h3>
+                            </a>
+                        @endforeach
+                    @endif
+                @endforeach
+            </div>
+        </div>
+  
         </div>
     </div>
-</section>
+  </section>
 
 <!-- Assuming Tailwind CSS is included in your project -->
 <div class="container mx-auto px-10 py-16 bg-white">

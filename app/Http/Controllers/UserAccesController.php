@@ -24,13 +24,7 @@ class UserAccesController extends Controller
 
     public function logout()
     {
-        if (auth()->check()) { 
-             /** @disregard P1013 [tokens function exists and working] **/
-            auth()->user()->tokens()->delete(); 
-            auth()->logout();
-            return redirect('/login')->with('success', 'Logged out successfully');
-        }
-    
-        return redirect('/login')->with('error', 'No user was logged in');
+        auth()->logout();
+        return redirect('/login')->with('success', 'Logged out successfully');
     }
     }

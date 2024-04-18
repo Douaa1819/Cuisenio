@@ -19,21 +19,24 @@ use Spatie\Newsletter\Facades\Newsletter;
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
     Route::get('/user', [HomeController::class, 'see'])->name('user.index');
+    Route::get('/Recipes/View-More', [RecipeController::class, 'viewMore'])->name('viewMore');
+    Route::get('/Recipes/details', [RecipeController::class,'details'])->name('details');
     Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
     Route::get('/urblog', [HomeController::class, 'urblog'])->name('urblog');
     Route::get('/More', [HomeController::class, 'more'])->name('more');
     Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
 //--------------------------------Recipes---------------------------------------------------
 
-Route::get('/Add', [RecipeController::class, 'index'])->name('recipes');
-Route::get('/recipe', [RecipeController::class, 'recipe'])->name('recipe');
-Route::get('/recipe', [RecipeController::class, 'create'])->name('view');
-Route::get('/recipe', [RecipeController::class, 'ReadMore'])->name('more');
+Route::get('/Add/Recipe', [RecipeController::class, 'index'])->name('recipes');
+Route::get('/Show/Recipe', [RecipeController::class, 'show'])->name('My.recipe');
+Route::get('/Recipe', [RecipeController::class, 'create'])->name('view');
+Route::get('/Recipe', [RecipeController::class, 'ReadMore'])->name('more');
 Route::post('/Add-recipe', [RecipeController::class, 'store'])->name('recipe.store');
 Route::get('/Edite/recipe', [RecipeController::class, 'see'])->name('recipes.edit');
 Route::put('/Edite/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
 
-Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+Route::delete('/Recipe/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+Route::get('/Recipe/Theme/{theme}',[RecipeController::class,'filtreParTheme'])->name('filtre');
 
 
 //------------------------------------auth---------------------------------------
@@ -42,8 +45,8 @@ Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('
     Route::post('/register-user', [CustomAuthController::class, 'registerUser'])->name('register-user');
     Route::post('/login-user', [CustomAuthController::class, 'loginUser'])->name('login-user');
  
-    //-----------------------------------Admine-----------------------------------
-    Route::middleware(['auth', 'admin'])->group(function () {
+    // //-----------------------------------Admine-----------------------------------
+    // Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/user-acces', [UserAccesController::class, 'index'])->name('user');
     Route::post('/user-acces/{user}/toggle-block', [UserAccesController::class, 'toggleBlock'])->name('user.toggle-block');
 
@@ -67,7 +70,7 @@ Route::delete('/ingrediants/{id}', [IngrediantController::class, 'destroy'])->na
 //------------------------------------------------------------------------------------------
 
 
-});
+// });
 
     Route::get('/logout', [UserAccesController::class, 'logout'])->name('logout');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ingrediant;
 use App\Http\Requests\RecipeRequest;
 use App\Models\Recipe;
+use App\Models\Theme;
 use App\Repositories\IngrediantRepositoryInterface;
 use App\Repositories\RecipeRepositoryInterface;
 use App\Repositories\ThemeRepositoryInterface;
@@ -47,7 +48,15 @@ class RecipeController extends Controller
         return view('user.EditeRecipe', compact('themes', 'recipes','ingrediants'));
     }
 
-    public function recipe()
+    public function filtreParTheme(Theme $theme)
+    {
+        $recipes = $theme->recipes()->get();
+        
+        return view("user.RecipeWithTheme", compact('theme','recipes'));
+    }
+
+
+    public function show()
     {
         $recipes = Recipe::all();
         return view('user.ownRecipe', compact('recipes'));
@@ -65,6 +74,13 @@ class RecipeController extends Controller
     {
         $recipes = Recipe::all();
         return view('visitor.ReadMore', compact('recipes'));
+    }
+
+
+        public function details()
+    {
+ 
+        return view('user.readMore');
     }
 
     public function store(RecipeRequest $request)
@@ -92,14 +108,11 @@ class RecipeController extends Controller
 
 
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Recipe $recipe)
+    
+    public function viewMore(Recipe $recipe)
     {
-        //
+    return view('user.ViewMoreRecipe');
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -156,6 +169,6 @@ class RecipeController extends Controller
         $recipe->ingredients()->detach();
         $recipe->delete();
 
-        return redirect()->route('recipe')->with('success', 'Recipe deleted successfully!');
+        return redirect()->route('My.recipe')->with('success', 'Recipe deleted successfully!');
     }
 }

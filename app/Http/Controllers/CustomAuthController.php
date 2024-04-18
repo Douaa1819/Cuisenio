@@ -31,7 +31,7 @@ $user->email =$request->email;
 $user->password = Hash::make($request->password);
 $res = $user->save();
 if($res){
-    return redirect()->route('home')->with('success', 'You have registered successfully');
+    return redirect()->route('user.index')->with('success', 'You have registered successfully');
 }else{
     return back()->with('fail','Somthing wrong                                                                                           ');
 }
@@ -51,7 +51,7 @@ public function loginUser(Request $request){
             } elseif ($user->role === 'user') {
                 return redirect()->route('user.index')->with('success', 'You have registered successfully');
             } else {
-                return redirect('home');
+                return redirect('user.index');
             }
         } else {
 
