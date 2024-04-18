@@ -13,7 +13,7 @@
             Blog
         </a>
         <a href="{{ route('about') }}" class="{{ $page == 'about' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
-            About US
+            favorites list
         </a>
         <a href="{{ route('contact') }}" class="{{ $page == 'contact' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
             Contact US

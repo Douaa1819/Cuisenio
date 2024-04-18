@@ -55,7 +55,10 @@ class RecipeController extends Controller
         return view("user.RecipeWithTheme", compact('theme','recipes'));
     }
 
+  
 
+
+    
     public function show()
     {
         $recipes = Recipe::all();
@@ -87,13 +90,11 @@ class RecipeController extends Controller
     {
     $recipe = Recipe::create($request->validated());
 
-    // Check and sync ingredients if provided
     if ($request->filled('ingredients')) {
         $ingredientIds = Ingrediant::whereIn('name', $request->ingredients)->pluck('id');
         $recipe->ingredients()->sync($ingredientIds);
     }
-
-    // Handle image upload
+    
     if ($request->hasFile('image')) {
         try {
             $path = $request->file('image')->store('images', 'public');
@@ -111,7 +112,8 @@ class RecipeController extends Controller
     
     public function viewMore(Recipe $recipe)
     {
-    return view('user.ViewMoreRecipe');
+    $recipes = Recipe::all();
+    return view('user.ViewMoreRecipes', compact('recipes'));
     }
     /**
      * Show the form for editing the specified resource.

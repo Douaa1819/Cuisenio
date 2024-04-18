@@ -1,5 +1,8 @@
 <!-- component -->
 <x-head></x-head>
+<script src="
+https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
+"></script>
 
 <x-main-layout>
     @section('douaaa')
@@ -10,168 +13,123 @@
 
 <section class="flex flex-col items-center mt-12 px-5 space-y-6">
     <h5 class="text-3xl md:text-3xl mb-5 mt-3 font-bold text-center text-black">
-       Recipes for Theme: {{ $theme->name }}
+        Keep up-to-date with everything happening in the culinary world
     </h5>
-    <form
-        class="w-full max-w-lg flex items-center space-x-4 bg-gray-100 rounded-md overflow-hidden border border-gray-300">
-        <input type="search" id="search" placeholder="Search articles, news, or recipes..."
-            class="flex-1 p-4 text-sm text-gray-700 placeholder-gray-500 bg-transparent focus:outline-none" />
-        <button type="submit"
-            class="px-6 py-4 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors rounded-md">
-            Search
+
+    <form class="w-full max-w-lg flex items-center space-x-4 bg-gray-100 rounded-md overflow-hidden border border-gray-300">
+        <div class="container mx-auto">
+            <input type="search" id="search" placeholder="Search articles, news, or recipes..."
+                class="flex-1 p-4 text-sm text-gray-700 placeholder-gray-500 bg-transparent focus:outline-none" />
+            <div id="search-results"></div>
+        </div>
+        <!-- Removed type="submit" from the button to prevent form submission -->
+        <button type="button"
+            class="px-6 py-4 text-white text-sm font-medium hover:bg-gray-800 transition-colors rounded-md">
+            <span id="total_records"></span>Search
         </button>
     </form>
+    
 </section>
 
 
 {{-- Blog --}}
-<div class="max-w-6xl mx-auto mt-8 px-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-        <!-- Article 1 -->
-
-        <article class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg my-4">
-            <img class="w-full h-48 object-cover" src="https://via.placeholder.com/800x400?text=Healthy+Breakfast+Bowl"
-                alt="Healthy Breakfast Bowl">
-            <div class="p-6">
-                <h2 class="text-xl font-bold mb-2">Healthy Breakfast Bowl</h2>
-                <p class="text-gray-700">Start your day with this energizing and healthy breakfast bowl.</p>
-                <div class="flex justify-between items-center mt-4">
-                    <div class="flex items-center">
-                        <i class="fas fa-user-circle text-xl text-gray-700 mr-2"></i>
-                        <span class="text-sm text-gray-600">Albert Flores</span>
+<div class="max-w-6xl mx-auto mb-8 px-4">
+    <div class="container mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-16"></h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            @foreach ($recipes as $recipe)
+                <div
+                    class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
+                    <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
+                        <i class="fas fa-heart"></i>
                     </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-calendar-alt text-xl text-gray-700 mr-2"></i>
-                        <time class="text-sm text-gray-600">5 December 2024</time>
+                    @if ($recipe->images->isNotEmpty())
+                        @foreach ($recipe->images as $image)
+                            <img src="{{ Storage::url($image->url) }}" alt="Recipe Image"
+                                class="w-full h-56 object-cover">
+                        @endforeach
+                    @endif
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                            <i class="fas fa-utensils text-gray-500 mr-2"></i>{{ $recipe->title }}
+                        </h3>
+
+                        <p class="text-gray-600 text-sm">
+                            {{ \Illuminate\Support\Str::limit($recipe->description, 50, '...') }} <a
+                                href="{{ route('details') }}"
+                                class="text-blue-400 hover:text-green-400 font-semibold cursor-pointer"> Read
+                                more...</a>
+                        <div class="flex items-center mt-4">
+                            @if ($recipe->theme)
+                                <span
+                                    class="inline-block mr-4 bg-red-200 rounded-full px-3 py-1 text-sm font-semibold text-red-800 ">
+                                    {{ $recipe->theme->name }}
+                                </span>
+                            @endif
+                            <span>
+                                <i class="far fa-clock"></i> {{ $recipe->duration_preparation }} min
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </article>
-
-        <!-- Article 2 -->
-        <article class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg my-4">
-            <img class="w-full h-48 object-cover"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/8c4c84e7ba66404ed44d2a56bd635b767eab121e2df8ed983ce292f0ad43ef9b?apiKey=93bb9bcd81d443648999334442ead41e&"
-                alt="Vegetarian Taco">
-            <div class="p-6">
-                <h2 class="text-xl font-bold mb-2">Cauliflower Walnut Vegetarian Taco Meat</h2>
-                <p class="text-gray-700">A delicious and healthy alternative to traditional taco meat.</p>
-                <div class="flex justify-between items-center mt-4">
-                    <div class="flex items-center">
-                        <i class="fas fa-user-circle text-xl text-gray-700 mr-2"></i>
-                        <span class="text-sm text-gray-600">Albert Flores</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-calendar-alt text-xl text-gray-700 mr-2"></i>
-                        <time class="text-sm text-gray-600">5 December 2024</time>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <!-- Article 3 -->
-        <article class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg my-4">
-            <img class="w-full h-48 object-cover"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/97b02af90ef8d27744d299532adb312372718335a24a2e2bce17a09cac041631?apiKey=93bb9bcd81d443648999334442ead41e&"
-                alt="Rainbow Chicken Salad">
-            <div class="p-6">
-                <h2 class="text-xl font-bold mb-2">Rainbow Chicken Salad with Almond Honey Mustard Dressing</h2>
-                <p class="text-gray-700">A colorful salad that's as nutritious as it is delicious.</p>
-                <div class="flex justify-between items-center mt-4">
-                    <div class="flex items-center">
-                        <i class="fas fa-user-circle text-xl text-gray-700 mr-2"></i>
-                        <span class="text-sm text-gray-600">Albert Flores</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-calendar-alt text-xl text-gray-700 mr-2"></i>
-                        <time class="text-sm text-gray-600">5 December 2024</time>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <!-- Article 4 -->
-        <article class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg my-4">
-            <img class="w-full h-48 object-cover"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/f24f268202d77ba54bfd2fb8008dcec9a877cb3a61a63dd36e25b7d1eb4793b3?apiKey=93bb9bcd81d443648999334442ead41e&"
-                alt="Colorful Quinoa Salad">
-            <div class="p-6">
-                <h2 class="text-xl font-bold mb-2">Colorful Quinoa Salad</h2>
-                <p class="text-gray-700">A fresh and easy quinoa salad that's great for a healthy lunch.</p>
-                <div class="flex justify-between items-center mt-4">
-                    <div class="flex items-center">
-                        <i class="fas fa-user-circle text-xl text-gray-700 mr-2"></i>
-                        <span class="text-sm text-gray-600">Albert Flores</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-calendar-alt text-xl text-gray-700 mr-2"></i>
-                        <time class="text-sm text-gray-600">5 December 2024</time>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <!-- Article 5 -->
-        <article class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg my-4">
-            <img class="w-full h-48 object-cover"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/3c176f632e531c88eb2df76c08c83c1b4cebe512f09d19017d03409bd22ee61b?apiKey=93bb9bcd81d443648999334442ead41e&"
-                alt="Hearty Chicken Ramen Soup">
-            <div class="p-6">
-                <h2 class="text-xl font-bold mb-2">Hearty Chicken Ramen Soup</h2>
-                <p class="text-gray-700">Warm up with this comforting and savory chicken ramen soup.</p>
-                <div class="flex justify-between items-center mt-4">
-                    <div class="flex items-center">
-                        <i class="fas fa-user-circle text-xl text-gray-700 mr-2"></i>
-                        <span class="text-sm text-gray-600">Albert Flores</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-calendar-alt text-xl text-gray-700 mr-2"></i>
-                        <time class="text-sm text-gray-600">5 December 2024</time>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <!-- Recipe Card 5 -->
-<div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
-    <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-        <i class="fas fa-heart"></i>
-    </div>
-    <img class="w-full h-48 object-cover"src="{{asset('images/choco.jpg')}}" alt="Chocolate Cake">
-    <div class="p-4">
-        <h3 class="font-bold text-lg">Moist Chocolate Cake</h3>
-        <p class="text-gray-700 my-2">
-            Indulge in the rich and moist chocolate cake that melts in your mouth.
-        </p>
-        <div class="flex justify-between items-center">
-            <span class="inline-block bg-pink-200 rounded-full px-3 py-1 text-sm font-semibold text-pink-800">Dessert</span>
-            <span><i class="far fa-clock"></i> 45 min</span>
+            @endforeach
         </div>
-    </div>
-  </div>
-  <!-- Recipe Card 6 -->
-  <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative group">
-    <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-    </div>
-    <img class="w-full h-48 object-cover transition duration-300 ease-in-out group-hover:opacity-90" src="https://cdn.builder.io/api/v1/image/assets/TEMP/8c4c84e7ba66404ed44d2a56bd635b767eab121e2df8ed983ce292f0ad43ef9b?apiKey=93bb9bcd81d443648999334442ead41e&" alt="Vegetarian Pizza">
-    <div class="p-4">
-      <h3 class="font-bold text-lg mb-2">Quick Vegetarian Pizza</h3>
-      <p class="text-gray-700 my-2">
-        Enjoy a quick, healthy, and delicious vegetarian pizza loaded with fresh vegetables. <a href="{{ route('details')}}" class="text-red-400 hover:text-green-400 font-semibold cursor-pointer">Read more...</a>
-      </p>
-      <div class="flex justify-between items-center">
-        <span class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-800">Vegetarian</span>
-        <span class="flex items-center"><i class="far fa-clock mr-2"></i> 30 min</span>
-      </div>
-    </div>
-  </div>
-  
-  
 
-{{-- Foter --}}
-<x-footer></x-footer>
-</div>
-</div>
-</div>
+    </div>
+
+
+
+    {{-- Foter --}}
+    <x-footer></x-footer>
+    <script>
+        $(document).ready(function() {
+            $('#search').keyup(function(event) {
+                event.preventDefault();  
+                var query = $(this).val();
+                fetch_customer_data(query);
+            });
+        
+            function fetch_customer_data(query = '') {
+                $.ajax({
+                    url: "{{ route('action') }}",
+                    method: 'GET',
+                    data: { query: query },
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        renderRecipes(data);
+                    },
+                    error: function() {
+                        console.error('Error fetching data.');
+                    }
+                });
+            }
+        
+            function renderRecipes(data) {
+                let html = '';
+                if (data.length > 0) {
+                    data.forEach(recipe => {
+                        let imagesHtml = '';
+                        if (recipe.images && recipe.images.length > 0) {
+                            recipe.images.forEach(image => {
+                                imagesHtml += `<img src="/storage/${image.url}" class="h-24 w-24">`;
+                            });
+                        }
+        
+                        html += `<div class="recipe-item mt-4 flex space-x-4 px-3">
+                            ${imagesHtml}
+                            <div class="flex flex-col">
+                                <p class="text-black capitalize text-xl hover:underline">${recipe.title}</p>
+                                <p class="text-gray-400 text-center text-sm">${recipe.season}</p>
+                            </div>
+                            <div class="border border-black dark:border-gray-500 my-2"></div>
+                        </div>`;
+                    });
+                } else {
+                    html = '<p class="text-center">No Data Found</p>';
+                }
+                $('#search-results').html(html);
+            }
+        });
+        </script>
+        

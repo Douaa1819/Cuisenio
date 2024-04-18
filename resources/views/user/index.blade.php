@@ -37,105 +37,48 @@
     </div>
    </section>
         
-        </section>
+
             
      
 
 
-
-        <!-- Recipe Card 2 -->
-<div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
-  <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-    <i class="fas fa-heart"></i>
-  </div>
-  <img class="w-full h-48 object-cover" src="https://cdn.builder.io/api/v1/image/assets/TEMP/8c4c84e7ba66404ed44d2a56bd635b767eab121e2df8ed983ce292f0ad43ef9b?apiKey=93bb9bcd81d443648999334442ead41e&" alt="Vegetarian Taco">
-  <div class="p-4">
-    <h3 class="font-bold text-lg">Cauliflower Walnut Vegetarian Taco Meat</h3>
-    <p class="text-gray-700 my-2">
-      A delicious and healthy alternative to traditional taco meat.
-    </p>
-    <div class="flex justify-between items-center">
-      <span class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-800">Vegetarian</span>
-      <span><i class="far fa-clock"></i> 25 min</span>
-    </div>
-  </div>
-</div>
-
-<!-- Recipe Card 3 -->
-<div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
-  <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-    <i class="fas fa-heart"></i>
-  </div>
-  <img class="w-full h-48 object-cover" src="https://cdn.builder.io/api/v1/image/assets/TEMP/97b02af90ef8d27744d299532adb312372718335a24a2e2bce17a09cac041631?apiKey=93bb9bcd81d443648999334442ead41e&" alt="Rainbow Chicken Salad">
-  <div class="p-4">
-    <h3 class="font-bold text-lg">Rainbow Chicken Salad with Almond Honey Mustard Dressing</h3>
-    <p class="text-gray-700 my-2">
-      A colorful salad that's as nutritious as it is delicious.
-    </p>
-    <div class="flex justify-between items-center">
-      <span class="inline-block bg-yellow-200 rounded-full px-3 py-1 text-sm font-semibold text-yellow-800">Low Calorie</span>
-      <span><i class="far fa-clock"></i> 20 min</span>
-    </div>
-  </div>
-</div>
-
-<!-- Recipe Card 4 -->
-<div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
-  <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-    <i class="fas fa-heart"></i>
-  </div>
-  <img class="w-full h-48 object-cover" src="https://cdn.builder.io/api/v1/image/assets/TEMP/f24f268202d77ba54bfd2fb8008dcec9a877cb3a61a63dd36e25b7d1eb4793b3?apiKey=93bb9bcd81d443648999334442ead41e&" alt="Quinoa Salad">
-  <div class="p-4">
-    <h3 class="font-bold text-lg">Colorful Quinoa Salad</h3>
-    <p class="text-gray-700 my-2">
-      A fresh and easy quinoa salad that's great for a healthy lunch.
-    </p>
-    <div class="flex justify-between items-center">
-      <span class="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-800">Healthy</span>
-      <span><i class="far fa-clock"></i> 30 min</span>
-    </div>
-  </div>
-</div>
-
-
-<!-- Recipe Card 5 -->
-<div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
-  <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-      <i class="fas fa-heart"></i>
-  </div>
-  <img class="w-full h-48 object-cover"src="{{asset('images/choco.jpg')}}" alt="Chocolate Cake">
-  <div class="p-4">
-      <h3 class="font-bold text-lg">Moist Chocolate Cake</h3>
-      <p class="text-gray-700 my-2">
-          Indulge in the rich and moist chocolate cake that melts in your mouth.
-      </p>
-      <div class="flex justify-between items-center">
-          <span class="inline-block bg-pink-200 rounded-full px-3 py-1 text-sm font-semibold text-pink-800">Dessert</span>
-          <span><i class="far fa-clock"></i> 45 min</span>
-      </div>
-  </div>
-</div>
-<!-- Recipe Card 6 -->
-<div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative group">
-  <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-  </div>
-  <img class="w-full h-48 object-cover transition duration-300 ease-in-out group-hover:opacity-90" src="https://cdn.builder.io/api/v1/image/assets/TEMP/8c4c84e7ba66404ed44d2a56bd635b767eab121e2df8ed983ce292f0ad43ef9b?apiKey=93bb9bcd81d443648999334442ead41e&" alt="Vegetarian Pizza">
-  <div class="p-4">
-    <h3 class="font-bold text-lg mb-2">Quick Vegetarian Pizza</h3>
-    <p class="text-gray-700 my-2">
-      Enjoy a quick, healthy, and delicious vegetarian pizza loaded with fresh vegetables. <a href="{{ route('details')}}" class="text-red-400 hover:text-green-400 font-semibold cursor-pointer">Read more...</a>
-    </p>
-    <div class="flex justify-between items-center">
-      <span class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-800">Vegetarian</span>
-      <span class="flex items-center"><i class="far fa-clock mr-2"></i> 30 min</span>
-    </div>
-  </div>
-</div>
+  
+   <div class="container mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16">Top Recipes</h2>
+    <div class="max-w-6xl mx-auto mb-8 px-4">
+          <div class="grid md:grid-cols-3 gap-8">
+              @foreach ($recipes as $recipe)
+                  <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
+                      <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
+                          <i class="fas fa-heart"></i>
+                      </div>
+                      @if ($recipe->images->isNotEmpty())
+                          @foreach ($recipe->images as $image)
+                              <img src="{{ Storage::url($image->url) }}" alt="Recipe Image" class="w-full h-56 object-cover">
+                          @endforeach
+                      @endif
+                      <div class="p-4">
+                          <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                              <i class="fas fa-utensils text-gray-500 mr-2"></i>{{ $recipe->title }}
+                          </h3>
+                       
+                              <p class="text-gray-600 text-sm">{{ \Illuminate\Support\Str::limit($recipe->description, 50, '...') }}  
+                          <div class="flex items-center mt-4">
+                              @if ($recipe->theme)
+                                  <span class="inline-block mr-4 bg-red-200 rounded-full px-3 py-1 text-sm font-semibold text-red-800 ">
+                                      {{ $recipe->theme->name }}
+                                  </span>
+                              @endif
+                          </div></div>
+                  </div>
+              @endforeach
+          </div>
+          </div>
 
 
 
-      </div>
+
+
       <div class="text-right">
         <button
             class="overflow-hidden px-4 py-2 mt-10 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
@@ -152,8 +95,10 @@
               </a>
         </button>
     </div>
+  </div>
 </section>
-    </div>
+
+ 
     
 
     <section class="pt-16 pb-10 px-10">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ingrediant;
+use App\Models\Recipe;
 use App\Models\Theme;
 use App\Repositories\IngrediantRepositoryInterface;
 use App\Repositories\RecipeRepositoryInterface;
@@ -45,7 +46,9 @@ class HomeController extends Controller
         $themes = Theme::paginate(6);
         $this->ingrediant = Theme::query();
         $ingrediant = Ingrediant::paginate(6);
-        return view('user.index', compact('themes', 'ingrediant'));
+        $this->recipes = Recipe::query();
+        $recipes = Recipe::paginate(3);
+        return view('user.index', compact('themes', 'ingrediant','recipes'));
     }
     public function blog(){
 
