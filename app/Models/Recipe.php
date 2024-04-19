@@ -14,6 +14,7 @@ class Recipe extends Model
         'description',
         'theme_id',
         'ingredient_id',
+        'user_id',
         'duration_preparation',
         'steps',
         'list_ingredients',

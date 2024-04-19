@@ -25,24 +25,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            $user = User::find(Auth::id());
-            if($user->role("admin")) return redirect()->intended('/dashboard');
-            elseif ($user->role("client")) return redirect()->intended('/client');
-            else return redirect()->intended('/');
-            return redirect('/');
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
-    }
+   
 
 
     /**
