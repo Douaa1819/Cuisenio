@@ -6,12 +6,12 @@
     @endsection
 
 </x-main-layout>
-<x-header page='Home' />
+<x-headeer page='Home' />
     
 
 <section class="flex flex-col items-center mt-12 px-5 space-y-6">
     <h5 class="text-3xl md:text-3xl mb-5 mt-3 font-bold text-center text-black">
-        Recipes for Theme: {{ $theme->name }}
+        Keep up-to-date with everything happening in the culinary world
     </h5>
     <form
         class="w-full max-w-lg flex items-center space-x-4 bg-gray-100 rounded-md overflow-hidden border border-gray-300">

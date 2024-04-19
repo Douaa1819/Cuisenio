@@ -42,7 +42,7 @@ class RecipeController extends Controller
         return view('user.AddRecipes', compact('themes', 'ingrediants'));
     }
     public function see(Recipe $recipe)
-    {    
+    {
         $themes = $this->themes->all();
         $ingrediants = $this->ingrediant->all();
 
@@ -54,7 +54,7 @@ class RecipeController extends Controller
 
         $recipes = $theme->recipes()->get();
 
-        return view("visitor.RecipeWithTheme", compact('theme', 'recipes'));
+        return view("visitor.RecipeFiltre", compact('theme', 'recipes'));
     }
 
     public function filtreParThemes(Theme $theme)
@@ -62,9 +62,25 @@ class RecipeController extends Controller
 
         $recipes = $theme->recipes()->get();
 
-        return view("user.RecipeWithTheme", compact('theme', 'recipes'));
+        return view("user.RecipeFiltre", compact('theme', 'recipes'));
     }
-    
+
+
+    public function filtreParIngrediants(Ingrediant $ingrediants)
+    {
+
+        $recipes = $ingrediants->recipes()->get();
+
+        return view("user.RecipeFiltre", compact('recipes', 'ingrediants'));
+    }
+
+    public function filtreParIngrediant(Ingrediant $ingrediants)
+    {
+
+        $recipes = $ingrediants->recipes()->get();
+
+        return view("visitor.RecipeFiltre", compact('recipes', 'ingrediants'));
+    }
 
 
 

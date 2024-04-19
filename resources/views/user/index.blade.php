@@ -191,7 +191,7 @@
               @foreach ($ingrediant as $ingrediant)
                   @if ($ingrediant->images->isNotEmpty())
                       @foreach ($ingrediant->images as $image)
-                          <a href="/cakes" class="flex flex-col items-center transition duration-300 ease-in-out hover:scale-110 group">
+                          <a href="{{ route('ingrediants',  $ingrediant)}}" class="flex flex-col items-center transition duration-300 ease-in-out hover:scale-110 group">
                               <img src="{{ Storage::url($image->url) }}" alt="{{ $ingrediant->name }} Image" class="w-24 h-24 object-cover rounded-full shadow-md hover:shadow-lg">
                               <h3 class="text-sm font-semibold mt-2 text-gray-700 group-hover:text-gray-800">{{ $ingrediant->name }}</h3>
                           </a>

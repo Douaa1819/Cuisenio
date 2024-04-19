@@ -42,12 +42,16 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     Route::get('/Recipe/Theme/{theme}', [RecipeController::class, 'filtreParThemes'])->name('filtrage');
 
+    Route::get('/Recipe/Ingredients/{ingrediants', [RecipeController::class, 'filtreParIngrediant'])->name('ingrediant');
+    Route::get('/Recipe/Ingrediants/{ingrediants}', [RecipeController::class, 'filtreParIngrediants'])->name('ingrediants');
+
+
     Route::get('/More', [HomeController::class, 'more'])->name('more');
-Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
+    Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
 
     Route::get('/home', [HomeController::class, 'see'])->name('user.index');
-Route::get('/Recipes/View-More', [RecipeController::class, 'viewMore'])->name('viewMore');
-Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');
+    Route::get('/Recipes/View-More', [RecipeController::class, 'viewMore'])->name('viewMore');
+    Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');
 });
 
 
