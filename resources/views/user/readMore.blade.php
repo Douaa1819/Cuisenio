@@ -20,10 +20,9 @@
             <div class="flex flex-col lg:flex-row gap-8">
                 <div class="lg:w-3/4">
                     <h2 class="text-3xl font-bold text-center mb-4">{{ $recipe->title }}</h2>
-                    @foreach ($recipe->images as $image)
-                    <img src="{{ Storage::url($image->url) }}" alt="Recipe Image"
-                        class="w-full rounded-lg mb-6 h-56 object-cover">
-                @endforeach
+                    @if ($recipe->image)
+                    <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image" class="w-full h-56 object-cover">
+                    @endif
                     
                     <div class="flex justify-between items-center mb-4 text-gray-700">
                         <div>
@@ -87,11 +86,8 @@
         </div>
     </main>
     
-    <footer class="bg-white shadow-md py-4 mt-8">
-        <div class="container mx-auto text-center">
-            <p class="text-gray-700">© 2023 Recettes Gourmandes. All rights reserved.</p>
-        </div>
-    </footer>
+  <x-footer/>
+
     
     </body>
     </html>

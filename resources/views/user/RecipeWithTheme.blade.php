@@ -34,10 +34,8 @@
    
 
         <article class="flex flex-col bg-white rounded-lg overflow-hidden shadow-lg my-4">
-            @if ($recipe->images->isNotEmpty()) 
-            @foreach ($recipe->images as $image) 
-            <img src="{{ Storage::url($image->url) }}" alt="Recipe Image"  class="w-full h-56 object-cover" >
-            @endforeach
+            @if ($recipe->image)
+            <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image" class="w-full h-56 object-cover">
             @endif
             <div class="p-6">
                 <h2 class="text-xl font-bold mb-2">{{ $recipe->title }}</h2>

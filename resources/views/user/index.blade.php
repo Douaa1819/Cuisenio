@@ -24,7 +24,7 @@
                 @foreach ($themes as $theme)
                     @if ($theme->images->isNotEmpty())
                         @foreach ($theme->images as $image)
-                            <a href="{{ route('filtre', ['theme' => $theme]) }}" class="flex flex-col items-center transition duration-300 ease-in-out hover:scale-110 group">
+                            <a href="{{ route('filtrage', ['theme' => $theme]) }}" class="flex flex-col items-center transition duration-300 ease-in-out hover:scale-110 group">
                                 <img src="{{ Storage::url($image->url) }}" alt="{{ $theme->name }} Image" class="w-24 h-24 object-cover rounded-full shadow-md hover:shadow-lg">
                                 <h3 class="text-sm font-semibold mt-2 text-gray-700 group-hover:text-gray-800">{{ $theme->name }}</h3>
                             </a>
@@ -60,7 +60,11 @@
                               <i class="fas fa-utensils text-gray-500 mr-2"></i>{{ $recipe->title }}
                           </h3>
                        
-                              <p class="text-gray-600 text-sm">{{ \Illuminate\Support\Str::limit($recipe->description, 50, '...') }}  
+                             
+                        <p class="text-gray-600 text-sm">
+                            {{ \Illuminate\Support\Str::limit($recipe->description, 50, '...') }}
+                            <a href="{{ route('recipes.more', $recipe->id) }}" class="text-blue-400 hover:text-green-400 font-semibold cursor-pointer">Read more...</a>
+                        </p>
                           <div class="flex items-center mt-4">
                               @if ($recipe->theme)
                                   <span class="inline-block mr-4 bg-red-200 rounded-full px-3 py-1 text-sm font-semibold text-red-800 ">
@@ -79,7 +83,7 @@
 
       <div class="text-right">
         <button
-            class="overflow-hidden px-4 py-2 mt-10 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
+            class="overflow-hidden  mr-8 px-4 py-2 mt-10 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
             <a href="{{ route('viewMore')}}">
             View More <span
                 class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>

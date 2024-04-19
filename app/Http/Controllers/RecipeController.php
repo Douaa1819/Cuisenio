@@ -51,10 +51,22 @@ class RecipeController extends Controller
 
     public function filtreParTheme(Theme $theme)
     {
+
+        $recipes = $theme->recipes()->get();
+
+        return view("visitor.RecipeWithTheme", compact('theme', 'recipes'));
+    }
+
+    public function filtreParThemes(Theme $theme)
+    {
+
         $recipes = $theme->recipes()->get();
 
         return view("user.RecipeWithTheme", compact('theme', 'recipes'));
     }
+    
+
+
 
 
 

@@ -22,14 +22,11 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 
 //----------------------------------User------------------------------------------------
-Route::get('/home', [HomeController::class, 'see'])->name('user.index');
-Route::get('/Recipes/View-More', [RecipeController::class, 'viewMore'])->name('viewMore');
-Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');
+
 Route::get('/Recipes/details', [RecipeController::class, 'details'])->name('details');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/urblog', [HomeController::class, 'urblog'])->name('urblog');
-Route::get('/More', [HomeController::class, 'more'])->name('more');
-Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
+
 //--------------------------------Recipes---------------------------------------------------
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/Add/Recipe', [RecipeController::class, 'index'])->name('recipes');
@@ -42,8 +39,17 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::put('/Edite/recipe/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
 
     Route::delete('/Recipe/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
-    Route::get('/Recipe/Theme/{theme}', [RecipeController::class, 'filtreParTheme'])->name('filtre');
+
+    Route::get('/Recipe/Theme/{theme}', [RecipeController::class, 'filtreParThemes'])->name('filtrage');
+
+    Route::get('/More', [HomeController::class, 'more'])->name('more');
+Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
+
+    Route::get('/home', [HomeController::class, 'see'])->name('user.index');
+Route::get('/Recipes/View-More', [RecipeController::class, 'viewMore'])->name('viewMore');
+Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');
 });
+
 
 //------------------------------------auth---------------------------------------
 Route::get('/register', [CustomAuthController::class, 'register'])->name('register');

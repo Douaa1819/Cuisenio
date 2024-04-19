@@ -33,7 +33,7 @@ class NewsLetterController extends Controller
             'email' => 'required|unique:members,email'
         ]);
 
-        // event(new UserSubscribed($request->input('email')));
+        event(new UserSubscribed($request->input('email')));
         return back();
     }
 
