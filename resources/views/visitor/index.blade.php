@@ -373,10 +373,10 @@
                 Join our newsletter to stay updated with the latest recipes and cooking tips.
             </p>
           
-            <form class="flex flex-wrap justify-center gap-4 " method="POST" action="{{ route('news.store')}}">
+            <form class="flex flex-wrap justify-center gap-4 " method="POST" action="/subscribe">
                 @csrf
                 @method('POST')
-                <input type="email" name="user_email" placeholder="Your email address..."
+                <input type="email" name="email" placeholder="Your email address..."
                     class="p-2 w-full md:w-auto border-2 border-gray-300 rounded-md" />
                     <button type="submit"
                     class="overflow-hidden px-2 py-2 mt-5 mb-2 bg-red-300 text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">

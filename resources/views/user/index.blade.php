@@ -24,7 +24,7 @@
                 @foreach ($themes as $theme)
                     @if ($theme->images->isNotEmpty())
                         @foreach ($theme->images as $image)
-                            <a href="{{ route('filtrage', ['theme' => $theme]) }}" class="flex flex-col items-center transition duration-300 ease-in-out hover:scale-110 group">
+                            <a href=    class="flex flex-col items-center transition duration-300 ease-in-out hover:scale-110 group">
                                 <img src="{{ Storage::url($image->url) }}" alt="{{ $theme->name }} Image" class="w-24 h-24 object-cover rounded-full shadow-md hover:shadow-lg">
                                 <h3 class="text-sm font-semibold mt-2 text-gray-700 group-hover:text-gray-800">{{ $theme->name }}</h3>
                             </a>

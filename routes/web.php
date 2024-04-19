@@ -16,11 +16,13 @@ use Spatie\Newsletter\Facades\Newsletter;
 
 //---------------------------------------Visiteur-----------------------------------------
 
+Route::post('/subscribe', [NewsletterController::class, 'subscribe']);
+
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-
-
+Route::get('/Theme/{theme}', [RecipeController::class, 'filtreParTheme'])->name('filtre');
+Route::get('/Ingredients/{ingrediants}', [RecipeController::class, 'filtreParIngrediant'])->name('ingrediant');
 //----------------------------------User------------------------------------------------
 
 Route::get('/Recipes/details', [RecipeController::class, 'details'])->name('details');
@@ -42,7 +44,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     Route::get('/Recipe/Theme/{theme}', [RecipeController::class, 'filtreParThemes'])->name('filtrage');
 
-    Route::get('/Recipe/Ingredients/{ingrediants', [RecipeController::class, 'filtreParIngrediant'])->name('ingrediant');
+
     Route::get('/Recipe/Ingrediants/{ingrediants}', [RecipeController::class, 'filtreParIngrediants'])->name('ingrediants');
 
 

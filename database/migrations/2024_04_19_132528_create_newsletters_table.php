@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ingrediant_recipe', function (Blueprint $table) {
-            $table->dropPrimary(['recipe_id', 'ingredient_id']);          
+        Schema::create('newsletters', function (Blueprint $table) {
             $table->id();
+            $table->string("email");
+            $table->boolean("subscribered");
+            $table->timestamps();
         });
     }
 
@@ -22,12 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ingredient_recipe', function (Blueprint $table) {
-            $table->dropColumn('id');
-        
-            $table->primary(['recipe_id', 'ingredient_id']);
-
-        });
-       
+        Schema::dropIfExists('newsletters');
     }
 };

@@ -2,66 +2,31 @@
 
 namespace App\Mail;
 
+use App\Models\Recipe;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class  NewsletterEmail extends Mailable
+class NewsletterEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    protected $email;
-    public function __construct($email)
+
+
+    public $recipe; 
+
+    public function __construct($recipe) 
     {
-        $this->email = $email;
-    }
-
-    /**
-
-     * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
-     */
-    public function envelope()
-    {
-        return new Envelope(
-            subject: 'User Subscribed Message',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
-     */
-//    public function content()
-//    {
-//        return new Content(
-//            view: 'mail.subscribed',
-//        );
-//    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
+        $recipe = Recipe::find($recipe);
+        $this->recipe = $recipe; 
     }
 
     public function build()
     {
-        return $this->subject('User Subscribed Message')
-            ->view('mail.subscribed'); 
+        return $this->view('emails.newsletter')
+                    ->with([
+                        'recipeTitle' => $this->recipe->title,
+                        'recipeDescription' => $this->recipe->description
+                    ]);
     }
 }

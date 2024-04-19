@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ingrediant;
-use App\Http\Requests\RecipeRequest;
-use App\Models\Recipe;
+use App\Models\User;
 use App\Models\Theme;
-use App\Repositories\IngrediantRepositoryInterface;
-use App\Repositories\RecipeRepositoryInterface;
-use App\Repositories\ThemeRepositoryInterface;
+use App\Models\Recipe;
+use App\Models\Ingrediant;
+use App\Models\Newsletter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Mail\NewsletterEmail;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\RecipeRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Repositories\ThemeRepositoryInterface;
+use App\Repositories\RecipeRepositoryInterface;
+use App\Repositories\IngrediantRepositoryInterface;
 
 class RecipeController extends Controller
 {
@@ -133,10 +137,25 @@ class RecipeController extends Controller
                 return back()->withErrors('Failed to upload image. Please try again.');
             }
         }
+        if ($recipe) {
+            $this->sendEmailToSubs($recipe);
+        }
         return redirect()->route('recipes')->with('success', 'Recipe added successfully!');
     }
 
 
+    public function sendEmailToSubs(Recipe $recipe) 
+    {
+        $subscribers = Newsletter::where('subscribed', true)->get();
+        
+        foreach ($subscribers as $subscriber) {
+            Mail::to($subscriber->email)->send(new NewsletterEmail($recipe->id));
+        }
+    }
+    
+    
+
+    
 
 
     public function viewMore(Recipe $recipe)
@@ -144,9 +163,7 @@ class RecipeController extends Controller
         $recipes = Recipe::all();
         return view('user.ViewMoreRecipes', compact('recipes'));
     }
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Recipe $recipe)
     {
     }
