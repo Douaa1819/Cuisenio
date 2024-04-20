@@ -16,6 +16,13 @@ use Spatie\Newsletter\Facades\Newsletter;
 
 //---------------------------------------Visiteur-----------------------------------------
 
+//------------------------------------auth---------------------------------------
+Route::get('/register', [CustomAuthController::class, 'register'])->name('register');
+Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
+Route::post('/register', [CustomAuthController::class, 'registerUser'])->name('register-user');
+Route::post('/login', [CustomAuthController::class, 'loginUser'])->name('login-user');
+
+
 Route::post('/subscribe', [NewsletterController::class, 'subscribe']);
 
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -57,11 +64,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 });
 
 
-//------------------------------------auth---------------------------------------
-Route::get('/register', [CustomAuthController::class, 'register'])->name('register');
-Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
-Route::post('/register', [CustomAuthController::class, 'registerUser'])->name('register-user');
-Route::post('/login', [CustomAuthController::class, 'loginUser'])->name('login-user');
 
 // //-----------------------------------Admine-----------------------------------
 Route::middleware(['auth', 'role:admin'])->group(function () {

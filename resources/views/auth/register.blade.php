@@ -1,8 +1,18 @@
 <x-head></x-head>
 <div class="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-100 to-gray-200 px-4">
+  @if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   <div class="max-w-4xl w-full bg-white shadow-2xl rounded-xl overflow-hidden md:flex">
     <div class="w-full md:w-1/2 p-10">
       <h1 class="text-4xl font-bold flex justify-center text-red-500 mb-8">Create Account</h1>
+
       <div class="flex items-center justify-center w-full border-t border-gray-300 mt-6 pt-6 mb-8">
         <a href="/auth/google/redirect" class="flex items-center justify-center px-4 py-3 w-full md:w-3/4 bg-white border border-gray-300 rounded-full shadow-sm text-gray-700 hover:border-gray-400 hover:shadow-lg transition duration-300 ease-in-out">
           <img class="w-6 h-6 mr-3" src="https://www.svgrepo.com/show/355037/google.svg" alt="Google logo">

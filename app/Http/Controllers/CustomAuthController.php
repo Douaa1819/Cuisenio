@@ -23,22 +23,28 @@ class CustomAuthController extends Controller
     public function registerUser(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
         ]);
+    
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $res = $user->save();
-        if ($res) {
+        $user->save();
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
             return redirect()->route('user.index')->with('success', 'You have registered successfully');
-        } else {
-            return back()->with('fail', 'Somthing wrong                                                                                           ');
         }
+    
+        return back()->with('error', 'Authentication failed after registration.');
     }
+
+
+
     public function loginUser(Request $request)
     {
         $credentials = $request->only('email', 'password');
