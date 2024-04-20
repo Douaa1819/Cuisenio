@@ -6,6 +6,7 @@ use App\Models\Ingrediant;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\IngrediantRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class IngrediantController extends Controller
 {
@@ -27,6 +28,8 @@ class IngrediantController extends Controller
         }
         return view('admin.Ingrediants', compact('ingrediants'));
     }
+
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -41,12 +44,12 @@ class IngrediantController extends Controller
         $ingrediant = $this->ingrediantRepo->create($request->only(['name']));
 
 
-        $path = $request->file('ingrediant_file')->store('ingrediant', 'public');
-        $ingrediant->images()->create([
-            'url' => $path
-        ]);
-
-
+        if ($request->hasFile('ingrediant_file')) {
+            $path = $request->file('ingrediant_file')->store('ingrediants', 'public');
+            $ingrediant->image()->create([
+                'url' => $path
+            ]);
+        }
         return redirect()->back()->with('success', 'Ingrediant added successfully!');
     }
 
@@ -57,23 +60,26 @@ class IngrediantController extends Controller
 {
     $validated = $request->validate([
         'name' => 'required|string|max:255',  
-        'theme_file' => 'nullable|file|image|max:2048',
+        'ingrediant_file' => 'nullable|file|image|max:2048',
     ]);
 
     
      $ingrediant->name = $validated['name'];
 
    
-    if ($request->hasFile('theme_file')) {
-      
-        $path = $request->file('theme_file')->store('ingrediant', 'public');
+     if ($request->hasFile('ingrediant_file')) {
+        $oldImage = $ingrediant->image;
+        if ($oldImage) {
+            Storage::delete($oldImage->url); 
+            $oldImage->delete(); 
+        }
 
-       
-         $ingrediant->image_url = $path;
+        $path = $request->file('ingrediant_file')->store('ingrediants', 'public');
+        $ingrediant->image()->create(['url' => $path]); 
     }
+    $ingrediant->update();
+    
 
-   
-     $ingrediant->save();
     return redirect()->back()->with('success', 'Ingrediant updated successfully!');
 }
 

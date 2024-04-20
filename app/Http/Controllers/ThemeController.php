@@ -6,6 +6,7 @@ use App\Models\Theme;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\ThemeRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ThemeController extends Controller
 {
@@ -44,10 +45,13 @@ class ThemeController extends Controller
 
     $theme = $this->themes->create($request->only(['name']));
 
-    $path = $request->file('theme_file')->store('images', 'public');
-    $theme->images()->create([
-        'url' => $path
-    ]);
+    if ($request->hasFile('theme_file')) {
+        $path = $request->file('theme_file')->store('ingrediants', 'public');
+        $theme->image()->create([
+            'url' => $path
+        ]);
+    }
+    $theme->save();
 
     return redirect()->back()->with('success', 'Theme added successfully!');
 }
@@ -63,9 +67,16 @@ public function update(Request $request, Theme $theme)
    
     $theme->name = $validated['name'];
 
-    if ($request->hasFile('theme_file')) {
-        $path = $request->file('theme_file')->store('themes', 'public');
-        $theme->image_url = $path;
+   
+     if ($request->hasFile('theme_file')) {
+        $oldImage = $theme->image;
+        if ($oldImage) {
+            Storage::delete($oldImage->url); 
+            $oldImage->delete(); 
+        }
+
+        $path = $request->file('theme_file')->store('ingrediants', 'public');
+        $theme->image()->create(['url' => $path]); 
     }
     $theme->save();
     return redirect()->back()->with('success', 'Theme updated successfully!');

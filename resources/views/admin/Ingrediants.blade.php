@@ -25,15 +25,12 @@
                 <tbody id="IngrediantTable">
                     @foreach ($ingrediants as $ingrediant)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        @if ($ingrediant->images->isNotEmpty()) 
-                            @foreach ($ingrediant->images as $image)
-                        <td class="py-6 px-6">
-                            <img src="{{ Storage::url($image->url) }}" alt="Ingrediant Image" style="width: 100px; height: auto;"></td>
-                            @endforeach
-                            @endif
-
+                        @if ($ingrediant->image) <!-- Check if an image exists -->
+                            <td class="py-6 px-6">
+                                <img src="{{ Storage::url($ingrediant->image->url) }}" alt="Ingredient Image" style="width: 100px; height: auto;">
+                            </td>
+                        @endif
                         <td class="py-6 px-6">{{ $ingrediant->name }}</td>
-
                         <td class="py-6 px-6">
                             <button onclick="openModa('{{$ingrediant->id}}')"   onclick="return confirm('Are you sure you want to update this Ingrediant?')" class="text-green-500 hover:text-orange-300">
                                 <i class="fas fa-edit"></i>Edit
@@ -72,7 +69,7 @@
                                 <input type="text" name="name" id="newThemeName" placeholder="Ingrediant name..." class="mb-4 w-full p-2 border rounded" value="{{ old('name', $ingrediant->name) }}" required>
                                 <div class="font-[sans-serif] max-w-md mx-auto">
                                     <label class="text-sm text-black mb-2 block">Upload file</label>
-                                    <input type="file" name="theme_file"
+                                    <input type="file" name="ingrediant_file"
                                       class="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black rounded" />
                                     <p class="text-xs text-gray-400  mb-5 mt-2">PNG, JPG SVG, WEBP, and GIF are Allowed.</p>
                                   </div>

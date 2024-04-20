@@ -21,13 +21,11 @@
             <tbody id="IngrediantTable">
                 @foreach ($Themes as $Theme)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    @if ($Theme->images->isNotEmpty()) 
-                        @foreach ($Theme->images as $image)
-                    <td class="py-6 px-6">
-                        <img src="{{ Storage::url($image->url) }}" alt="Theme Image" style="width: 100px; height: auto;">
-                    </td>
-                    @endforeach
-                    @endif
+                    @if ($Theme->image) <!-- Check if an image exists -->
+                            <td class="py-6 px-6">
+                                <img src="{{ Storage::url($Theme->image->url) }}" alt="Theme Image" style="width: 100px; height: auto;">
+                            </td>
+                        @endif
                     <td class="py-6 px-6">{{ $Theme->name }}</td>
 
                     <td class="py-6 px-6">
