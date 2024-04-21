@@ -29,7 +29,7 @@
         </button>
         <div id="dropdownContent" class="hidden absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
             <a href="{{ route('user.profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"> Edite Profile</a>
-            <a href="{{ route('recipes') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Add recipes</a>
+            <a href="{{ route('recipes.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Add recipes</a>
             <a href="{{ route('logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
         </div>
     </div>

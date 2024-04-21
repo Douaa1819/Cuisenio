@@ -13,7 +13,7 @@
             @endif
 
 
-            @foreach ($elements as $element)
+            @foreach ($elements as $element)    
                 @if (is_string($element))
                     <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white cursor-default leading-5 text-gray-700">
                         {{ $element }}

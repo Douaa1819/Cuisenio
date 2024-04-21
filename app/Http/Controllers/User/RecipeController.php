@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\Theme;
 use App\Models\Recipe;
 use App\Models\Ingrediant;
 use App\Models\Newsletter;
-use Illuminate\Http\Request;
 use App\Mail\NewsletterEmail;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\RecipeRequest;
@@ -21,14 +19,12 @@ use App\Repositories\IngrediantRepositoryInterface;
 
 class RecipeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
 
     protected $recipes;
     protected $themes;
     protected $ingrediant;
-    // Inversion of Control (IoC) w Dependency Injection.
+    
     public function __construct(RecipeRepositoryInterface $recipes, ThemeRepositoryInterface $themes, IngrediantRepositoryInterface $ingrediant)
     {
 
@@ -60,58 +56,6 @@ class RecipeController extends Controller
 
 
 
-    public function filtreParTheme(Theme $theme)
-    {
-
-        $recipes = $theme->recipes()->get();
-
-        return view("visitor.RecipeFiltre", compact('theme', 'recipes'));
-    }
-
-
-
-    public function filtreParThemes(Theme $theme)
-    {
-
-        $recipes = $theme->recipes()->get();
-
-        return view("user.RecipeFiltre", compact('theme', 'recipes'));
-    }
-
-
-
-
-
-    public function filtreParIngrediants(Ingrediant $ingrediants)
-    {
-
-        $recipes = $ingrediants->recipes()->get();
-
-        return view("user.RecipeFiltre", compact('recipes', 'ingrediants'));
-    }
-
-    
-
-    public function filtreParIngrediant(Ingrediant $ingrediants)
-    {
-
-        $recipes = $ingrediants->recipes()->get();
-
-        return view("visitor.RecipeFiltre", compact('recipes', 'ingrediants'));
-    }
-
-
-
-
-
-
-
-    public function show()
-    {
-        $userId = auth()->user()->id;
-        $recipes = Recipe::where('user_id',  $userId)->get();
-        return view('user.ownRecipe', compact('recipes'));
-    }
 
 
 
@@ -121,18 +65,7 @@ class RecipeController extends Controller
         return view('visitor.ViewMore', compact('recipes'));
     }
 
-    public function ReadMore()
-    {
-        $recipes = Recipe::all();
-        return view('visitor.ReadMore', compact('recipes'));
-    }
-
-
-
-    public function details(Recipe $recipe)
-    {
-        return view('user.readMore', compact('recipe'));
-    }
+  
 
     public function store(RecipeRequest $request)
     {
@@ -154,7 +87,7 @@ class RecipeController extends Controller
         if ($recipe) {
             $this->sendEmailToSubs($recipe);
         }
-        return redirect()->route('recipes')->with('success', 'Recipe added successfully!');
+        return redirect()->route('recipes.store')->with('success', 'Recipe added successfully!');
     }
 
 
@@ -172,12 +105,7 @@ class RecipeController extends Controller
 
 
 
-    public function viewMore(Recipe $recipe)
-    {
-        $recipes = Recipe::paginate(9);
-        return view('user.ViewMoreRecipes', compact('recipes'));
-    }
-
+    
 
     
     public function update(RecipeRequest $request, Recipe $recipe)

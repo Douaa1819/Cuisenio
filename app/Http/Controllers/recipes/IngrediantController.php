@@ -20,10 +20,10 @@ class IngrediantController extends Controller
         $this->ingrediantRepo = $ingrediantRepo;
     }
 
-    public function creat()
+    public function index()
     {
 
-        $ingrediants = $this->ingrediantRepo->all();
+    $ingrediants = $this->ingrediantRepo->all();
         foreach ($ingrediants as $ingrediant) {
             $ingrediant->images = $ingrediant->images;
         }

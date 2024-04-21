@@ -17,7 +17,9 @@ class ThemeController extends Controller
         $this->themes = $themes;
     }
 
-    public function creat()
+
+
+    public function index()
     {
         $Themes = $this->themes->all();
         foreach ($Themes as $Theme) {
@@ -26,11 +28,7 @@ class ThemeController extends Controller
         return view('admin.Theme-management', compact('Themes'));
     }
 
-    public function index()
-    {
-        $themes = $this->themes->all();
-        return view('themes.index', compact('themes'));
-    }
+
 
     public function store(Request $request)
 {
@@ -55,6 +53,7 @@ class ThemeController extends Controller
 
     return redirect()->back()->with('success', 'Theme added successfully!');
 }
+
 
 
 public function update(Request $request, Theme $theme)

@@ -51,7 +51,7 @@
                
               
     <div class="max-w-4xl mx-auto p-8">
-        <form action="{{ route('recipe.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-lg"enctype="multipart/form-data">
+        <form action="{{ route('recipes.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-lg"enctype="multipart/form-data">
             @csrf
             
             <div class="flex justify-between items-center mb-6">
