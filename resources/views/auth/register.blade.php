@@ -63,7 +63,7 @@
       validateInput(this, /^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailFeedback');
   });
   document.getElementById('password').addEventListener('input', function () {
-      validateInput(this, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\S]{8,}$/, 'passwordFeedback');
+      validateInput(this, /^(?=.*[a-z])(?=.*\d)[\S]{8,}$/, 'passwordFeedback');
   });
 
   function validateInput(input, regex, feedbackId) {

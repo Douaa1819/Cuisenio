@@ -173,7 +173,7 @@ class RecipeController extends Controller
 
     public function viewMore(Recipe $recipe)
     {
-        $recipes = Recipe::all();
+        $recipes = Recipe::paginate(9);
         return view('user.ViewMoreRecipes', compact('recipes'));
     }
 

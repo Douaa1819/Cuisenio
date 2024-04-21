@@ -75,7 +75,8 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
         </div>
 
     </div>
-
+    {{ $recipes->links() }}
+</div>
 
 
     <x-footer></x-footer>

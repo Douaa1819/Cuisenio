@@ -12,6 +12,7 @@
     style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; background-color: #f4f4f4; color: #333; padding: 20px;">
     <div
         style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h1 style="color: #ffafaf">Cuisenio</h1>
         <header style="text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 20px;">
         </header>
 
@@ -22,7 +23,7 @@
 
         <p style="font-size: 16px; color: #666;">{{ $recipeDescription }}</p>
 
-        <p style="font-size: 16px; margin-top: 20px;">Check out the full details on our website!</p>
+        <p style="font-size: 16px; margin-top: 20px; color: #529dff">Check out the full details on our website!</p>
     </div>
 
         <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee;">

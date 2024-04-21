@@ -22,8 +22,8 @@ class CreateRecipesTable extends Migration
             $table->text('steps');
             $table->text('list_ingredients');
             $table->integer('duration_preparation'); 
-            $table->enum('level', ['easy', 'average', 'advance']);
-            $table->enum('season', ['winter', 'spring', 'summer', 'autumn' ,'seasn']);
+            $table->enum('level', ['biginner', 'intermediate', 'advanced', 'expert']);
+            $table->enum('season', ['winter', 'spring', 'summer', 'autumn' ,' all seasn']);
             $table->timestamps();
         });
     }

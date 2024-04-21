@@ -30,8 +30,7 @@ class CustomAuthController extends Controller
                 'string',
                 'min:6',
                 'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&]/',
             ],
         ]);
 

@@ -30,8 +30,8 @@ class RecipeRequest extends FormRequest
             'duration_preparation'=>'required|int',
             'ingredients.*' => 'exists:ingrediants,id',
             'steps' => 'required|string',
-            'level' => 'required|in:easy,average,advanced',
-            'season' => 'required|in:winter,spring,summer,autumn'
+            'level' => 'required|in:easy,intermediate,advanced,expert',
+            'season' => 'required|in:winter,spring,summer,autumn,all season'
         ];
     }
 }
