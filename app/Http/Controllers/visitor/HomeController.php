@@ -31,8 +31,14 @@ class HomeController extends Controller
         $themes = Theme::paginate(6);
         $this->ingrediant = Theme::query();
         $ingrediant = Ingrediant::paginate(6);
-    return view('visitor.index', compact('themes', 'ingrediant'));
+        $allRecipes = Recipe::latest()->take(6)->get();
+    
+        $firstThreeRecipes = $allRecipes->take(3);
+        $nextThreeRecipes = $allRecipes->slice(3, 3);
+    return view('visitor.index', compact('themes', 'ingrediant','firstThreeRecipes', 'nextThreeRecipes'));
     }
+
+    
     public function contact()
     {
     return view('visitor.ContactUs');
@@ -50,7 +56,14 @@ class HomeController extends Controller
         $ingrediant = Ingrediant::paginate(6);
         $this->recipes = Recipe::query();
         $recipes = Recipe::paginate(3);
-        return view('user.index', compact('themes', 'ingrediant','recipes'));
+
+
+        $allRecipes = Recipe::latest()->take(6)->get();
+    
+        $firstThreeRecipes = $allRecipes->take(3);
+        $nextThreeRecipes = $allRecipes->slice(3, 3);
+        
+        return view('user.index', compact('themes', 'ingrediant','recipes','firstThreeRecipes', 'nextThreeRecipes'));
     }
     public function blog(){
 

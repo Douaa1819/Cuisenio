@@ -39,43 +39,45 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
         <h2 class="text-4xl font-bold text-center mb-16"></h2>
         <div class="grid md:grid-cols-3 gap-8">
             @foreach ($recipes as $recipe)
-                <div
-                    class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
-                    <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-                        <i class="fas fa-heart"></i>
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out relative">
+                    <div class="relative">
+                        @if ($recipe->image)
+                            <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image" class="w-full h-56 object-cover">
+                        @endif
+                        <button class="absolute right-2 top-2 text-red-500 hover:text-red-600 p-2 rounded-full text-lg">
+                            <i class="far fa-heart"></i>
+                        </button>
                     </div>
-                    @if ($recipe->image)
-                        <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image"
-                            class="w-full h-56 object-cover">
-                    @endif
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                            <i class="fas fa-utensils text-gray-500 mr-2"></i>{{ $recipe->title }}
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">
+                            {{ $recipe->title }}
                         </h3>
-
-                        <p class="text-gray-600 text-sm">
-                            {{ \Illuminate\Support\Str::limit($recipe->description, 50, '...') }}
-                            <a href="{{ route('recipes.more', $recipe->id) }}"
-                                class="text-blue-400 hover:text-green-400 font-semibold cursor-pointer">Read more...</a>
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <img src="{{ asset('https://via.placeholder.com/40x40') }}" alt="User avatar" class="w-6 h-6 rounded-full mr-2">
+                            By {{ $recipe->user->name }} on :<time class=" mr-2 ml-2 ">{{ $recipe->created_at->format('M d, Y') }}</time>
+                        </div>
+                        <p class="text-gray-600">
+                            {{ \Illuminate\Support\Str::limit($recipe->description, 100, '...') }}
+                            <a href="{{ route('recipes.more', $recipe->id) }}" class="text-blue-500 hover:text-blue-600 font-semibold">Read more</a>
                         </p>
-                        <div class="flex items-center mt-4">
+                        <div class="flex items-center mt-2 text-gray-700">
                             @if ($recipe->theme)
-                                <span
-                                    class="inline-block mr-4 bg-red-200 rounded-full px-3 py-1 text-sm font-semibold text-red-800 ">
+                                <span class="bg-blue-200  mr-36 text-blue-800 text-xs font-semibold  px-2.5 py-0.5 rounded">
                                     {{ $recipe->theme->name }}
                                 </span>
                             @endif
-                            <span>
-                                <i class="far fa-clock"></i> {{ $recipe->duration_preparation }} min
+                            <span class="flex items-center">
+                                <i class="far fa-clock mr-1"></i> {{ $recipe->duration_preparation }} min
                             </span>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-
+        <div class="mt-8">
+            {{ $recipes->links() }}
+        </div>
     </div>
-    {{ $recipes->links() }}
 </div>
 
 

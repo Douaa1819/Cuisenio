@@ -20,12 +20,12 @@ Route::get('/register', [CustomAuthController::class, 'register'])->name('regist
 Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
 Route::post('/register', [CustomAuthController::class, 'registerUser'])->name('register-user');
 Route::post('/login', [CustomAuthController::class, 'loginUser'])->name('login-user');
-
+Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');
 
 Route::post('/subscribe', [NewsletterController::class, 'subscribe']);
 
 
-
+Route::get('/Recipes/View-More', [HelpController::class, 'viewMore'])->name('viewMore');
 Route::get('/Recipe/Ingrediants/{ingrediants}', [HelpController::class, 'filtreParIngrediant'])->name('ingrediant');
 
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -41,11 +41,12 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     Route::get('/Show/Recipe', [HelpController::class, 'show'])->name('My.recipe');
 
-    Route::get('/Recipes/View-More', [HelpController::class, 'viewMore'])->name('viewMore');
+
     Route::get('/Recipe/{recipe}', [HelpController::class, 'details'])->name('recipes.more');
     Route::resource('recipes', RecipeController::class);
 
 
+    Route::get('/home', [HelpController::class, 'last'])->name('latest-recipes');
 
 
 
@@ -55,7 +56,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     Route::get('/home', [HomeController::class, 'see'])->name('user.index');
 
-    Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');
+ 
 });
 
 

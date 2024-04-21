@@ -16,6 +16,7 @@
                 the art of cooking like never before.</p>
             <button
                 class="overflow-hidden px-4 py-2 mt-5 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
+                <a href="{{ route('viewMore') }}">
                 View More <span
                     class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
                 <span
@@ -25,6 +26,7 @@
                 <span
                     class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2 left-4 z-10">Let's
                     Goo ! </span>
+                </a>
             </button>
         </div>
         <div class="w-1/2">
@@ -65,69 +67,44 @@
 
     {{-- Astuces --}}
 
-
     <section class="pt-16 pb-10 px-10">
         <div class="container mx-auto text-center">
-            <h2 class="text-4xl font-bold mb-16">Check out our latest tips</h2>
+            <h2 class="text-4xl font-bold mb-16">Check out the latest tips</h2>
             <div class="flex justify-around gap-8">
                 <div class="w-full lg:w-5/12 flex flex-col gap-4">
-                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
+
+                    @foreach ($firstThreeRecipes as $recipe)
+                   
+                    <div
+                        class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
+                        <img src="{{ Storage::url($recipe->image->url) }}" alt="Default Image" class="mr-4  w-28 h-28 object-cover">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
+                            <h3 class="text-xl font-bold">{{ $recipe->title }}</h3>
                             <p class="mb-4">Day of the Week</p>
                         </div>
                     </div>
-                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
-                            <p class="mb-4">Day of the Week</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
-                            <p class="mb-4">Day of the Week</p>
-                        </div>
-                    </div>      
+                    @endforeach
                 </div>
 
 
                 <div class="w-full lg:w-5/12 flex flex-col gap-4 ">
-                    <!-- Left Column -->
+                    @foreach ($nextThreeRecipes as $recipe)
                     <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
+                        <img src="{{ Storage::url($recipe->image->url) }}" alt="Default Image" class="mr-4 w-28 h-28 object-cover">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
+                            <h3 class="text-xl font-bold">{{ $recipe->title }}</h3>
                             <p class="mb-4">Day of the Week</p>
                         </div>
                     </div>
+                @endforeach
 
-
-                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
-                            <p class="mb-4">Day of the Week</p>
-                        </div>
-                    </div>
-
-
-                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
-                            <p class="mb-4">Day of the Week</p>
-                        </div>
-                    </div>
-                    <!-- Items 2 and 3 omitted for brevity, similar structure to Item 1 -->
+                    
                 </div>
             </div>
             <div class="text-right">
                 <button
                     class="overflow-hidden px-4 py-2 mt-10 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
+                    <a href="{{ route('viewMore') }}">
                     View More <span
                         class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
                     <span
@@ -137,9 +114,11 @@
                     <span
                         class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2 left-4 z-10">Let's
                         Goo ! </span>
+                    </a>
                 </button>
             </div>
     </section>
+
 
 
 

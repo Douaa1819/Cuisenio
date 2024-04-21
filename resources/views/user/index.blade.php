@@ -111,64 +111,33 @@
             <h2 class="text-4xl font-bold mb-16">Check out the latest tips</h2>
             <div class="flex justify-around gap-8">
                 <div class="w-full lg:w-5/12 flex flex-col gap-4">
+
+                    @foreach ($firstThreeRecipes as $recipe)
+                   
                     <div
                         class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
+                        <img src="{{ Storage::url($recipe->image->url) }}" alt="Default Image" class="mr-4  w-28 h-28 object-cover">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
+                            <h3 class="text-xl font-bold">{{ $recipe->title }}</h3>
                             <p class="mb-4">Day of the Week</p>
                         </div>
                     </div>
-                    <div
-                        class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
-                            <p class="mb-4">Day of the Week</p>
-                        </div>
-                    </div>
-                    <div
-                        class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
-                            <p class="mb-4">Day of the Week</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
 
                 <div class="w-full lg:w-5/12 flex flex-col gap-4 ">
-                    <!-- Left Column -->
-                    <div
-                        class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
+                    @foreach ($nextThreeRecipes as $recipe)
+                    <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
+                        <img src="{{ Storage::url($recipe->image->url) }}" alt="Default Image" class="mr-4 w-28 h-28 object-cover">
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
+                            <h3 class="text-xl font-bold">{{ $recipe->title }}</h3>
                             <p class="mb-4">Day of the Week</p>
                         </div>
                     </div>
+                @endforeach
 
-
-                    <div
-                        class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
-                            <p class="mb-4">Day of the Week</p>
-                        </div>
-                    </div>
-
-
-                    <div
-                        class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
-                        <img src="https://via.placeholder.com/100" alt="Default Image" class="mr-4">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Tip Title 1</h3>
-                            <p class="mb-4">Day of the Week</p>
-                        </div>
-                    </div>
-                    <!-- Items 2 and 3 omitted for brevity, similar structure to Item 1 -->
+                    
                 </div>
             </div>
             <div class="text-right">
@@ -212,7 +181,7 @@
         </div>
     </section>
 
-    <!-- Assuming Tailwind CSS is included in your project -->
+
     <div class="container mx-auto px-10 py-16 bg-white">
         <h2 class="text-4xl font-bold text-center mb-16">Recipes of the Season</h2>
         <div class="grid md:grid-cols-3 gap-8">
