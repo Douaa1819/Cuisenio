@@ -16,21 +16,19 @@
         </header>
 
 
-        <h1 style="font-size: 16px; color: #666;">A new recipe has been added to our collection!</h1>
+        <h1 style="font-size: 16px; color: #666;">A new recipe has been added to our Collection!</h1>
 
         <h2 style="font-size: 20px; color: #333;">{{ $recipeTitle }}</h2>
 
         <p style="font-size: 16px; color: #666;">{{ $recipeDescription }}</p>
 
         <p style="font-size: 16px; margin-top: 20px;">Check out the full details on our website!</p>
+    </div>
 
         <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee;">
-            <p style="font-size: 14px; color: #999;">© 2023 Your Website Name. All rights reserved.</p>
+            <p style="font-size: 14px; color: #ffafaf;">© 2024 Cuisenio. All rights reserved.</p>
         </footer>
-
-        <p style="font-size: 14px; color: #999;">© 2023 Your Website Name. All rights reserved.</p>
-        </footer>
-    </div>
+   
 </body>
 
 </html>

@@ -111,9 +111,8 @@
                 <div class="mb-4">
                     <label for="ingredients" class="block text-sm font-medium text-gray-700">Ingredients</label>
                     <div class="grid grid-cols-3 gap-4">
-                        @dd($recipe->ingredients)
                         @foreach ($ingrediants as $index => $ingredient)
-                            @if (in_array($recipe->ingredients->name, $ingredient->name))
+                            @if (in_array($recipe->ingredient->name, $ingredient->name))
                                 <div>
                                     <!-- Utilisez l'ID de l'ingrédient comme valeur -->
                                     <input type="checkbox" id="ingredient{{ $index }}" name="ingredients[]"
@@ -159,6 +158,7 @@
                 <label for="level" class="block text-sm font-medium text-gray-700">Difficulty Level</label>
                 <select id="level" name="level" required
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
+                    <option></option>
                     <option value="easy">Easy</option>
                     <option value="average">Average</option>
                     <option value="advance">Advanced</option>
@@ -169,6 +169,8 @@
                 <label for="season" class="block text-sm font-medium text-gray-700">Season</label>
                 <select id="season" name="season" required
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
+                    <option></option>
+                    <option value="All season">All Season</option>
                     <option value="winter">Winter</option>
                     <option value="spring">Spring</option>
                     <option value="summer">Summer</option>

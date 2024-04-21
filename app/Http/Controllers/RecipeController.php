@@ -171,32 +171,25 @@ class RecipeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Recipe $recipe)
+    public function update(RecipeRequest $request, Recipe $recipe)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'theme_id' => 'required|integer|exists:themes,id',
-            'list_ingredients' => 'sometimes|string',
-            'duration_preparation' => 'required|integer',
-            'steps' => 'required|string',
-            'level' => 'required|in:easy,average,advanced',
-            'season' => 'required|in:winter,spring,summer,autumn',
-            'image' => 'sometimes|file|image|max:2048',
-        ]);
+        $data = $request->validated();
         $userID = Auth::user()->id;
-        $validatedData['user_id'] = $userID;
-        $recipe->update($validated);
-
+    
+        $userID = Auth::user()->id;
+        $data['user_id'] = $userID;
+        $recipe->update($data);
+        $recipe->ingredients()->attach($data['ingredients']);
         if ($request->hasFile('image')) {
             try {
                 foreach ($recipe->images as $image) {
                     Storage::delete($image->url);
                     $image->delete();
                 }
+                
                 $path = $request->file('image')->store('public/recipe_images');
                 $recipe->images()->create(['url' => $path]);
-
+                   
                 return redirect()->route('recipes.edit', $recipe->id)->with('success', 'Recipe and images updated successfully!');
             } catch (\Exception $e) {
                 return redirect()->route('recipes.edit', $recipe->id)->with('error', 'Failed to update images: ' . $e->getMessage());
@@ -209,9 +202,9 @@ class RecipeController extends Controller
 
     public function destroy(Recipe $recipe)
     {
-        foreach ($recipe->images as $image) {
-            Storage::disk('public')->delete($image->url);
-            $image->delete();
+        if ($recipe->image) {
+            Storage::disk('public')->delete($recipe->image);
+            $recipe->image->delete();
         }
 
 
