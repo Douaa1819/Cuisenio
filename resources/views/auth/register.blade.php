@@ -25,23 +25,25 @@
         @csrf
         <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
           <span class="px-4"><i class="far fa-user text-red-500 mr-2"></i></span>
-          <input id="name" class="block w-full py-3 pl-2 bg-transparent focus:outline-none" placeholder="Enter Full Name" type="text" name="name" required value="{{ old('name') }}" />
-          <p id="nameFeedback" class="text-xs text-red-500 mt-1"></p>
+          <input id="name" type="text" name="name" placeholder="Your full name" required
+          class="block w-full py-3 px-2 bg-transparent  rounded-full focus:outline-none ">
+        <p id="nameFeedback" class="text-xs text-red-500 mt-1"></p>
         </div>
         <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
           <span class="px-4"><i class="far fa-envelope text-red-500"></i></span>
-          <input id="email" class="block w-full py-3 pl-2 bg-transparent focus:outline-none" placeholder="Enter Email Address" type="email" name="email" required value="{{ old('email') }}"
-            @input="validateEmail" :class="{'border-2 border-green-500': isValidEmail, 'border-2 border-red-500': !isValidEmail && email.length > 0}">
-            <p id="emailFeedback" class="text-xs text-red-500 mt-1"></p>
+          <input id="email" type="email" name="email" placeholder="Enter Email Address" required
+          class="block w-full py-3 px-2 bg-transparent border-2rounded-full focus:outline-none ">
+   <p id="emailFeedback" class="text-xs text-red-500 mt-1"></p>
         </div>
         <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
           <span class="px-4"><i class="fas fa-lock text-red-500"></i></span>
-          <input id="password" class="block w-full py-3 pl-2 bg-transparent focus:outline-none" placeholder="Enter Password" type="password" name="password" required />
-          <p id="passwordFeedback" class="text-xs text-red-500 mt-1"></p>
+          <input id="password" type="password" name="password" placeholder="Create a password" required
+          class="block w-full py-3 px-2 bg-transparent   rounded-full focus:outline-none ">
+   <p id="passwordFeedback" class="text-xs text-red-500 mt-1"></p>
         </div>
         <button type="submit" class="mt-6 px-6 py-3 w-full bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors duration-300 ease-in-out">Sign Up</button>
       </form>
-      <p class="text-center mt-8 text-sm text-gray-600">Already have an account? <a href="#" class="text-red-500 hover:text-red-600">Sign In</a></p>
+      <p class="text-center mt-8 text-sm text-gray-600">Already have an account? <a <a href="{{ route('login')}}" class="text-red-500 hover:text-red-600">Sign In</a></p>
     </div>
     <div class="hidden md:block md:w-1/2 bg-cover bg-center" style="background-image: url('https://cdn.builder.io/api/v1/image/assets/TEMP/2daca9a5408ef5497ad2bffbe868caae6719cb587ca60750a67d8a92226ef815');">
       <div class="flex flex-col justify-center h-full p-10 bg-black bg-opacity-60">
@@ -67,11 +69,11 @@
   function validateInput(input, regex, feedbackId) {
       const feedbackElement = document.getElementById(feedbackId);
       if (regex.test(input.value)) {
-          input.className = 'mt-1 block w-full p-2 border-2 border-green-500 rounded-md shadow-sm focus:outline-none';
+          input.className = 'block w-full py-3 px-2 bg-transparent border-2 border-green-500 rounded-full focus:outline-none';
           feedbackElement.textContent = '';
       } else {
-          input.className = 'mt-1 block w-full p-2 border-2 border-red-500 rounded-md shadow-sm focus:outline-none';
-          feedbackElement.textContent = 'Please enter a valid ' + input.getAttribute('placeholder').toLowerCase();
+          input.className = 'block w-full py-3 px-2 bg-transparent border-2 border-red-500 rounded-full focus:outline-none';
+          feedbackElement.textContent = 'Please enter a valid ' + input.placeholder.toLowerCase() + '.';
       }
   }
 </script>

@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 class ThemeController extends Controller
 {
     protected $themes;
-// Inversion of Control (IoC) w Dependency Injection.
     public function __construct(ThemeRepositoryInterface $themes)
     {
         $this->themes = $themes;
