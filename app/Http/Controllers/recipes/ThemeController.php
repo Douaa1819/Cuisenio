@@ -1,6 +1,7 @@
 <?php
+namespace App\Http\Controllers\recipes;
 
-namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 
 use App\Models\Theme;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +17,7 @@ class ThemeController extends Controller
         $this->themes = $themes;
     }
 
-    public function see()
+    public function creat()
     {
         $Themes = $this->themes->all();
         foreach ($Themes as $Theme) {

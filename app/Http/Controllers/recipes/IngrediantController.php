@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\recipes;
 
+use App\Http\Controllers\Controller;
 use App\Models\Ingrediant;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\IngrediantRepositoryInterface;
@@ -19,7 +20,7 @@ class IngrediantController extends Controller
         $this->ingrediantRepo = $ingrediantRepo;
     }
 
-    public function see()
+    public function creat()
     {
 
         $ingrediants = $this->ingrediantRepo->all();

@@ -1,17 +1,15 @@
 <?php
 
-use App\Http\Controllers\ThemeController;
-
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\recipes\ThemeController;
+use App\Http\Controllers\dashboard\AdminController;
 use App\Http\Controllers\CustomAuthController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\IngrediantController;
-use App\Http\Controllers\LiveSearchController;
-use App\Http\Controllers\NewsletterController;
-use App\Http\Controllers\RecipeController;
-use App\Http\Controllers\UserAccesController;
+use App\Http\Controllers\visitor\HomeController;
+use App\Http\Controllers\recipes\IngrediantController;
+use App\Http\Controllers\recipes\LiveSearchController;
+use App\Http\Controllers\visitor\NewsletterController;
+use App\Http\Controllers\User\RecipeController;
+use App\Http\Controllers\User\UserAccesController;
 use Illuminate\Support\Facades\Route;
-use Spatie\Newsletter\Facades\Newsletter;
 
 
 //---------------------------------------Visiteur-----------------------------------------
@@ -71,7 +69,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/user-acces/{user}/toggle-block', [UserAccesController::class, 'toggleBlock'])->name('user.toggle-block');
 
     //--------------------------Themes------------------------------------------//
-    Route::get('/Theme', [ThemeController::class, 'see'])->name('Theme.index');
+    Route::get('/Theme', [ThemeController::class, 'creat'])->name('Theme.index');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::post('/Theme', [ThemeController::class, 'store'])->name('themes.store');
     Route::put('/Theme/{theme}', [ThemeController::class, 'update'])->name('themes.update');
@@ -79,7 +77,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
     //--------------------------Ingrediants------------------------------------------//
-    Route::get('/ingrediants', [IngrediantController::class, 'see'])->name('ingrediants.index');
+    Route::get('/ingrediants', [IngrediantController::class, 'creat'])->name('ingrediants.index');
     Route::post('/ingrediants', [IngrediantController::class, 'store'])->name('ingrediants.store');
     Route::put('/ingrediants/{ingrediant}', [IngrediantController::class, 'update'])->name('ingredians.update');
     Route::delete('/ingrediants/{id}', [IngrediantController::class, 'destroy'])->name('ingrediants.destroy');

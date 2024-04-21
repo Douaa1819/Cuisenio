@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\visitor;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Ingrediant;
 use App\Models\Recipe;
