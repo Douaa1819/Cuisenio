@@ -144,6 +144,7 @@
                 <label for="level" class="block text-sm font-medium text-gray-700">Difficulty Level</label>
                 <select id="level" name="level" required
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
+                    <option></option>
                     <option value="easy">Easy</option>
                     <option value="average">Average</option>
                     <option value="advance">Advanced</option>
@@ -154,11 +155,12 @@
                 <label for="season" class="block text-sm font-medium text-gray-700">Season</label>
                 <select id="season" name="season" required
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
-                    <option value="all season">All Season</option>
+                    <option></option>
                     <option value="winter">Winter</option>
                     <option value="spring">Spring</option>
                     <option value="summer">Summer</option>
                     <option value="autumn">Autumn</option>
+                    <option value="season">All Season</option>
                 </select>
             </div>
 

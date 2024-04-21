@@ -13,7 +13,6 @@ class Recipe extends Model
         'title',
         'description',
         'theme_id',
-        'ingredient_id',
         'user_id',
         'duration_preparation',
         'steps',
@@ -26,6 +25,8 @@ class Recipe extends Model
     {
         return $this->belongsTo(Theme::class, 'theme_id');
     }
+
+    
 
     public function user()
     {

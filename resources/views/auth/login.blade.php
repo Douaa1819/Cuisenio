@@ -29,10 +29,12 @@
           <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
             <span class="px-4"><i class="far fa-envelope text-red-500"></i></span>
             <input id="email" class="block w-full py-3 pl-2 bg-transparent focus:outline-none" placeholder="Enter Email Address" type="email" name="email" required value="{{ old('email') }}" />
+            <p id="emailFeedback" class="text-xs text-red-500 mt-1"></p>
           </div>
           <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
             <span class="px-4"><i class="fas fa-lock text-red-500"></i></span>
             <input id="password" class="block w-full  mb-5 py-3 pl-2 bg-transparent focus:outline-none" placeholder="Enter Password" type="password" name="password" required />
+            <p id="passwordFeedback" class="text-xs text-red-500 mt-1"></p>
           </div>
           <a href="#" class="text-red-500 mt-4 hover:text-red-600 hover:underline">Forgot your password?</a>
           <button type="submit" class="mt-4 px-6 py-3 w-full bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors duration-300">Sign In</button>
@@ -41,3 +43,24 @@
     </div>
   </div>
 </div>
+<script>
+  document.getElementById('email').addEventListener('input', function() {
+      validateInput(this, /^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailFeedback');
+  });
+  document.getElementById('password').addEventListener('input', function() {
+      validateInput(this, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\S]{8,}$/, 'passwordFeedback');
+  });
+
+  function validateInput(input, regex, feedbackId) {
+      const feedbackElement = document.getElementById(feedbackId);
+      if (regex.test(input.value)) {
+          input.classList.remove('border-red-500', 'text-red-500');
+          input.classList.add('border-green-500', 'text-green-500');
+          feedbackElement.textContent = '';
+      } else {
+          input.classList.remove('border-green-500', 'text-green-500');
+          input.classList.add('border-red-500', 'text-red-500');
+          feedbackElement.textContent = 'Please enter a valid ' + input.placeholder.toLowerCase();
+      }
+  }
+</script>

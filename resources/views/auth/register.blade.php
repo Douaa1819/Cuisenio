@@ -26,14 +26,18 @@
         <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
           <span class="px-4"><i class="far fa-user text-red-500 mr-2"></i></span>
           <input id="name" class="block w-full py-3 pl-2 bg-transparent focus:outline-none" placeholder="Enter Full Name" type="text" name="name" required value="{{ old('name') }}" />
+          <p id="nameFeedback" class="text-xs text-red-500 mt-1"></p>
         </div>
         <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
           <span class="px-4"><i class="far fa-envelope text-red-500"></i></span>
-          <input id="email" class="block w-full py-3 pl-2 bg-transparent focus:outline-none" placeholder="Enter Email Address" type="email" name="email" required value="{{ old('email') }}" />
+          <input id="email" class="block w-full py-3 pl-2 bg-transparent focus:outline-none" placeholder="Enter Email Address" type="email" name="email" required value="{{ old('email') }}"
+            @input="validateEmail" :class="{'border-2 border-green-500': isValidEmail, 'border-2 border-red-500': !isValidEmail && email.length > 0}">
+            <p id="emailFeedback" class="text-xs text-red-500 mt-1"></p>
         </div>
         <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
           <span class="px-4"><i class="fas fa-lock text-red-500"></i></span>
           <input id="password" class="block w-full py-3 pl-2 bg-transparent focus:outline-none" placeholder="Enter Password" type="password" name="password" required />
+          <p id="passwordFeedback" class="text-xs text-red-500 mt-1"></p>
         </div>
         <button type="submit" class="mt-6 px-6 py-3 w-full bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors duration-300 ease-in-out">Sign Up</button>
       </form>
@@ -49,3 +53,27 @@
     </div>
   </div>
 </div>
+<script>
+  document.getElementById('name').addEventListener('input', function () {
+      validateInput(this, /^[\p{L}\s'-]+$/u, 'nameFeedback');
+  });
+  document.getElementById('email').addEventListener('input', function () {
+      validateInput(this, /^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailFeedback');
+  });
+  document.getElementById('password').addEventListener('input', function () {
+      validateInput(this, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\S]{8,}$/, 'passwordFeedback');
+  });
+
+  function validateInput(input, regex, feedbackId) {
+      const feedbackElement = document.getElementById(feedbackId);
+      if (regex.test(input.value)) {
+          input.className = 'mt-1 block w-full p-2 border-2 border-green-500 rounded-md shadow-sm focus:outline-none';
+          feedbackElement.textContent = '';
+      } else {
+          input.className = 'mt-1 block w-full p-2 border-2 border-red-500 rounded-md shadow-sm focus:outline-none';
+          feedbackElement.textContent = 'Please enter a valid ' + input.getAttribute('placeholder').toLowerCase();
+      }
+  }
+</script>
+</body>
+</html>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ingrediant_recipe', function (Blueprint $table) {
             $table->id(); 
             $table->foreignId('recipe_id')->constrained('recipes')->onDelete('cascade');
-            $table->foreignId('ingredient_id')->constrained('ingrediants')->onDelete('cascade');
+            $table->foreignId('ingrediant_id')->constrained('ingrediants')->onDelete('cascade');
         });
     }
 

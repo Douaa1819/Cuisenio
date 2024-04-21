@@ -45,15 +45,19 @@ class RecipeController extends Controller
 
         return view('user.AddRecipes', compact('themes', 'ingrediants'));
     }
-    public function see(Recipe $recipe)
-    { 
+
+
+    public function edit(Recipe $recipe)
+    {
 
         $themes = $this->themes->all();
         $recipeIngredientIds = $recipe->ingredients->pluck('id')->toArray();
         $ingrediants = $this->ingrediant->all();
 
-        return view('user.EditeRecipe', compact('themes', 'recipe', 'ingrediants','recipeIngredientIds'));
+        return view('user.EditeRecipe', compact('themes', 'recipe', 'ingrediants', 'recipeIngredientIds'));
     }
+
+
 
     public function filtreParTheme(Theme $theme)
     {
@@ -62,6 +66,8 @@ class RecipeController extends Controller
 
         return view("visitor.RecipeFiltre", compact('theme', 'recipes'));
     }
+
+
 
     public function filtreParThemes(Theme $theme)
     {
@@ -72,6 +78,9 @@ class RecipeController extends Controller
     }
 
 
+
+
+
     public function filtreParIngrediants(Ingrediant $ingrediants)
     {
 
@@ -79,6 +88,8 @@ class RecipeController extends Controller
 
         return view("user.RecipeFiltre", compact('recipes', 'ingrediants'));
     }
+
+    
 
     public function filtreParIngrediant(Ingrediant $ingrediants)
     {
@@ -122,42 +133,42 @@ class RecipeController extends Controller
         return view('user.readMore', compact('recipe'));
     }
 
-        public function store(RecipeRequest $request)
-        {
-            $data = $request->validated();
-            $userID = Auth::user()->id;
-            $data['user_id'] = $userID;
-            $recipe = Recipe::create($data);
-            $recipe->ingredients()->attach($data['ingredients']);
+    public function store(RecipeRequest $request)
+    {
+        $data = $request->validated();
+        $userID = Auth::user()->id;
+        $data['user_id'] = $userID;
+        $recipe = Recipe::create($data);
+        $recipe->ingredients()->attach($data['ingredients']);
 
-            if ($request->hasFile('image') && $request->file('image')->isValid()) {
-                try {
-                    $path = $request->file('image')->store('images', 'public');
-                    $recipe->image()->create(['url' => $path]);
-                } catch (\Exception $e) {
-                    Log::error("Failed to upload image: " . $e->getMessage());
-                    return back()->withErrors('Failed to upload image. Please try again.');
-                }
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            try {
+                $path = $request->file('image')->store('images', 'public');
+                $recipe->image()->create(['url' => $path]);
+            } catch (\Exception $e) {
+                Log::error("Failed to upload image: " . $e->getMessage());
+                return back()->withErrors('Failed to upload image. Please try again.');
             }
-            if ($recipe) {
-                $this->sendEmailToSubs($recipe);
-            }
-            return redirect()->route('recipes')->with('success', 'Recipe added successfully!');
         }
+        if ($recipe) {
+            $this->sendEmailToSubs($recipe);
+        }
+        return redirect()->route('recipes')->with('success', 'Recipe added successfully!');
+    }
 
 
-    public function sendEmailToSubs(Recipe $recipe) 
+    public function sendEmailToSubs(Recipe $recipe)
     {
         $subscribers = Newsletter::where('subscribed', true)->get();
-        
+
         foreach ($subscribers as $subscriber) {
             Mail::to($subscriber->email)->send(new NewsletterEmail($recipe->id));
         }
     }
-    
-    
 
-    
+
+
+
 
 
     public function viewMore(Recipe $recipe)
@@ -165,48 +176,39 @@ class RecipeController extends Controller
         $recipes = Recipe::all();
         return view('user.ViewMoreRecipes', compact('recipes'));
     }
-    
-    public function edit(Recipe $recipe)
-    {
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
+    
     public function update(RecipeRequest $request, Recipe $recipe)
     {
         $data = $request->validated();
         $userID = Auth::user()->id;
-    
+
         $data['user_id'] = $userID;
         try {
-        if (!empty($data['ingredients'])) {
-            $recipe->ingredients()->sync($data['ingredients']);
+            if (!empty($data['ingredients'])) {
+                $recipe->ingredients()->sync($data['ingredients']);
+            }
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $existingImage = $recipe->image;
+                if ($existingImage) {
+                    Storage::delete($existingImage->url);
+                    $existingImage->delete();
+                }
+                $path = $request->file('image')->store('images', 'public');
+                $recipe->image()->create(['url' => $path]);
+            }
+            $recipe->update($data);
+            return redirect()->route('recipes.edit', $recipe->id)->with('success', 'Recipe and images updated successfully!');
+        } catch (\Exception $e) {
+            Log::error("Error updating recipe: " . $e->getMessage());
+            return back()->withErrors('An error occurred while updating the recipe. Please try again.');
         }
-        // Gestion de l'image
-    if ($request->hasFile('image') && $request->file('image')->isValid()) {
-        // Supprimez l'image existante si elle existe
-        $existingImage = $recipe->image;
-        if ($existingImage) {
-            Storage::delete($existingImage->url);
-            $existingImage->delete();
-        }
-
-        // Ajoutez la nouvelle image
-        $path = $request->file('image')->store('public/recipe_images');
-        $recipe->image()->create(['url' => $path]);
-    }
-        $recipe->update($data);
-        return redirect()->route('recipes.edit', $recipe->id)->with('success', 'Recipe and images updated successfully!');
-    } catch (\Exception $e) {
-        Log::error("Error updating recipe: " . $e->getMessage());
-        return back()->withErrors('An error occurred while updating the recipe. Please try again.');
-    }
     }
 
-         
 
-    
+
+
 
 
     public function destroy(Recipe $recipe)

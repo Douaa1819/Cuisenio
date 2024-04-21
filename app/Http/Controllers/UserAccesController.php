@@ -25,6 +25,6 @@ class UserAccesController extends Controller
     public function logout()
     {
         auth()->logout();
-        return redirect('/login')->with('success', 'Logged out successfully');
+        return redirect('/')->with('success', 'Logged out successfully');
     }
     }

@@ -23,11 +23,18 @@ class CustomAuthController extends Controller
     public function registerUser(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|regex:/^[a-zA-Z\s\'\-]+$/',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
+            'password' => [
+                'required',
+                'string',
+                'min:6',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+            ],
         ]);
-    
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -39,7 +46,7 @@ class CustomAuthController extends Controller
 
             return redirect()->route('user.index')->with('success', 'You have registered successfully');
         }
-    
+
         return back()->with('error', 'Authentication failed after registration.');
     }
 

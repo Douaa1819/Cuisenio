@@ -33,7 +33,7 @@ class NewsLetterController extends Controller
      
          Newsletter::create([
              'email' => $validatedData['email'],
-             'subscribed' => true
+             'subscribered' => true
          ]);
      
          return back()->with('success', 'You have subscribed successfully!');

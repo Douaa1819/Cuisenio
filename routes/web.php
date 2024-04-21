@@ -44,7 +44,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     Route::get('/Recipe/{recipe}', [RecipeController::class, 'details'])->name('recipes.more');
     Route::post('/Add-recipe', [RecipeController::class, 'store'])->name('recipe.store');
-    Route::get('/Edite/recipe/{recipe}', [RecipeController::class, 'see'])->name('recipes.edit');
+    Route::get('/Edite/recipe/{recipe}', [RecipeController::class, 'edit'])->name('recipes.edit');
     Route::put('/Edite/recipe/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
 
     Route::delete('/Recipe/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');

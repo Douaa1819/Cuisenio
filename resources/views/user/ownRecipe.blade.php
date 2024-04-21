@@ -93,10 +93,23 @@
                             @endif
                             <div class="p-4">
                                 <h3 class="text-lg font-semibold text-gray-800">{{ $recipe->title }}</h3>
-                                <p class="text-gray-600 text-sm">{{ \Illuminate\Support\Str::limit($recipe->description, 50, '...') }}</p>
+                                <p class="text-gray-600 text-sm">
+                                    {{ \Illuminate\Support\Str::limit($recipe->description, 50, '...') }}
+                                    <a href="{{ route('recipes.more', $recipe->id) }}"
+                                        class="text-blue-400 hover:text-green-400 font-semibold cursor-pointer">Read
+                                        more...</a>
+                                </p>
+                                <div class="flex items-center mt-4">
+                                    @if ($recipe->theme)
+                                        <span
+                                            class="inline-block mr-4 bg-red-200 rounded-full px-3 py-1 text-sm font-semibold text-red-800 ">
+                                            {{ $recipe->theme->name }}
+                                        </span>
+                                    @endif
+                                </div>
                                 <div class="flex items-center mt-4">
                                     <i class="fas fa-clock text-gray-400"></i>
-                                    <span class="ml-2 text-sm text-gray-500">{{ $recipe->duration_preparation }} min</span>
+                                    <span class="ml-2 text-sm text-gray-500">{{ $recipe->updated_at }}s</span>
                                 </div>
                             </div>
                         </div>

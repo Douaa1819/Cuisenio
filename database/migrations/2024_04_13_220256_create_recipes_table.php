@@ -16,13 +16,14 @@ class CreateRecipesTable extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->text('description');
             $table->foreignId('theme_id')->constrained('themes');
             $table->text('steps');
             $table->text('list_ingredients');
             $table->integer('duration_preparation'); 
             $table->enum('level', ['easy', 'average', 'advance']);
-            $table->enum('season', ['winter', 'spring', 'summer', 'autumn']);
+            $table->enum('season', ['winter', 'spring', 'summer', 'autumn' ,'seasn']);
             $table->timestamps();
         });
     }
