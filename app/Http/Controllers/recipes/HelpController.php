@@ -13,7 +13,8 @@ class HelpController extends Controller
 
     public function details(Recipe $recipe)
     {
-        return view('user.readMore', compact('recipe'));
+        $randomRecipes = Recipe::inRandomOrder()->take(4)->get();
+        return view('user.readMore', compact('recipe','randomRecipes'));
     }
 
 

@@ -50,7 +50,7 @@
                 Dashboard
             </a>
     
-            <a href="{{ route('Theme.index')}}" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
+            <a href="{{ route('themes.index')}}" class="flex items-center mt-4 py-2 px-6 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors duration-200">
                 <i class="fas fa-utensils mr-3"></i>
                 Theme Management
             </a>
