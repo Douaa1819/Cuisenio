@@ -82,7 +82,7 @@
                 <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                 <textarea id="description" name="description" rows="4" required
                     class="focus:ring-red-300 focus:border-red-300 block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="Describe your recipe"></textarea>
+                    placeholder="Describe your recipe">{{ $recipe->description }}</textarea>
             </div>
 
             <div class="mb-4">
@@ -104,7 +104,7 @@
                     d'ingrédients</label>
                 <textarea id="list_ingredients" name="list_ingredients"
                     class="focus:ring-red-300 focus:border-red-300 block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="Listez les ingrédients, séparés par des virgules ou sauts de ligne"></textarea>
+                    placeholder="Listez les ingrédients, séparés par des virgules ou sauts de ligne">{{ $recipe->list_ingredients }}</textarea>
             </div>
 
             <div class="mb-4">
@@ -112,19 +112,19 @@
                     <label for="ingredients" class="block text-sm font-medium text-gray-700">Ingredients</label>
                     <div class="grid grid-cols-3 gap-4">
                         @foreach ($ingrediants as $index => $ingredient)
-                            @if (in_array($recipe->ingredient->name, $ingredient->name))
+                            @if ($recipe->ingredient && in_array($recipe->ingredient->name, $ingredient->name))
                                 <div>
                                     <!-- Utilisez l'ID de l'ingrédient comme valeur -->
                                     <input type="checkbox" id="ingredient{{ $index }}" name="ingredients[]"
-                                        value="{{ $ingredient->id }}" checked>
+                                        value="{{ $ingredient->id }}"
+                                        {{ in_array($ingredient->id, $recipeIngredientIds) ? 'checked' : '' }}>
                                     <label for="ingredient{{ $index }}">{{ $ingredient->name }}</label>
                                 </div>
                             @endif
                             <div>
-                                <!-- Utilisez l'ID de l'ingrédient comme valeur -->
                                 <input type="checkbox" id="ingredient{{ $index }}" name="ingredients[]"
-                                    value="{{ $ingredient->id }}">
-                                <label for="ingredient{{ $index }}">{{ $ingredient->name }}</label>
+                       value="{{ $ingredient->id }}" {{ in_array($ingredient->id, $recipeIngredientIds) ? 'checked' : '' }}>
+                <label for="ingredient{{ $index }}">{{ $ingredient->name }}</label>
                             </div>
                         @endforeach
                     </div>
@@ -137,7 +137,7 @@
                 <label for="steps" class="block text-sm font-medium text-gray-700">Steps</label>
                 <textarea id="steps" name="steps" rows="4" required
                     class="focus:ring-red-300 focus:border-red-300 block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="Enter the steps"></textarea>
+                    placeholder="Enter the steps">{{ $recipe->steps }}</textarea>
             </div>
             <div class="font-[sans-serif] max-w-md mx-auto">
                 <label class="text-sm text-black mb-2 block">Upload file</label>
@@ -152,16 +152,16 @@
                     (en minutes)</label>
                 <input type="number" id="duration_preparation" name="duration_preparation"
                     class="focus:ring-red-300 focus:border-red-300 block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="Entrez la durée de préparation en minutes">
+                    placeholder="Entrez la durée de préparation en minutes"
+                    value="{{ $recipe->duration_preparation }}">
             </div>
             <div class="mb-4">
                 <label for="level" class="block text-sm font-medium text-gray-700">Difficulty Level</label>
                 <select id="level" name="level" required
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
-                    <option></option>
-                    <option value="easy">Easy</option>
-                    <option value="average">Average</option>
-                    <option value="advance">Advanced</option>
+                    <option value="easy" {{ $recipe->level == 'easy' ? 'selected' : '' }}>Easy</option>
+                    <option value="average" {{ $recipe->level == 'average' ? 'selected' : '' }}>Average</option>
+                    <option value="advance" {{ $recipe->level == 'advance' ? 'selected' : '' }}>Advanced</option>
                 </select>
             </div>
 
@@ -169,12 +169,11 @@
                 <label for="season" class="block text-sm font-medium text-gray-700">Season</label>
                 <select id="season" name="season" required
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
-                    <option></option>
-                    <option value="All season">All Season</option>
-                    <option value="winter">Winter</option>
-                    <option value="spring">Spring</option>
-                    <option value="summer">Summer</option>
-                    <option value="autumn">Autumn</option>
+                    <option value="season" {{ $recipe->season == 'All season' ? 'selected' : '' }}>All Season</option>
+                    <option value="winter" {{ $recipe->season == 'winter' ? 'selected' : '' }}>Winter</option>
+                    <option value="spring" {{ $recipe->season == 'spring' ? 'selected' : '' }}>Spring</option>
+                    <option value="summer" {{ $recipe->season == 'summer' ? 'selected' : '' }}>Summer</option>
+                    <option value="autumn" {{ $recipe->season == 'autumn' ? 'selected' : '' }}>Autumn</option>
                 </select>
             </div>
 

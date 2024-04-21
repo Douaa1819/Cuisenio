@@ -46,11 +46,13 @@ class RecipeController extends Controller
         return view('user.AddRecipes', compact('themes', 'ingrediants'));
     }
     public function see(Recipe $recipe)
-    {
+    { 
+
         $themes = $this->themes->all();
+        $recipeIngredientIds = $recipe->ingredients->pluck('id')->toArray();
         $ingrediants = $this->ingrediant->all();
 
-        return view('user.EditeRecipe', compact('themes', 'recipe', 'ingrediants'));
+        return view('user.EditeRecipe', compact('themes', 'recipe', 'ingrediants','recipeIngredientIds'));
     }
 
     public function filtreParTheme(Theme $theme)
@@ -120,28 +122,28 @@ class RecipeController extends Controller
         return view('user.readMore', compact('recipe'));
     }
 
-    public function store(RecipeRequest $request)
-    {
-        $data = $request->validated();
-        $userID = Auth::user()->id;
-        $data['user_id'] = $userID;
-        $recipe = Recipe::create($data);
-        $recipe->ingredients()->attach($data['ingredients']);
+        public function store(RecipeRequest $request)
+        {
+            $data = $request->validated();
+            $userID = Auth::user()->id;
+            $data['user_id'] = $userID;
+            $recipe = Recipe::create($data);
+            $recipe->ingredients()->attach($data['ingredients']);
 
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            try {
-                $path = $request->file('image')->store('images', 'public');
-                $recipe->image()->create(['url' => $path]);
-            } catch (\Exception $e) {
-                Log::error("Failed to upload image: " . $e->getMessage());
-                return back()->withErrors('Failed to upload image. Please try again.');
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                try {
+                    $path = $request->file('image')->store('images', 'public');
+                    $recipe->image()->create(['url' => $path]);
+                } catch (\Exception $e) {
+                    Log::error("Failed to upload image: " . $e->getMessage());
+                    return back()->withErrors('Failed to upload image. Please try again.');
+                }
             }
+            if ($recipe) {
+                $this->sendEmailToSubs($recipe);
+            }
+            return redirect()->route('recipes')->with('success', 'Recipe added successfully!');
         }
-        if ($recipe) {
-            $this->sendEmailToSubs($recipe);
-        }
-        return redirect()->route('recipes')->with('success', 'Recipe added successfully!');
-    }
 
 
     public function sendEmailToSubs(Recipe $recipe) 
@@ -176,28 +178,35 @@ class RecipeController extends Controller
         $data = $request->validated();
         $userID = Auth::user()->id;
     
-        $userID = Auth::user()->id;
         $data['user_id'] = $userID;
-        $recipe->update($data);
-        $recipe->ingredients()->attach($data['ingredients']);
-        if ($request->hasFile('image')) {
-            try {
-                foreach ($recipe->images as $image) {
-                    Storage::delete($image->url);
-                    $image->delete();
-                }
-                
-                $path = $request->file('image')->store('public/recipe_images');
-                $recipe->images()->create(['url' => $path]);
-                   
-                return redirect()->route('recipes.edit', $recipe->id)->with('success', 'Recipe and images updated successfully!');
-            } catch (\Exception $e) {
-                return redirect()->route('recipes.edit', $recipe->id)->with('error', 'Failed to update images: ' . $e->getMessage());
-            }
+        try {
+        if (!empty($data['ingredients'])) {
+            $recipe->ingredients()->sync($data['ingredients']);
+        }
+        // Gestion de l'image
+    if ($request->hasFile('image') && $request->file('image')->isValid()) {
+        // Supprimez l'image existante si elle existe
+        $existingImage = $recipe->image;
+        if ($existingImage) {
+            Storage::delete($existingImage->url);
+            $existingImage->delete();
         }
 
-        return redirect()->route('recipes.edit');
+        // Ajoutez la nouvelle image
+        $path = $request->file('image')->store('public/recipe_images');
+        $recipe->image()->create(['url' => $path]);
     }
+        $recipe->update($data);
+        return redirect()->route('recipes.edit', $recipe->id)->with('success', 'Recipe and images updated successfully!');
+    } catch (\Exception $e) {
+        Log::error("Error updating recipe: " . $e->getMessage());
+        return back()->withErrors('An error occurred while updating the recipe. Please try again.');
+    }
+    }
+
+         
+
+    
 
 
     public function destroy(Recipe $recipe)
