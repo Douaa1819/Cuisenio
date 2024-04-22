@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ForgotPasswordLinkController;
 use App\Http\Controllers\recipes\ThemeController;
 use App\Http\Controllers\recipes\HelpController;
 use App\Http\Controllers\dashboard\AdminController;
@@ -92,6 +93,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 //---------------------------news.store--------------------------------------------
+Route::get('/forget-password', [ForgotPasswordLinkController::class, 'index'])->name('forgetPassword');
+Route::post('/forget-password', [ForgotPasswordLinkController::class, 'forgetPassword']);
 Route::get('/newsletter/details', [NewsletterController::class, 'showListDetails']);
 Route::post('/', [NewsletterController::class, 'store'])->name('news.store');
 Route::get('/logout', [UserAccesController::class, 'logout'])->name('logout');

@@ -39,7 +39,7 @@
                 <p id="passwordFeedback" class="text-xs text-red-500 mt-1"></p>
             <p id="passwordFeedback" class="text-xs text-red-500 mt-1"></p>
           </div>
-          <a href="#" class="text-red-500 mt-4 hover:text-red-600 hover:underline">Forgot your password?</a>
+          <a href="{{ route('forgetPassword')}}" class="text-red-500 mt-4 hover:text-red-600 hover:underline">Forgot your password?</a>
           <button type="submit" class="mt-4 px-6 py-3 w-full bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors duration-300">Sign In</button>
         </form>
       </div>
