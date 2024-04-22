@@ -1,15 +1,12 @@
 <?php
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
-use Nette\Utils\Random;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Mail\ForgetPasswordMail;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -39,20 +36,27 @@ class ForgotPasswordLinkController extends Controller
 
     $token=Str::random(64);
         
-      DB::table('password_reset_tokens')->insert([
+      DB::table('password_resets')->insert([
             'email' => $request->email,
             'token' => $token,
             'created_at' => Carbon::now(),
         ]);
         
-        //  Mail::to( $request->email)->send(new ForgetPasswordMail($token));
+          Mail::send('emails.forget-password',['token'=>$token],function($message) use ($request){
+            $message->to($request->email);
+            $message->subject("Reset Password");
+            return redirect()->to( route('forgetPassword'))->with('succes',"We have send an email to reset password ");
+
+          });
         
         return redirect()->back();
     }
 
+    
+
     public function ResetPassword($token)
     {
-        return view('Auth.new-password',compact('token'));
+        return view('emails.new-password',compact('token'));
     }
 
     public function NewPassword(Request $request)
@@ -60,10 +64,10 @@ class ForgotPasswordLinkController extends Controller
         $request->validate([
                 'email' => "required|email|exists:users,email",
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
-                'token' => 'required|exists:password_reset_tokens,token'
+                'token' => 'required|exists:password_resets,token'
         ]);
 
-       $updatePassword = DB::table('password_reset_tokens')->where([
+       $updatePassword = DB::table('password_resets')->where([
             'email' => $request->email,
             'token' => $request->token,
         ])->first();
@@ -79,7 +83,7 @@ class ForgotPasswordLinkController extends Controller
         return redirect()->back()->with('error','invalid Data');
        }
 
-       $updatePassword = DB::table('password_reset_tokens')->where([
+       $updatePassword = DB::table('password_resets')->where([
         'email' => $request->email,
         ])->delete();
 
