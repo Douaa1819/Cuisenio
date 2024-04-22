@@ -1,6 +1,5 @@
 <?php
-namespace App\Http\Controllers\visitor;
-
+namespace App\Http\Controllers\Visitor;
 use App\Http\Controllers\Controller;
 use App\Models\NewsLetter;
 use Illuminate\Http\Request;

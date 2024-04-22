@@ -4,6 +4,7 @@ use App\Http\Controllers\recipes\ThemeController;
 use App\Http\Controllers\recipes\HelpController;
 use App\Http\Controllers\dashboard\AdminController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\PrintController;
 use App\Http\Controllers\visitor\HomeController;
 use App\Http\Controllers\recipes\IngrediantController;
 use App\Http\Controllers\recipes\LiveSearchController;
@@ -21,6 +22,13 @@ Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
 Route::post('/register', [CustomAuthController::class, 'registerUser'])->name('register-user');
 Route::post('/login', [CustomAuthController::class, 'loginUser'])->name('login-user');
 Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');
+
+
+
+// Route::get('/recipes', [PrintController::class, 'index']);
+
+Route::get('/recipes/download/{id}', [PrintController::class, 'downloadPDF'])->name('recipes.download');
+
 
 Route::post('/subscribe', [NewsletterController::class, 'subscribe']);
 
@@ -61,7 +69,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
 
 
-// //-----------------------------------Admine-----------------------------------
+ //-----------------------------------Admine-----------------------------------
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/user-acces', [UserAccesController::class, 'index'])->name('user');
     Route::post('/user-acces/{user}/toggle-block', [UserAccesController::class, 'toggleBlock'])->name('user.toggle-block');

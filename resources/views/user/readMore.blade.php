@@ -4,7 +4,7 @@
   @endsection
 </x-main-layout>
 <x-header page='home' />
-
+{{-- user.readMore --}}
 <body class="bg-gray-50">
     <main class="container mx-auto px-4 py-8">
         <div class="bg-white shadow-lg rounded-lg p-6">
@@ -52,8 +52,12 @@
                                 <i class="fas fa-book-open"></i> Add to Booklist
                             </button>
                         </div>
-                        <button class="px-4 py-2 text-white bg-gray-500 rounded-full hover:bg-gray-600 transition-colors">
-                            <i class="fas fa-print"></i> Print
+                        <button   class="px-4 py-2 text-white bg-gray-500 rounded-full hover:bg-gray-600 transition-colors">
+                            <a href="{{ route('recipes.download', $recipe->id) }}" class="px-4 py-2 text-white bg-gray-500 rounded-full hover:bg-gray-600 transition-colors">
+                                <i class="fas fa-download"></i> Download PDF
+                            </a>
+                            
+                            
                         </button>
                     </div>
 
@@ -105,3 +109,5 @@
     <x-footer/>
 </body>
 </html>
+
+</script>
