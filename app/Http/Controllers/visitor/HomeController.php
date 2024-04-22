@@ -10,7 +10,10 @@ use App\Models\Theme;
 use App\Repositories\IngrediantRepositoryInterface;
 use App\Repositories\RecipeRepositoryInterface;
 use App\Repositories\ThemeRepositoryInterface;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -38,7 +41,7 @@ class HomeController extends Controller
     return view('visitor.index', compact('themes', 'ingrediant','firstThreeRecipes', 'nextThreeRecipes'));
     }
 
-    
+
     public function contact()
     {
     return view('visitor.ContactUs');
@@ -82,48 +85,37 @@ class HomeController extends Controller
         return view('user.profile');
     }
 
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function updateProfile(Request $request)
     {
-        //
-    }
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'phone' => 'string|max:255',
+            'email' => 'required|string|email|max:255',
+            'profile_image' => 'sometimes|image|max:2048',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json(['code' => 400, 'msg' => $validator->errors()->first()]);
+        }
+    
+        $user = Auth::user();
+        if (!$user instanceof User) {
+   return response()->json(['error' => 'Not a valid user instance']);
+        }
+    
+        $user->name = $request->name;
+        $user->phone = $request->phone;
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        if ($request->hasFile('profile_image')) {
+            $path = $request->file('profile_image')->store('profile_images', 'public');
+            $user->profile_image = $path;
+        }
+    
+        $user->save();
+        return response()->json(['code' => 200, 'msg' => 'Profile updated successfully.']);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    
 }
+
+

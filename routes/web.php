@@ -46,6 +46,8 @@ Route::get('/urblog', [HomeController::class, 'urblog'])->name('urblog');
 
 //--------------------------------Recipes---------------------------------------------------
 Route::middleware(['auth', 'role:user'])->group(function () {
+ 
+    Route::post('/profile', [HomeController::class, 'updateProfile'])->name('update.profile');
 
     Route::get('/Show/Recipe', [HelpController::class, 'show'])->name('My.recipe');
 
