@@ -41,6 +41,10 @@ class Recipe extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
-    
+
+    public function favoris()
+    {
+        return $this->hasMany(favoris::class);
+    }    
     
 }

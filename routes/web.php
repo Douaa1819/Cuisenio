@@ -5,6 +5,7 @@ use App\Http\Controllers\recipes\ThemeController;
 use App\Http\Controllers\recipes\HelpController;
 use App\Http\Controllers\dashboard\AdminController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\visitor\HomeController;
 use App\Http\Controllers\recipes\IngrediantController;
@@ -54,7 +55,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     Route::get('/Show/Recipe', [HelpController::class, 'show'])->name('My.recipe');
 
-
+Route::resource('/favoris',FavorisController::class);
     Route::get('/Recipe/{recipe}', [HelpController::class, 'details'])->name('recipes.more');
     Route::resource('recipes', RecipeController::class);
 
