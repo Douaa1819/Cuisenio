@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReviewRequest;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -26,11 +28,13 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReviewRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = Auth::user()->id;
+        Review::create($data);
+        return redirect()->back();
     }
-
     /**
      * Display the specified resource.
      */
@@ -55,11 +59,10 @@ class ReviewController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Review $review)
     {
-        //
+        $review->delete();
+        return redirect()->back();
     }
 }

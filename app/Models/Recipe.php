@@ -45,6 +45,12 @@ class Recipe extends Model
     public function favoris()
     {
         return $this->hasMany(favoris::class);
-    }    
+    }   
+    
+    
+    public function review()
+    {
+        return $this->hasMany(favoris::class);
+    }
     
 }
