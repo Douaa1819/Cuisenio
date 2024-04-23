@@ -20,10 +20,6 @@
                 </a>
             </div>
 
-            <p style="font-size: 16px; color: #666; text-align: center;">
-                If you did not request a password reset, please ignore this email or contact support if you have any questions.
-            </p>
-
             <p style="text-align: center; font-size: 14px; color: #aaaaaa; margin-top: 30px;">
                 &copy; 2024 Cuisenio. All rights reserved.
             </p>

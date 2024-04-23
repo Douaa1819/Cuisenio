@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -34,60 +36,55 @@ class ForgotPasswordLinkController extends Controller
             'email' => 'required|email|exists:users,email',
         ]);
 
-    $token=Str::random(64);
-        
-      DB::table('password_resets')->insert([
+        $token = Str::random(64);
+
+        DB::table('password_resets')->insert([
             'email' => $request->email,
             'token' => $token,
             'created_at' => Carbon::now(),
         ]);
-        
-          Mail::send('emails.forget-password',['token'=>$token],function($message) use ($request){
+
+        Mail::send('emails.forget-password', ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject("Reset Password");
-            return redirect()->to( route('forgetPassword'))->with('succes',"We have send an email to reset password ");
-
-          });
-        
-        return redirect()->back();
+            return redirect()->to(route('forgetPassword'))->with('succes', "We have send an email to reset password ");
+        });
     }
 
-    
+
 
     public function ResetPassword($token)
     {
-        return view('emails.new-password',compact('token'));
+        return view('emails.new-password', compact('token'));
     }
 
     public function NewPassword(Request $request)
     {
         $request->validate([
-                'email' => "required|email|exists:users,email",
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-                'token' => 'required|exists:password_resets,token'
+            'email' => "required|email|exists:users,email",
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'token' => 'required|exists:password_resets,token'
         ]);
 
-       $updatePassword = DB::table('password_resets')->where([
+        $updatePassword = DB::table('password_resets')->where([
             'email' => $request->email,
             'token' => $request->token,
         ])->first();
 
-        if(!$updatePassword)
-        {
-            return redirect()->back()->with('error','invalid Email');
+        if (!$updatePassword) {
+            return redirect()->back()->with('error', 'invalid Email');
         }
 
-       $updated =  User::where("email",$request->email)->update(['password' => Hash::make($request->password)]);
-        
-       if(!$updated){
-        return redirect()->back()->with('error','invalid Data');
-       }
+        $updated =  User::where("email", $request->email)->update(['password' => Hash::make($request->password)]);
 
-       $updatePassword = DB::table('password_resets')->where([
-        'email' => $request->email,
+        if (!$updated) {
+            return redirect()->back()->with('error', 'invalid Data');
+        }
+
+        $updatePassword = DB::table('password_resets')->where([
+            'email' => $request->email,
         ])->delete();
 
-        return redirect('/login')->with('success','password changed with success');
-
+        return redirect('/login')->with('success', 'password changed with success');
     }
 }
