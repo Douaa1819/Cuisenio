@@ -15,9 +15,11 @@
         <a href="{{ route('about') }}" class="{{ $page == 'about' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
             favorites list
         </a>
-        <a href="{{ route('contact') }}" class="{{ $page == 'contact' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
-            Contact US
+        <a href="javascript:void(0);" onclick="displayBooklistPage()"  class="{{ $page == 'contact' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
+         BookList
         </a>
+
+        
     </div>
 
     <!-- Profile Dropdown -->
@@ -39,4 +41,18 @@
   document.getElementById('profileDropdown').addEventListener('click', function() {
     document.getElementById('dropdownContent').classList.toggle('hidden');
   });
+
+
+  
+function displayBooklistPage() {
+    let booklist = JSON.parse(localStorage.getItem('booklist')) || [];
+    if (booklist.length > 0) {
+        const url = `/print-booklist?ids=${encodeURIComponent(JSON.stringify(booklist))}`;
+        window.location.href = url;
+    } else {
+        alert('Your booklist is empty.');
+    }
+}
+
 </script>
+

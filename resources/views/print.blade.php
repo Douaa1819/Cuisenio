@@ -52,6 +52,7 @@
             <p>{{ $recipe->description }}</p>
             
         </div>
+        {{-- <img src="{{ asset('laraveldaily.png') }}" alt="laravel daily" width="200" /> --}}
         <div class="content">
             <h2><i class="fas fa-pepper-hot"></i> Ingredients</h2>
             <ul>

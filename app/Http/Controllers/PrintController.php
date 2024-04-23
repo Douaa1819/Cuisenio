@@ -3,26 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recipe;
-use Illuminate\Http\Request;
-use  Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Dompdf\Dompdf;
+use Illuminate\Http\Request;
 
 class PrintController extends Controller
 {
- 
-    // public function index()
-    // {
-    //     $recipes = Recipe::all();
-    //     return view('user.readMore', compact('recipes'));
-    // }
-
-    // // Prépare la recette spécifique pour l'impression
-    // public function printPreview($id)
-    // {
-    //     $recipe = Recipe::findOrFail($id);
-    //     return view('print', compact('recipe'));
-    // }
-
 
     public function downloadPDF($id)
     {
@@ -38,5 +23,17 @@ class PrintController extends Controller
         ]);
     }
     
-
+    public function printBooklist(Request $request)
+    {
+        $ids = json_decode($request->query('ids'), true);
+        $recipes = Recipe::whereIn('id', $ids)->get(); 
+        if ($recipes->isEmpty()) {
+            abort(404, 'No recipes found.');
+        }
+        return view('print_recipes', compact('recipes'));
+    }
+    
+    
+    
+    
 }

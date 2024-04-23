@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 
 //---------------------------------------Visiteur-----------------------------------------
+       
+Route::get('/print-booklist', [PrintController::class, 'printBooklist'])->name('print.booklist');
 
 //------------------------------------auth---------------------------------------
 Route::get('/register', [CustomAuthController::class, 'register'])->name('register');
@@ -93,6 +95,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 //---------------------------news.store--------------------------------------------
+
+
 Route::get('/forget-password', [ForgotPasswordLinkController::class, 'index'])->name('forgetPassword');
 
 Route::post('/forget-password', [ForgotPasswordLinkController::class, 'forgetPasswordPost'])->name('post.forget');

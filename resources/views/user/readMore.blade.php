@@ -6,9 +6,12 @@
 <x-header page='home' />
 {{-- user.readMore --}}
 <body class="bg-gray-50">
+    <button onclick="sendBooklistToServer()" class="bg-black w-full text-white">Send Booklist to Server</button>
     <main class="container mx-auto px-4 py-8">
         <div class="bg-white shadow-lg rounded-lg p-6">
             <div class="flex flex-col lg:flex-row gap-8">
+                
+
                 <!-- Main content area -->
                 <div class="lg:w-3/4">
                     <h2 class="text-3xl font-bold text-center mb-4">{{ $recipe->title }}</h2>
@@ -48,9 +51,9 @@
                             <button class="px-4 py-2 text-white bg-blue-500 rounded-full hover:bg-blue-600 transition-colors">
                                 <i class="fas fa-comment-alt"></i> Comment
                             </button>
-                            <button class="px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 transition-colors">
-                                <i class="fas fa-book-open"></i> Add to Booklist
-                            </button>
+                            <button onclick="addToBooklist({{ $recipe->id }})" class="px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 transition-colors">
+                                <i class="fas fa-book-open"></i> Add to Recettelist
+                            </button>                            
                         </div>
                         <button   class="px-4 py-2 text-white bg-gray-500 rounded-full hover:bg-gray-600 transition-colors">
                             <a href="{{ route('recipes.download', $recipe->id) }}" class="px-4 py-2 text-white bg-gray-500 rounded-full hover:bg-gray-600 transition-colors">
@@ -109,5 +112,25 @@
     <x-footer/>
 </body>
 </html>
+
+<script>
+  function addToBooklist(recipeId) {
+    let booklist = JSON.parse(localStorage.getItem('booklist')) || [];
+    if (!booklist.includes(recipeId)) {
+        booklist.push(recipeId);
+        localStorage.setItem('booklist', JSON.stringify(booklist));
+        alert('Recipe added to booklist: ' + recipeId);
+    }
+}
+
+  function displayBooklist() {
+    let booklist = JSON.parse(localStorage.getItem('booklist')) || [];
+    let listHtml = booklist.map(id => `<li>Recipe ID: ${id}</li>`).join('');
+    document.getElementById('booklistView').innerHTML = listHtml;
+}
+
+
+
+
 
 </script>
