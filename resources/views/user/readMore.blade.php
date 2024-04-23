@@ -7,7 +7,6 @@
 {{-- user.readMore --}}
 
 <body class="bg-gray-50">
-    <button onclick="sendBooklistToServer()" class="bg-black w-full text-white">Send Booklist to Server</button>
     <main class="container mx-auto px-4 py-8">
         <div class="bg-white shadow-lg rounded-lg p-6">
             <div class="flex flex-col lg:flex-row gap-8">

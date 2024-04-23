@@ -1,69 +1,90 @@
-<x-head></x-head>
-<section class="bg-gray-50 dark:bg-gray-900">
-    @if (session('success'))
-
-    <div class="bg-green-500 text-white flex items-center w-max max-w-sm px-4 py-4 rounded" role="alert">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 shrink-0 fill-white inline mr-2" viewBox="0 0 512 512">
-          <ellipse cx="256" cy="256" fill="#fff" data-original="#fff" rx="256" ry="255.832" />
-          <path class="fill-green-500"
-            d="m235.472 392.08-121.04-94.296 34.416-44.168 74.328 57.904 122.672-177.016 46.032 31.888z"
-            data-original="#ffffff" />
-        </svg>
-        <span class="block sm:inline text-sm font-semibold mr-4">Update successfully</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 cursor-pointer shrink-0 fill-white ml-auto"
-          viewBox="0 0 320.591 320.591">
-          <path
-            d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-            data-original="#000000" />
-          <path
-            d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-            data-original="#000000" />
-        </svg>
-      </div>
-      @endif
-    @if ($errors->any())
-        <div class="bg-red-500 text-white flex items-center w-max max-w-sm px-4 py-4 rounded" role="alert">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 shrink-0 fill-white inline mr-2" viewBox="0 0 32 32">
-                <path
-                    d="M16 1a15 15 0 1 0 15 15A15 15 0 0 0 16 1zm6.36 20L21 22.36l-5-4.95-4.95 4.95L9.64 21l4.95-5-4.95-4.95 1.41-1.41L16 14.59l5-4.95 1.41 1.41-5 4.95z"
-           kdjind         data-original="#ea2d3f" />
-            </svg>
-            <span class="block sm:inline text-sm font-semibold mr-4">Something went wrong</span>o
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex flex-col justify-center items-center">
+        <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-xl">
+            <div class="text-center">
+                <img src="{{ asset('images/logo.png') }}" alt="Company Logo" class="mx-auto w-32 mb-4">
+                <h2 class="mt-2 text-3xl font-bold text-black">
+                    Reset Your Password
+                </h2>
+                <p class="mt-1 text-sm text-gray-700">
+                    We'll send you a link to reset your password.
+                </p>
+            </div>
             
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 cursor-pointer shrink-0 fill-white ml-auto"
-                viewBox="0 0 320.591 320.591">
-                <path
-                    d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-                    data-original="#000000" />
-                <path
-                    d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-                    data-original="#000000" />
-            </svg>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-            <img class="w-36 mr-2" src="{{ asset('images/logo.png') }}" alt="logo">   
-        </a>
-        <h2 class="mb-4 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-xl dark:text-white">
-            We Will  send a  Link to your email ,use that link to reset password
-         </h2>
-        <div class="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
-            
-            <form class="mt-4 space-y-4 lg:mt-5 md:space-y-5" action= "{{ route('post.forget') }}"method="POST">
+            <form class="space-y-6" action="{{ route('post.forget') }}" method="POST">
                 @csrf
-                <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email adress</label>
-                    <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-300 dark:focus:border-red-300" placeholder="email@gmail.com" required="">
+                @if (session('success'))
+            <div class="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-24 max-w-7xl">
+                <div class="p-6 border-l-4 border-green-500 -6 rounded-r-xl bg-green-50">
+                  <div class="flex">
+                    <div class="flex-shrink-0">
+                      <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                      </svg>
+                    </div>
+                    <div class="ml-3">
+                      <div class="text-sm text-green-600">
+                        <p>Success! Your changes have been saved. 😍</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-                <button type="submit" class="w-full text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send</button>
+              </div>
+        </div>
+                </div>
+            @endif
+            @if ($errors->any())
+            <div
+            class="flex bg-white dark:bg-gray-900 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500">
+            <svg viewBox="0 0 24 24" class="w-8 h-8 text-red-500 stroke-current" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12 8V12V8ZM12 16H12.01H12ZM21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <div class="ml-3">
+                <div class="font-bold text-left text-black dark:text-gray-50">Error</div>
+                <div class="w-full text-gray-900 dark:text-gray-300 mt-1">You don&#x27;    There was an error processing your request.</div>
+            </div>
+        </div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email Address</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.118z" />
+                            </svg>
+                        </div>
+                        <input type="email" name="email" id="email" class="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-400 focus:border-red-400 text-gray-900 sm:text-sm" placeholder="name@example.com" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address">
+                    </div>
+                    
+                <button type="submit" class="w-full mt-4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-red-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-4 focus:ring-red-500">
+                    Send Reset Link
+                </button>
             </form>
         </div>
     </div>
-  </section>
+</body>
+</html>
