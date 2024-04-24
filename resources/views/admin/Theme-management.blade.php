@@ -22,8 +22,8 @@
                 @foreach ($Themes as $Theme)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                     @if ($Theme->image) <!-- Check if an image exists -->
-                            <td class="py-6 px-6">
-                                <img src="{{ Storage::url($Theme->image->url) }}" alt="Theme Image" style="width: 100px; height: auto;">
+                            <td class="py-6 px-6   ">
+                                <img src="{{ Storage::url($Theme->image->url) }}" alt="Theme Image"  class ="border rounded-lg  w-32">
                             </td>
                         @endif
                     <td class="py-6 px-6">{{ $Theme->name }}</td>

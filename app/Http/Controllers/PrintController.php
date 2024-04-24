@@ -31,8 +31,26 @@ class PrintController extends Controller
             abort(404, 'No recipes found.');
         }
         return view('print_recipes', compact('recipes'));
+
+        
     }
     
+
+    public function Booklist(Request $request)
+    {
+        $ids = json_decode($request->query('ids'), true);
+        $recipes = Recipe::whereIn('id', $ids)->get(); 
+        if ($recipes->isEmpty()) {
+            return abort(404, 'No recipes found.');
+        }
+
+        $view = view('print_recipes', compact('recipes'))->render();
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($view);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        return $dompdf->stream('booklist.pdf', ['Attachment' => true]);
+    }
     
     
     

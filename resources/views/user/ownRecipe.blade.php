@@ -88,9 +88,9 @@
                                     </ul>
                                 </div>
                             </div>
-                            @if ($recipe->image)
-                            <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image" class="w-full h-56 object-cover">
-                            @endif
+                                @if ($recipe->image)
+                                <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image" class="w-full h-56 object-cover">
+                                @endif
                             <div class="p-4">
                                 <h3 class="text-lg font-semibold text-gray-800">{{ $recipe->title }}</h3>
                                 <p class="text-gray-600 text-sm">

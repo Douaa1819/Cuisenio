@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 //---------------------------------------Visiteur-----------------------------------------
 
 Route::get('/print-booklist', [PrintController::class, 'printBooklist'])->name('print.booklist');
+Route::get('/download-booklist', [PrintController::class, 'Booklist'])->name('download.booklist');
 
 //------------------------------------auth---------------------------------------
 Route::get('/register', [CustomAuthController::class, 'register'])->name('register');
