@@ -10,6 +10,7 @@ use App\Models\Newsletter;
 use App\Mail\NewsletterEmail;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\RecipeRequest;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -50,8 +51,8 @@ class RecipeController extends Controller
         $themes = $this->themes->all();
         $recipeIngredientIds = $recipe->ingredients->pluck('id')->toArray();
         $ingrediants = $this->ingrediant->all();
-
-        return view('user.EditeRecipe', compact('themes', 'recipe', 'ingrediants', 'recipeIngredientIds'));
+   
+        return view('user.EditeRecipe', compact('themes', 'recipe', 'ingrediants','recipeIngredientIds'));
     }
 
 

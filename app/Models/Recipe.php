@@ -48,9 +48,9 @@ class Recipe extends Model
     }   
     
     
-    public function review()
+    public function reviews()
     {
-        return $this->hasMany(favoris::class);
+        return $this->hasMany(favoris::class,'recipe_id');
     }
     
 }

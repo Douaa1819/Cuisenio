@@ -7,6 +7,40 @@
 {{-- user.readMore --}}
 
 <body class="bg-gray-50">
+
+    <div id="review"
+        class=" hidden min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
+        <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
+        <div class="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
+            <h1 class="font-bold text-center text-xl  ">Rate this book.</h1>
+            <p class="text-md text-center mt-3">Let others know what you think about <span
+                    class="font-semibold text-gray-600">{{ $recipe->id }}</span></p>
+            <form method="POST" action="{{ route('reviews.store') }}" class="flex flex-col gap-8">
+                @csrf
+                @method('POST')
+                <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
+                <div class="rating flex justify-center ">
+                    <input value="5" name="nbr_stars" id="star5" type="radio">
+                    <label title="text" for="star5"></label>
+                    <input value="4" name="nbr_stars" id="star4" type="radio">
+                    <label title="text" for="star4"></label>
+                    <input value="3" name="nbr_stars" id="star3" type="radio">
+                    <label title="text" for="star3"></label>
+                    <input value="2" name="nbr_stars" id="star2" type="radio">
+                    <label title="text" for="star2"></label>
+                    <input value="1" name="nbr_stars" id="star1" type="radio">
+                    <label title="text" for="star1"></label>
+                </div>
+                <button class="bg-black text-white rounded-xl py-1 hover:bg-rgay-800">
+                    Rate
+                </button>
+                <button onclick="closeReview()" class="bg-red-600 text-white rounded-xl py-1 hover:bg-rgay-800">
+                    Close
+                </button>
+            </form>
+        </div>
+    </div>
+    </div>
     <main class="container mx-auto px-4 py-8">
         <div class="bg-white shadow-lg rounded-lg p-6">
             <div class="flex flex-col lg:flex-row gap-8">
@@ -86,13 +120,16 @@
                     <!-- Ratings section -->
                     <div class="mt-6">
                         <h3 class="text-xl font-semibold mb-2">Rate this Recipe</h3>
-                        <div class="flex items-center">
-                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                            <i class="fas fa-star text-gray-300 mr-2"></i>
-                            <span>4.0 (200 reviews)</span>
+                        <div onclick="openReview()" class="flex items-center cursor-pointer">
+                            @for ($i = 0; $i < 5; $i++)
+                                @if ($i < $stars)
+                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                @else
+                                    <i class="fas fa-star mr-2"></i>
+                                @endif
+                            @endfor
+
+                            <span> {{ number_format($nbr_stars, 2, '.', '') }}  \ {{ $countStars }} reviews</span>
                         </div>
                     </div>
                 </div>
@@ -124,41 +161,10 @@
 
 
 
-    {{-- <div id="review"
-        class="  min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
-        <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
-        <div class="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
-            <h1 class="font-bold text-center text-xl  ">Rate this book.</h1>
-            <p class="text-md text-center mt-3">Let others know what you think about <span
-                    class="font-semibold text-gray-600">{{ $recipe->title }}</span></p>
-            <form method="POST" action="{{ route('reviews.store') }}" class="flex flex-col gap-8">
-                @csrf
-                @method('POST')
-                <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
-                <div class="rating flex justify-center ">
-                    <input value="5" name="nbr_stars" id="star5" type="radio">
-                    <label title="text" for="star5"></label>
-                    <input value="4" name="nbr_stars" id="star4" type="radio">
-                    <label title="text" for="star4"></label>
-                    <input value="3" name="nbr_stars" id="star3" type="radio">
-                    <label title="text" for="star3"></label>
-                    <input value="2" name="nbr_stars" id="star2" type="radio">
-                    <label title="text" for="star2"></label>
-                    <input value="1" name="nbr_stars" id="star1" type="radio">
-                    <label title="text" for="star1"></label>
-                </div>
-                <button class="bg-black text-white rounded-xl py-1 hover:bg-rgay-800">
-                    Rate
-                </button>
-            </form>
-        </div>
-    </div>
-    </div> --}}
-
 </body>
 
 </html>
-{{-- <style>
+<style>
     .rating:not(:checked)>input {
         position: absolute;
         appearance: none;
@@ -191,8 +197,17 @@
     .rating>input:checked~label {
         color: #ffa723;
     }
-</style> --}}
+</style>
 <script>
+    function openReview() {
+        document.getElementById('review').classList.remove('hidden');
+    }
+
+    function closeReview() {
+        document.getElementById('review').classList.add('hidden');
+    }
+
+
     function addToBooklist(recipeId) {
         let booklist = JSON.parse(localStorage.getItem('booklist')) || [];
         if (!booklist.includes(recipeId)) {

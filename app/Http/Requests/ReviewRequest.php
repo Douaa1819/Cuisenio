@@ -23,7 +23,7 @@ class ReviewRequest extends FormRequest
     {
         return [
             'recipe_id'=>'required|exists:recipes,id',
-            'nbr_stars' => 'required|integer|between:1,5',
+            'nbr_stars' => 'required',
         ];
     }
 }

@@ -5,16 +5,21 @@ namespace App\Http\Controllers\recipes;
 use App\Http\Controllers\Controller;
 use App\Models\Ingrediant;
 use App\Models\Recipe;
+use App\Models\Review;
 use App\Models\Theme;
 
 class HelpController extends Controller
 {
-    
+
 
     public function details(Recipe $recipe)
     {
         $randomRecipes = Recipe::inRandomOrder()->take(4)->get();
-        return view('user.readMore', compact('recipe','randomRecipes'));
+        $countStars = Review::where('recipe_id', $recipe->id)->count();
+        
+        $nbr_stars = Review::where('recipe_id', $recipe->id)->avg('nbr_stars');
+        $stars = intval($nbr_stars);
+        return view('user.readMore', compact('nbr_stars', 'recipe', 'randomRecipes', 'stars', 'countStars'));
     }
 
 
@@ -25,7 +30,7 @@ class HelpController extends Controller
 
 
 
-    
+
     public function filtreParIngrediant(Ingrediant $ingrediants)
     {
 
