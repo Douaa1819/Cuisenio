@@ -35,7 +35,6 @@ class RecipeController extends Controller
     }
 
 
-
     public function index()
     {
         $themes = $this->themes->all();

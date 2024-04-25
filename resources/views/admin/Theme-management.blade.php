@@ -1,8 +1,10 @@
 <x-dashboard>
 <div class="flex-grow p-6 lg:pl-80 pt-28">
+    <x-flash/>
     <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md ml-10">
         <x-flash/>
         <div class="pb-4 flex justify-between items-center">
+
             <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Theme Management</h2>
             <div class="flex items-center">
                 <input type="text" id="searchInput" onkeyup="searchTheme()" placeholder="Search themes..." class="text-sm py-2 px-4 rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-500 mr-2">
@@ -107,7 +109,11 @@
     </div>
 </div>
 
-
+<div class="  ml-48">
+    <footer class="w-full text-center  flex justify-center items-center p-4 text-sm text-gray-600">
+        © 2024 Cuisénio. All rights reserved.
+    </div>
+</div>
 <!-- Modal -->
 
 
@@ -116,6 +122,7 @@
 
 
 </x-dashboard>
+
 <script>
     function openModa() {
         document.getElementById('addThemeModal').classList.remove('hidden');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\visitor;
 
 use App\Http\Controllers\Controller;
-
+use App\trait\season;
 use App\Models\Ingrediant;
 use App\Models\Recipe;
 use App\Models\Theme;
@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class HomeController extends Controller
+
 {
+    use season;
     protected $recipes;
     protected $themes;
     protected $ingrediant;
@@ -68,8 +70,9 @@ class HomeController extends Controller
 
         $firstThreeRecipes = $allRecipes->take(3);
         $nextThreeRecipes = $allRecipes->slice(3, 3);
-
-        return view('user.index', compact('themes', 'ingrediant', 'recipes', 'firstThreeRecipes', 'nextThreeRecipes'));
+        $season = $this->GetSeason();
+        $recipeseason = Recipe::where('season', $season)->limit(3)->get();
+        return view('user.index', compact('themes', 'ingrediant', 'recipes', 'recipeseason', 'firstThreeRecipes', 'nextThreeRecipes'));
     }
     public function blog()
     {
@@ -133,14 +136,12 @@ class HomeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()],422);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         $request->user()->update([
             'password' => Hash::make($request->password),
         ]);
-            return response()->json(['success' => 'password updated with success'],200);
-
-
+        return response()->json(['success' => 'password updated with success'], 200);
     }
 }

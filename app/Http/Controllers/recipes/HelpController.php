@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\recipes;
 
-use App\Http\Controllers\Controller;
-use App\Models\Ingrediant;
+use Carbon\Carbon;
+use App\Models\Theme;
+use App\trait\season;
 use App\Models\Recipe;
 use App\Models\Review;
-use App\Models\Theme;
+use App\Models\Ingrediant;
+use App\Http\Controllers\Controller;
 
-class HelpController extends Controller
+class HelpController extends Controller 
 {
-
+use season;
 
     public function details(Recipe $recipe)
     {
@@ -27,7 +29,13 @@ class HelpController extends Controller
 
 
 
+public function season(){
 
+    $season = $this->GetSeason();
+    $recipeseason=Recipe::where('season',$season)->take(3);
+    return view('user.index',compact('recipeseason'));
+   
+}
 
 
 

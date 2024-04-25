@@ -52,3 +52,8 @@
 
 
 </x-dashboard>
+<div class="  ml-48">
+    <footer class="w-full text-center  flex justify-center items-center p-4 text-sm text-gray-600">
+        © 2024 Cuisénio. All rights reserved.
+    </div>
+</div>

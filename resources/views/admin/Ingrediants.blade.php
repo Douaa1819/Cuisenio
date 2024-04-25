@@ -63,7 +63,7 @@
                                     </div>
                                 @endif
                     
-                                <form method="POST" action="{{ route('ingredians.update', ['ingrediant' => $ingrediant->id]) }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('ingrediants.update', ['ingrediant' => $ingrediant->id]) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                 <input type="text" name="name" id="newThemeName" placeholder="Ingrediant name..." class="mb-4 w-full p-2 border rounded" value="{{ old('name', $ingrediant->name) }}" required>
@@ -145,5 +145,11 @@
 </script>
 
 </x-dashboard>
+<div class="  ml-48">
+    <footer class="w-full text-center  flex justify-center items-center p-4 text-sm text-gray-600">
+        © 2024 Cuisénio. All rights reserved.
+    </div>
+</div>
+</footer>
 
 

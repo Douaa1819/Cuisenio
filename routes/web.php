@@ -63,6 +63,7 @@ Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
     Route::resource('/favoris', FavorisController::class);
     Route::resource('/reviews', ReviewController::class);
     Route::get('/Recipe/{recipe}', [HelpController::class, 'details'])->name('recipes.more');
+    Route::get('/RecipeOfSeason', [HelpController::class, 'season']);
     Route::resource('recipes', RecipeController::class);
 
 

@@ -4,7 +4,7 @@
     @section('douaaa')
     @endsection
 
-</x-main-layout>
+
 <x-header page='Home' />
 
 <!-- Sidebar -->
@@ -182,10 +182,11 @@
     </section>
 
 
+    
     <div class="container mx-auto px-10 py-16 bg-white">
         <h2 class="text-4xl font-bold text-center mb-16">Recipes of the Season</h2>
         <div class="grid md:grid-cols-3 gap-8">
-            <!-- Recipe Card 1 -->
+            @foreach ($recipeseason as $season )
             <div
                 class="relative shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white rounded-lg overflow-hidden">
                 <div class="absolute top-2 right-2 text-gray-700 hover:text-red-500 cursor-pointer">
@@ -193,37 +194,15 @@
                 </div>
                 <img class="w-full h-40 object-cover" src="https://via.placeholder.com/150" alt="Recipe Image">
                 <div class="p-4">
-                    <h3 class="text-xl font-bold mb-2">Spring Vegetable Pasta</h3>
+                    <h3 class="text-xl font-bold mb-2">{{ $season->title}}</h3>
                     <div class="text-yellow-400 mb-2">★★★★☆</div>
+                
                 </div>
+    
             </div>
-
-            <!-- Recipe Card 2 -->
-            <div
-                class="relative shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white rounded-lg overflow-hidden">
-                <div class="absolute top-2 right-2 text-gray-700 hover:text-red-500 cursor-pointer">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <img class="w-full h-40 object-cover" src="https://via.placeholder.com/150" alt="Recipe Image">
-                <div class="p-4">
-                    <h3 class="text-xl font-bold mb-2">Honey Lemon Chicken</h3>
-                    <div class="text-yellow-400 mb-2">★★★★★</div>
-                </div>
-            </div>
-
-            <!-- Recipe Card 3 -->
-            <div
-                class="relative shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white rounded-lg overflow-hidden">
-                <div class="absolute top-2 right-2 text-gray-700 hover:text-red-500 cursor-pointer">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <img class="w-full h-40 object-cover" src="https://via.placeholder.com/150" alt="Recipe Image">
-                <div class="p-4">
-                    <h3 class="text-xl font-bold mb-2">Quick Avocado Salad</h3>
-                    <div class="text-yellow-400 mb-2">★★★☆☆</div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <!-- Footer -->
-    <x-footer></x-footer>
+</x-main-layout>
+<x-footer/>
