@@ -40,9 +40,12 @@ class HomeController extends Controller
         $ingrediant = Ingrediant::paginate(6);
         $allRecipes = Recipe::latest()->take(6)->get();
 
+
         $firstThreeRecipes = $allRecipes->take(3);
         $nextThreeRecipes = $allRecipes->slice(3, 3);
-        return view('visitor.index', compact('themes', 'ingrediant', 'firstThreeRecipes', 'nextThreeRecipes'));
+        $season = $this->GetSeason();
+        $recipeseason=Recipe::where('season',$season)->limit(3)->get();
+        return view('visitor.index', compact('themes', 'recipeseason','ingrediant', 'firstThreeRecipes', 'nextThreeRecipes'));
     }
 
 

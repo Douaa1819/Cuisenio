@@ -255,47 +255,29 @@
 </section>
 
 
-<!-- Assuming Tailwind CSS is included in your project -->
+
 <div class="container mx-auto px-10 py-16 bg-white">
     <h2 class="text-4xl font-bold text-center mb-16">Recipes of the Season</h2>
     <div class="grid md:grid-cols-3 gap-8">
-        <!-- Recipe Card 1 -->
-        <div class="relative shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white rounded-lg overflow-hidden">
+        @foreach ($recipeseason as $season )
+        <div
+            class="relative shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white rounded-lg overflow-hidden">
             <div class="absolute top-2 right-2 text-gray-700 hover:text-red-500 cursor-pointer">
                 <i class="fas fa-heart"></i>
             </div>
             <img class="w-full h-40 object-cover" src="https://via.placeholder.com/150" alt="Recipe Image">
             <div class="p-4">
-                <h3 class="text-xl font-bold mb-2">Spring Vegetable Pasta</h3>
+                <h3 class="text-xl font-bold mb-2">{{ $season->title}}</h3>
                 <div class="text-yellow-400 mb-2">★★★★☆</div>
+            
             </div>
-        </div>
 
-        <!-- Recipe Card 2 -->
-        <div class="relative shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white rounded-lg overflow-hidden">
-            <div class="absolute top-2 right-2 text-gray-700 hover:text-red-500 cursor-pointer">
-                <i class="fas fa-heart"></i>
-            </div>
-            <img class="w-full h-40 object-cover" src="https://via.placeholder.com/150" alt="Recipe Image">
-            <div class="p-4">
-                <h3 class="text-xl font-bold mb-2">Honey Lemon Chicken</h3>
-                <div class="text-yellow-400 mb-2">★★★★★</div>
-            </div>
         </div>
-
-        <!-- Recipe Card 3 -->
-        <div class="relative shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white rounded-lg overflow-hidden">
-            <div class="absolute top-2 right-2 text-gray-700 hover:text-red-500 cursor-pointer">
-                <i class="fas fa-heart"></i>
-            </div>
-            <img class="w-full h-40 object-cover" src="https://via.placeholder.com/150" alt="Recipe Image">
-            <div class="p-4">
-                <h3 class="text-xl font-bold mb-2">Quick Avocado Salad</h3>
-                <div class="text-yellow-400 mb-2">★★★☆☆</div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
+
+
 
 
     <section class="flex gap-5 max-md:flex-col md:flex-nowrap pl-10 items-center">
@@ -334,7 +316,6 @@
 
 
 
-    <!-- Email Subscription Section -->
     <section class="bg-cover bg-center pb-40 pt-32  mt-8 text-center relative bg-pink-500 rounded-t-3xl"
         style="background-image: url('{{ asset('images/newsletter1.jpg') }}')">
         <div class="absolute bottom-0 left-0 z-10 w-full h-auto -mb-1">

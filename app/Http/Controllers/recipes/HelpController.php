@@ -17,8 +17,7 @@ use season;
     public function details(Recipe $recipe)
     {
         $randomRecipes = Recipe::inRandomOrder()->take(4)->get();
-        $countStars = Review::where('recipe_id', $recipe->id)->count();
-        
+        $countStars = Review::where('recipe_id', $recipe->id)->count();   
         $nbr_stars = Review::where('recipe_id', $recipe->id)->avg('nbr_stars');
         $stars = intval($nbr_stars);
         return view('user.readMore', compact('nbr_stars', 'recipe', 'randomRecipes', 'stars', 'countStars'));
@@ -29,13 +28,7 @@ use season;
 
 
 
-public function season(){
 
-    $season = $this->GetSeason();
-    $recipeseason=Recipe::where('season',$season)->take(3);
-    return view('user.index',compact('recipeseason'));
-   
-}
 
 
 
