@@ -4,6 +4,7 @@ namespace App\Http\Controllers\recipes;
 use App\Http\Controllers\Controller;
 
 use App\Models\Recipe;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

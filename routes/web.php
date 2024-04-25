@@ -21,7 +21,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/print-booklist', [PrintController::class, 'printBooklist'])->name('print.booklist');
 Route::get('/download-booklist', [PrintController::class, 'Booklist'])->name('download.booklist');
+Route::post('/profile', [HomeController::class, 'updateProfile'])->name('update.profile');
+Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
 
+
+Route::patch('/profile', [HomeController::class, 'password'])->name('password');
 //------------------------------------auth---------------------------------------
 Route::get('/register', [CustomAuthController::class, 'register'])->name('register');
 Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
@@ -46,14 +50,13 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/Theme/{theme}', [HelpController::class, 'filtreParTheme'])->name('filtre');
+
 //----------------------------------User------------------------------------------------
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/urblog', [HomeController::class, 'urblog'])->name('urblog');
 
 //--------------------------------Recipes---------------------------------------------------
 Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
-
-    Route::post('/profile', [HomeController::class, 'updateProfile'])->name('update.profile');
 
     Route::get('/Show/Recipe', [HelpController::class, 'show'])->name('My.recipe');
 
@@ -69,7 +72,6 @@ Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
 
 
     Route::get('/More', [HomeController::class, 'more'])->name('more');
-    Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
 
     Route::get('/home', [HomeController::class, 'see'])->name('user.index');
 });
@@ -78,6 +80,7 @@ Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
 
 //-----------------------------------Admine-----------------------------------
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
     Route::get('/user-acces', [UserAccesController::class, 'index'])->name('user');
     Route::post('/user-acces/{user}/toggle-block', [UserAccesController::class, 'toggleBlock'])->name('user.toggle-block');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class HomeController extends Controller
 {
@@ -35,24 +37,25 @@ class HomeController extends Controller
         $this->ingrediant = Theme::query();
         $ingrediant = Ingrediant::paginate(6);
         $allRecipes = Recipe::latest()->take(6)->get();
-    
+
         $firstThreeRecipes = $allRecipes->take(3);
         $nextThreeRecipes = $allRecipes->slice(3, 3);
-    return view('visitor.index', compact('themes', 'ingrediant','firstThreeRecipes', 'nextThreeRecipes'));
+        return view('visitor.index', compact('themes', 'ingrediant', 'firstThreeRecipes', 'nextThreeRecipes'));
     }
 
 
     public function contact()
     {
-    return view('visitor.ContactUs');
+        return view('visitor.ContactUs');
     }
 
-    public function about(){
+    public function about()
+    {
         return view('visitor.aboutUs');
-
     }
 
-    public function see(){
+    public function see()
+    {
         $this->themes = Theme::query();
         $themes = Theme::paginate(6);
         $this->ingrediant = Theme::query();
@@ -62,25 +65,29 @@ class HomeController extends Controller
 
 
         $allRecipes = Recipe::latest()->take(6)->get();
-    
+
         $firstThreeRecipes = $allRecipes->take(3);
         $nextThreeRecipes = $allRecipes->slice(3, 3);
-        
-        return view('user.index', compact('themes', 'ingrediant','recipes','firstThreeRecipes', 'nextThreeRecipes'));
+
+        return view('user.index', compact('themes', 'ingrediant', 'recipes', 'firstThreeRecipes', 'nextThreeRecipes'));
     }
-    public function blog(){
+    public function blog()
+    {
 
         return view('visitor.blog');
     }
-    public function urblog(){
+    public function urblog()
+    {
 
         return view('user.blog');
     }
-    public function more(){
+    public function more()
+    {
 
         return view('user.readMore');
     }
-    public function profile(){
+    public function profile()
+    {
 
         return view('user.profile');
     }
@@ -94,16 +101,16 @@ class HomeController extends Controller
             'email' => 'required|string|email|max:255',
             'profile_image' => 'sometimes|image|max:2048',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json(['code' => 400, 'msg' => $validator->errors()->first()]);
         }
-    
+
         $user = Auth::user();
         if (!$user instanceof User) {
-   return response()->json(['error' => 'Not a valid user instance']);
+            return response()->json(['error' => 'Not a valid user instance']);
         }
-    
+
         $user->name = $request->name;
         $user->phone = $request->phone;
 
@@ -111,11 +118,29 @@ class HomeController extends Controller
             $path = $request->file('profile_image')->store('profile_images', 'public');
             $user->profile_image = $path;
         }
-    
+
         $user->save();
         return response()->json(['code' => 200, 'msg' => 'Profile updated successfully.']);
     }
-    
+
+
+    public function password(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()],422);
+        }
+
+        $request->user()->update([
+            'password' => Hash::make($request->password),
+        ]);
+            return response()->json(['success' => 'password updated with success'],200);
+
+
+    }
 }
-
-

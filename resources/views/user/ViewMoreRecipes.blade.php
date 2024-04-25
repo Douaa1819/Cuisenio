@@ -173,13 +173,6 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
 
 
 
-
-
-
-
-
-
-
     function addfavori(button) {
         var form = button.closest('form')
         $(form).on('submit', function(event) {

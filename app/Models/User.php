@@ -9,10 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class User extends Authenticatable      
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $fillable = ['name', 'phone', 'email', 'profile_image'];
+    protected $fillable = ['name', 'phone', 'email', 'profile_image', 'password'];
     protected $hidden = [
         'password',
         'remember_token',
@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
- 
+
 
     public function recipes()
     {
@@ -30,6 +30,6 @@ class User extends Authenticatable
 
     public function favoris()
     {
-        return $this->hasMany(favoris::class,'user_id');
-    }   
+        return $this->hasMany(favoris::class, 'user_id');
+    }
 }

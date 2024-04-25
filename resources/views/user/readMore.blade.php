@@ -9,7 +9,8 @@
 <body class="bg-gray-50">
 
     <div id="review"
-        class=" hidden min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
+        class=" hidden min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0
+         justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
         <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
         <div class="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
             <h1 class="font-bold text-center text-xl  ">Rate this book.</h1>
@@ -129,7 +130,7 @@
                                 @endif
                             @endfor
 
-                            <span> {{ number_format($nbr_stars, 2, '.', '') }}  \ {{ $countStars }} reviews</span>
+                            <span> {{ number_format($nbr_stars, 2, '.', '') }}  ({{ $countStars }}) reviews</span>
                         </div>
                     </div>
                 </div>
