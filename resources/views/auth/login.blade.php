@@ -17,6 +17,7 @@
       </div>
       <div class="w-full md:w-1/2 p-8 md:p-12">
         <h1 class="text-4xl text-red-500 font-bold mb-8">Sign in to Cuisénio</h1>
+        <x-flash/>
         <div class="flex items-center justify-center w-full border-t mt-6 pt-6 pb-4">
           <a href="/auth/google/redirect" class="px-4 py-2 w-full md:w-3/4 border flex justify-center gap-2 border-gray-300 rounded-full text-gray-900 hover:border-gray-400 hover:shadow-md transition duration-150 ease-in-out">
               <img class="w-6 h-6 mr-3" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo">
@@ -24,21 +25,20 @@
           </a>
         </div>
         <p class="text-center my-8">or use your email account</p>
-        <form action="{{route('login-user')}}" method="POST" class="space-y-6">
+        <form  id="form" action="{{route('login-user')}}" method="POST" class="space-y-6">
           @csrf
           <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
             <span class="px-4"><i class="far fa-envelope text-red-500"></i></span>
             <input id="email" type="email" name="email" placeholder="Enter Email Address" required
-            class="block w-full py-3 px-2 bg-transparent  rounded-full focus:outline-none ">
-     <p id="emailFeedback" class="text-xs text-red-500 mt-1"></p>
-          </div>
-          <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                class="block w-full py-3 px-2 bg-transparent border-2rounded-full focus:outline-none ">
+            <p id="emailFeedback" class="text-xs text-red-500 mt-1"></p>
+        </div>
+        <div class="flex items-center bg-gray-100 rounded-full overflow-hidden shadow-inner">
             <span class="px-4"><i class="fas fa-lock text-red-500"></i></span>
             <input id="password" type="password" name="password" placeholder="Create a password" required
-                       class="block w-full py-3 px-2 bg-transparent  rounded-full focus:outline-none ">
-                <p id="passwordFeedback" class="text-xs text-red-500 mt-1"></p>
+                class="block w-full py-3 px-2 bg-transparent   rounded-full focus:outline-none ">
             <p id="passwordFeedback" class="text-xs text-red-500 mt-1"></p>
-          </div>
+        </div>
           <a href="{{ route('forgetPassword')}}" class="text-red-500 mt-4 hover:text-red-600 hover:underline">Forgot your password?</a>
           <button type="submit" class="mt-4 px-6 py-3 w-full bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors duration-300">Sign In</button>
         </form>
@@ -46,22 +46,47 @@
     </div>
   </div>
 </div>
+
 <script>
-       document.getElementById('email').addEventListener('input', function () {
-      validateInput(this, /^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailFeedback');
-  });
-  document.getElementById('password').addEventListener('input', function () {
-      validateInput(this, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\S]{8,}$/, 'passwordFeedback');
-  });
-  function validateInput(input, regex, feedbackId) {
-      const feedbackElement = document.getElementById(feedbackId);
-      if (regex.test(input.value)) {
-          input.className = 'block w-full py-3 px-2 bg-transparent border-2 border-green-500 rounded-full focus:outline-none';
-          feedbackElement.textContent = '';
-      } else {
-          input.className = 'block w-full py-3 px-2 bg-transparent border-2 border-red-500 rounded-full focus:outline-none';
-          feedbackElement.textContent = 'Please enter a valid ' + input.placeholder.toLowerCase() + '.';
-      }
-  }
+  document.getElementById('form').addEventListener('submit', e => {
+   e.preventDefault();
+
+   var email = document.getElementById('email');
+   var password = document.getElementById('password');
+   if (validateInput(email, /^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailFeedback') &&
+      validateInput(password, /^[a-zA-Z0-9].*$/, 'passwordFeedback'))  {
+       document.getElementById('form').submit();
+   } else {
+       console.log('Validation failed.');
+   }
+});
+
+document.getElementById('email').addEventListener('input', function() {
+   validateInput(this, /^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailFeedback');
+});
+document.getElementById('password').addEventListener('input', function() {
+   validateInput(this, /^[a-zA-Z\d].{6,}[\S]$/
+, 'passwordFeedback');
+});
+
+function validateInput(input, regex, feedbackId) {
+   const feedbackElement = document.getElementById(feedbackId);
+   if (regex.test(input.value)) {
+       input.className =
+           'block w-full py-3 px-2 bg-transparent border-2 border-green-500 rounded-full focus:outline-none';
+       feedbackElement.textContent = '';
+       return true;  
+   } else {
+       input.className =
+           'block w-full py-3 px-2 bg-transparent border-2 border-red-500 rounded-full focus:outline-none';
+       feedbackElement.textContent = 'Please enter a valid ' + input.placeholder.toLowerCase() + '.';
+       return false; 
+   }
+}
+
 </script>
+</body>
+
+</html>
+
     </script>

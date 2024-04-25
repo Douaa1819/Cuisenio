@@ -12,7 +12,7 @@
     <div class="max-w-4xl w-full bg-white shadow-2xl rounded-xl overflow-hidden md:flex">
         <div class="w-full md:w-1/2 p-10">
             <h1 class="text-4xl font-bold flex justify-center text-red-500 mb-8">Create Account</h1>
-
+            <x-flash/>
             <div class="flex items-center justify-center w-full border-t border-gray-300 mt-6 pt-6 mb-8">
                 <a href="/auth/google/redirect"
                     class="flex items-center justify-center px-4 py-3 w-full md:w-3/4 bg-white border border-gray-300 rounded-full shadow-sm text-gray-700 hover:border-gray-400 hover:shadow-lg transition duration-300 ease-in-out">
@@ -63,22 +63,21 @@
 <script>
    document.getElementById('form').addEventListener('submit', e => {
     e.preventDefault();
-    // Retrieve input elements
+ 
     var name = document.getElementById('name');
     var email = document.getElementById('email');
     var password = document.getElementById('password');
 
-    // Check if inputs are valid
+
     if (validateInput(name, /^[\p{L}\s'-]+$/u, 'nameFeedback') &&
         validateInput(email, /^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailFeedback') &&
-        validateInput(password, /^(?=.*[a-z])[\S]{8,}$/, 'passwordFeedback')) {
+        validateInput(password, /^[a-zA-Z\d].{6,}[\S]$/, 'passwordFeedback')) {
         document.getElementById('form').submit();
     } else {
         console.log('Validation failed.');
     }
 });
 
-// Separate event listeners for input validation
 document.getElementById('name').addEventListener('input', function() {
     validateInput(this, /^[\p{L}\s'-]+$/u, 'nameFeedback');
 });
@@ -86,7 +85,7 @@ document.getElementById('email').addEventListener('input', function() {
     validateInput(this, /^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailFeedback');
 });
 document.getElementById('password').addEventListener('input', function() {
-    validateInput(this, /^(?=.*[a-z])[\S]{8,}$/, 'passwordFeedback');
+    validateInput(this, /^[a-zA-Z\d].{6,}[\S]$/, 'passwordFeedback');
 });
 
 function validateInput(input, regex, feedbackId) {

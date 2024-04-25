@@ -62,6 +62,10 @@ class CustomAuthController extends Controller
             } else if ($user->role == 'user') {
                 return redirect('/home');
             }
+        } else {
+            return back()->withErrors([
+                'password' => 'The provided credentials do not match our records.'
+            ])->withInput($request->only('email'));
         }
     }
 }
