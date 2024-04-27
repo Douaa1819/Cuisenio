@@ -14,8 +14,8 @@
             class="{{ $page == 'blog' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
             Blog
         </a>
-        <a href="{{ route('about') }}"
-            class="{{ $page == 'about' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
+        <a href="{{ route('favoris.index') }}"
+            class="{{ $page == 'favoris' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
             favorites list
         </a>
         <a href="javascript:void(0);" onclick="displayBooklistPage()"

@@ -126,7 +126,7 @@
                     <form action="{{ route('comment.store') }}" method="POST" class="space-y-4">
                         @csrf
                         <input type="hidden" name="commentable_type" value="Recipe">
-<                        <input type="hidden" name="commentable_id" value="{{$recipe->id }}">
+                      <input type="hidden" name="commentable_id" value="{{$recipe->id }}">
 
                         <textarea name="body" rows="4" class="w-full p-2 border border-gray-300 rounded-md focus:ring-red-300 focus:border-red-300" placeholder="Write your comment here..." required></textarea>
                         <button type="submit" class="px-6 py-2 bg-red-300 text-white rounded-full hover:bg-red-400 transition-colors">Submit Comment</button>

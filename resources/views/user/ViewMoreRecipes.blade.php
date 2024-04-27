@@ -57,11 +57,13 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
                                 @method('DELETE')
                                 <button onclick="removefavori(this,'{{ $favoris->id }}')"
                                     class="absolute right-2 top-2 text-red-500 focus:outline-none hover:text-red-600 p-2 rounded-full text-lg">
+                                     {{ $recipe->favoris()->count() }}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                         viewBox="0 0 48 48">
                                         <path fill="currentColor"
                                             d="M34 9c-4.2 0-7.9 2.1-10 5.4C21.9 11.1 18.2 9 14 9C7.4 9 2 14.4 2 21c0 11.9 22 24 22 24s22-12 22-24c0-6.6-5.4-12-12-12" />
                                     </svg>
+                                   
                                 </button>
                             </form>
                         @else
@@ -69,9 +71,10 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
                                 @csrf
                                 @method('POST')
                                 <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
+                                
                                 <button onclick="addfavori(this)"
                                     class="absolute right-2 top-2 text-red-500 focus:outline-none hover:text-red-600    p-2 rounded-full text-lg">
-                                    <i class="far fa-heart "></i>
+                                    <i class="far fa-heart "></i>{{ $recipe->favoris()->count() }}
                                 </button>
                             </form>
                         @endif
