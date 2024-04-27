@@ -11,7 +11,10 @@
             size: A4 portrait; 
             margin: 2cm; 
         }
-
+        .recipe-container img {
+  width: 100%;
+  margin-bottom: 10px;
+}
         body, html {
             margin: 0;
             padding: 0;
