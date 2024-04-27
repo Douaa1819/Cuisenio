@@ -39,6 +39,20 @@
      <section id="inspiration" class="pt-16 pb-20 px-6 bg-white  ">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold mb-16">Thematic Inspiration</h2>
+            <div class="text-right">
+                <button
+                    class="overflow-hidden px-4 py-2 mb-10 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
+                    View More <span
+                        class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
+                    <span
+                        class="absolute w-36 h-32 -top-8 -left-2 bg-pink-200 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"></span>
+                    <span
+                        class="absolute w-36 h-32 -top-8 -left-2 bg-red-300 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left"></span>
+                    <span
+                        class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2 left-4 z-10">Let's
+                        Goo ! </span>
+                </button>
+            </div>
             <div class="flex flex-wrap justify-center gap-10">
     
     
@@ -258,6 +272,7 @@
 
 <div class="container mx-auto px-10 py-16 bg-white">
     <h2 class="text-4xl font-bold text-center mb-16">Recipes of the Season</h2>
+    
     <div class="grid md:grid-cols-3 gap-8">
         @foreach ($recipeseason as $season )
         <div
@@ -274,6 +289,20 @@
 
         </div>
         @endforeach
+    </div>
+    <div class="text-right">
+        <button
+            class="overflow-hidden px-4 py-2 mt-6 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
+            View More <span
+                class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
+            <span
+                class="absolute w-36 h-32 -top-8 -left-2 bg-pink-200 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"></span>
+            <span
+                class="absolute w-36 h-32 -top-8 -left-2 bg-red-300 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left"></span>
+            <span
+                class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2 left-4 z-10">Let's
+                Goo ! </span>
+        </button>
     </div>
 </div>
 

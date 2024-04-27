@@ -1,83 +1,160 @@
-{{-- <x-head></x-head> --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuisenio Recipes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-      .recipe { margin-bottom: 20px; }
-        .no-print { display: block; }
-        @media print {
-            .no-print { display: none; }
+        @page {
+            size: A4 portrait; 
+            margin: 2cm; 
         }
 
-        body { font-family: Arial, sans-serif; }
-  
-
-        .container {
-            padding: 20px;
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f7f7; 
+            color: #333;
         }
 
-        .header {
-            margin-bottom: 20px;
+        .cover {
+            background: linear-gradient(135deg, #fdeeee 0%, #e0c3fc 100%); background */
+            color: #333333;
             text-align: center;
+            padding: 20px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 80vh; 
         }
 
-        .content,
-        .steps {
+        .logo {
+            width: 180px; 
+            margin: 0 auto 30px; 
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #b71c1c; 
             margin-bottom: 10px;
         }
+        p {
+            font-size: 20px;
+            font-weight: 300;
+            color: #666;
+            max-width: 600px;
+            margin: 20px auto;
+        }
 
-        ul,
-        ol {
+        .recipes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 40px 20px;
+            gap: 20px;
+        }
+
+        .recipe-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            width: calc(50% - 20px);
+        }
+
+        .recipe-container h1, .recipe-container h2 {
+            color: #e85a4f; 
+        }
+
+        .ingredients ul, .steps ol {
+            list-style: none;
             padding-left: 20px;
         }
 
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
+        li {
+            padding: 8px 0;
         }
 
-        .button-remove {
+        .remove-button, .print-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            background-color: #4CAF50;
+            margin-top: 20px;
+        }
+
+        .remove-button {
             background-color: #f44336;
+        }
+
+        .print-button {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            align-self: center; 
+        }
+
+        @media print {
+            .remove-button, .print-button, .cover {
+                display: none; 
+            }
+
+            body, html {
+                background: #fff;
+                color: #000;
+            }
+
+            .recipes {
+                page-break-after: always;
+            }
         }
     </style>
 
+
 <script>
-    function printPage() {
+document.addEventListener('DOMContentLoaded', function() {
+    window.printPage = function(event) {
+        event.preventDefault();  
         let booklist = JSON.parse(localStorage.getItem('booklist')) || [];
         if (booklist.length > 0) {
             let url = `/download-booklist?ids=${encodeURIComponent(JSON.stringify(booklist))}`;
-            window.location.href = url;
+            window.open(url, '_blank'); 
         } else {
             alert('Your booklist is empty.');
         }
-    }
+    };})
 </script>
 </head>
 
 <body>
-    <div id="recipesList">
-        @foreach ($recipes as $recipe)
-        <div class="recipe-container" id="recipe-{{ $recipe->id }}">
+    <body>
+        <div class="cover">
+            <img src="{{ asset('images/logo.png') }}" alt="Cuisenio Logo" class="logo">
+            <h1>Welcome to Cuisenio</h1>
+            <p>Explore a world of delicious delights. Each page of this book is filled with inspiration to elevate your culinary skills and tantalize your taste buds. Enjoy the journey through flavors!</p>
+        </div>
+        <div id="recipesList" class="recipes">
+            @foreach ($recipes as $recipe)
+            <div class="recipe-container" id="recipe-{{ $recipe->id }}">
                 <h1>{{ $recipe->title }}</h1>
+                @if ($recipe->image && Storage::disk('public')->exists($recipe->image->url))
+                <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image" class="w-52 overflow-hidden rounded-lg shadow-md">
+            @else
+                <img src="{{ asset('images/logo.png') }}" alt="Default Image" class="w-52 overflow-hidden rounded-lg shadow-md">
+            @endif
                 <p>{{ $recipe->description }}</p>
-                @if ($recipe->image)
-                <div class="overflow-hidden">
-                    <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image" class="w-52 overflow-hidden rounded-lg shadow-md">
-
-
-                </div>
-
-                @endif
-                <div class="content">
-                    <h2><i class="fas fa-pepper-hot"></i> Ingredients</h2>
+                <div class="ingredients">
+                    <h2>Ingredients</h2>
                     <ul>
                         @foreach (explode(',', $recipe->list_ingredients) as $ingredient)
-                            <li>{{ $ingredient }}</li>
+                        <li>{{ $ingredient }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -85,21 +162,25 @@
                     <h2>Steps</h2>
                     <ol>
                         @foreach (explode('.', $recipe->steps) as $step)
-                            <li>{{ $step }}</li>
+                        <li>{{ $step }}</li>
                         @endforeach
                     </ol>
                 </div>
+                <button class="remove-button" onclick="removeRecipe({{ $recipe->id }})">
+                    <i class="fas fa-trash"></i> Remove
+                </button>
             </div>
-            <button  class="no-print" onclick="removeRecipe({{ $recipe->id }})">Remove</button>
+            @endforeach
+        </div>
+        <button class="print-button" onclick="printPage(event)">
+            <i class="fas fa-download"></i> Download PDF
+        </button>
+    </body>
+    </html>
 
-    </div>
-    @endforeach
-    </div>
-    <button class="no-print" onclick="printPage()">Download PDF</button>
+<script>
 
 
-    <script>
-   
 
    document.addEventListener('DOMContentLoaded', function() {
             displayBooklist();
@@ -108,17 +189,17 @@
                 const recipesList = document.getElementById('recipesList');
                 const booklist = JSON.parse(localStorage.getItem('booklist')) || [];
             }
-
             window.removeRecipe = function(recipeId) {
-                let booklist = JSON.parse(localStorage.getItem('booklist')) || [];
-                booklist = booklist.filter(id => id !== recipeId);
-                localStorage.setItem('booklist', JSON.stringify(booklist));
-                displayBooklist(); 
-            };
-
+        const recipeElement = document.getElementById('recipe-' + recipeId);
+        if (recipeElement) {
+            recipeElement.parentNode.removeChild(recipeElement);
+            recipeElement.remove();
+        }
+        let booklist = JSON.parse(localStorage.getItem('booklist')) || [];
+        booklist = booklist.filter(id => id !== recipeId);
+        localStorage.setItem('booklist', JSON.stringify(booklist));
+    };
           
         });
     </script>
-</body>
 
-</html>

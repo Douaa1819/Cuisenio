@@ -12,13 +12,13 @@
 <section class="bg-white dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div class="mx-auto max-w-screen-sm text-center mb-8">
-            <h2
-                class="mb-4 text-3xl py-1 lg:text-4xl tracking-tight font-extrabold text-transparent bg-clip-text bg-gradient-to-l to-red-300 from-red-200">
-                Our
-                <span class="">Blogs</span>
-            </h2>
-            <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">We use an agile approach to test
-                assumptions and connect with the needs of your audience early and often.</p>
+            <h1 class="text-4xl md:text-4xl  mb-5 font-bold text-center text-black">
+                Blog
+            </h1>
+            <p class="text-md  text-center text-gray-700">
+                Discover our latest culinary insights, including recipes, tips, and trends. Keep up-to-date with everything
+                happening in the culinary world.
+            </p>
         </div>
 
         <form class="w-7/12 mx-auto my-10">
@@ -54,19 +54,101 @@
                 <textarea id="blog" rows="1"
                     class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border-none focus:ring-red-300 focus:border-none focus:outline-none"
                     placeholder="what's on your mind..."></textarea>
-                <button type="submit" class="inline-flex justify-center p-2 rounded-full cursor-pointer ">
-                    <svg class="text-red-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                        height="24" color="#000000" fill="none">
-                        <path
-                            d="M21.0477 3.05293C18.8697 0.707363 2.48648 6.4532 2.50001 8.551C2.51535 10.9299 8.89809 11.6617 10.6672 12.1581C11.7311 12.4565 12.016 12.7625 12.2613 13.8781C13.3723 18.9305 13.9301 21.4435 15.2014 21.4996C17.2278 21.5892 23.1733 5.342 21.0477 3.05293Z"
-                            stroke="currentColor" stroke-width="1.5" />
-                        <path d="M11.5 12.5L15 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal"  class="inline-flex justify-center p-2 rounded-full cursor-pointer ">
+                    <svg class="text-red-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                        <path d="M12 8V16M16 12L8 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5" />
                     </svg>
                     <span class="sr-only">Send message</span>
                 </button>
             </div>
         </form>
+
+
+       
+
+        <!-- Main modal -->
+        <div id="crud-modal" tabindex="-1" aria-hidden="true"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            Create New Blog
+                        </h3>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-toggle="crud-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <form class="p-4 md:p-5">
+                        <div class="grid gap-4 mb-4 grid-cols-2">
+                            <div class="col-span-2">
+                                <label for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">title</label>
+                                <input type="text" name="title" id="name"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="Enter title" required="">
+                            </div>
+                            <div class="col-span-2">
+                                <label for="description"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Description</label>
+                                <textarea id="description" rows="4"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Write blog  description here"></textarea>
+                            </div>
+
+                            <div class="flex items-center justify-center w-full col-span-2">
+                                <label for="dropzone-file"
+                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                        </svg>
+                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                                class="font-semibold">Click to upload</span> or drag and drop</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF
+                                            (MAX. 800x400px)</p>
+                                    </div>
+                                    <input id="dropzone-file" type="file" class="hidden" />
+                                </label>
+                            </div>
+
+
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <button type="submit"
+                                class="text-white inline-flex items-center bg-red-300 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+                                color="#ffff" fill="none">
+                                <path
+                                    d="M21.0477 3.05293C18.8697 0.707363 2.48648 6.4532 2.50001 8.551C2.51535 10.9299 8.89809 11.6617 10.6672 12.1581C11.7311 12.4565 12.016 12.7625 12.2613 13.8781C13.3723 18.9305 13.9301 21.4435 15.2014 21.4996C17.2278 21.5892 23.1733 5.342 21.0477 3.05293Z"
+                                    stroke="currentColor" stroke-width="1.5" />
+                                <path d="M11.5 12.5L15 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                </svg>
+                                Add new Blog
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="grid gap-8 lg:grid-cols-2">
             <article
                 class="p-6 bg-white rounded-lg border-red-300 border-2 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -100,8 +182,8 @@
                     </div>
                     <div class="flex justify-center gap-3">
                         <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                color="#000000" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                height="24" color="#000000" fill="none">
                                 <path
                                     d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z"
                                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
@@ -110,9 +192,9 @@
                                     stroke="currentColor" stroke-width="1.5" />
                             </svg>
                         </a>
-                        <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                color="#000000" fill="none">
+                        <a onclick="toggleCommentsModal(1);" class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                height="24" color="#000000" fill="none">
                                 <path d="M8 13.5H16M8 8.5H12" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round" />
                                 <path
@@ -149,6 +231,149 @@
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
+                    </div>
+                </div>
+                <!-- Main modal -->
+                <div id="comments-modal1" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50">
+                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Comments
+                                </h3>
+                                <button onclick="toggleCommentsModal(1);" type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    data-modal-hide="static-modal">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-4 md:p-5 space-y-4">
+                                <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                                    <footer class="flex justify-between items-center mb-2">
+                                        <div class="flex items-center">
+                                            <p
+                                                class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                                <img class="mr-2 w-6 h-6 rounded-full"
+                                                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                                    alt="Michael Gough">Michael Gough
+                                            </p>
+                                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate
+                                                    datetime="2022-02-08" title="February 8th, 2022">Feb. 8,
+                                                    2022</time></p>
+                                        </div>
+                                        <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+                                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                            type="button">
+                                            <svg class="w-4 h-4" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                viewBox="0 0 16 3">
+                                                <path
+                                                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                            </svg>
+                                            <span class="sr-only">Comment settings</span>
+                                        </button>
+                                        <!-- Dropdown menu -->
+                                        <div id="dropdownComment1"
+                                            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                <li>
+                                                    <a href="#"
+                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"
+                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </footer>
+                                    <p class="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really
+                                        worth time reading. Thank you! But tools are just the
+                                        instruments for the UX designers. The knowledge of the design tools are as
+                                        important as the
+                                        creation of the design strategy.</p>
+                                </article>
+                                <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                                    <footer class="flex justify-between items-center mb-2">
+                                        <div class="flex items-center">
+                                            <p
+                                                class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                                <img class="mr-2 w-6 h-6 rounded-full"
+                                                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                                    alt="Michael Gough">Michael Gough
+                                            </p>
+                                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate
+                                                    datetime="2022-02-08" title="February 8th, 2022">Feb. 8,
+                                                    2022</time></p>
+                                        </div>
+                                        <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+                                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                            type="button">
+                                            <svg class="w-4 h-4" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                viewBox="0 0 16 3">
+                                                <path
+                                                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                            </svg>
+                                            <span class="sr-only">Comment settings</span>
+                                        </button>
+                                        <!-- Dropdown menu -->
+                                        <div id="dropdownComment1"
+                                            class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                                aria-labelledby="dropdownMenuIconHorizontalButton">
+                                                <li>
+                                                    <a href="#"
+                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"
+                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </footer>
+                                    <p class="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really
+                                        worth time reading. Thank you! But tools are just the
+                                        instruments for the UX designers. The knowledge of the design tools are as
+                                        important as the
+                                        creation of the design strategy.</p>
+                                </article>
+                            </div>
+                            <!-- Modal footer -->
+                            <div
+                                class="flex justify-center items-center p-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                <form class="flex w-full justify-between">
+                                    <div
+                                        class="py-2 px-4 w-7/12 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                                        <label for="comment" class="sr-only">Your comment</label>
+                                        <textarea id="comment" rows="2"
+                                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                            placeholder="Write a comment..." required></textarea>
+                                    </div>
+                                    <div class="inline-flex items-center ">
+                                        <button type="submit"
+                                            class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-red-400 rounded-lg focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 hover:bg-red-500">
+                                            Post comment
+                                        </button>
+                                        <button onclick="toggleCommentsModal(1);" data-modal-hide="static-modal"
+                                            type="button"
+                                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {{-- <div class="flex justify-center items-center">
@@ -263,5 +488,11 @@
         </div>
     </div>
 </section>
+
+<script>
+    function toggleCommentsModal(id) {
+        document.getElementById(`comments-modal${id}`).classList.toggle('hidden');
+    }
+</script>
 
 <x-footer></x-footer>

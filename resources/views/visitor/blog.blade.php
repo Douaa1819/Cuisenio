@@ -1,5 +1,5 @@
 <x-head></x-head>
-<x-header page='blog' />
+<x-headeer page='blog' />
 
 
 

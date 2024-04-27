@@ -4,45 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Print Recipe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff4f0;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
         }
         .container {
-            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .header {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-align: center;
+            border-bottom: 2px solid #f2c9c6;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #e85a4f;
+        }
+        .header p {
+            font-size: 18px;
+            color: #666;
         }
         .content, .steps {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
-        ul, ol {
-            padding-left: 20px;
-        }
-
-        /* .footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #f9d6e4;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-        .footer h3 {
+        .content h2, .steps h2 {
+            font-size: 24px;
+            font-weight: 600;
             color: #333;
             margin-bottom: 10px;
         }
-        .footer p {
-            color: #555;
-            margin-bottom: 10px;
+        ul, ol {
+            padding-left: 40px;
         }
-        .footer a {
-            color: #d6336c;
-            text-decoration: none;
-            font-weight: bold;
-        } */
+        li {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        i.fa-pepper-hot {
+            color: #e85a4f;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -50,9 +64,7 @@
         <div class="header">
             <h1>{{ $recipe->title }}</h1>
             <p>{{ $recipe->description }}</p>
-            
         </div>
-        {{-- <img src="{{ asset('laraveldaily.png') }}" alt="laravel daily" width="200" /> --}}
         <div class="content">
             <h2><i class="fas fa-pepper-hot"></i> Ingredients</h2>
             <ul>
@@ -70,11 +82,5 @@
             </ol>
         </div>
     </div>
-    
-    {{-- <footer class="footer">
-        <h3>Join Cuisenio Today!</h3>
-        <p>Explore thousands of recipes and sharpen your cooking skills!</p>
-        <a href="#">Learn More</a>
-    </footer>
-</body> --}}
+</body>
 </html>

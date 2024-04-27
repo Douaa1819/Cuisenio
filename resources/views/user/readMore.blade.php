@@ -70,12 +70,16 @@
                             {{ $recipe->description }}
                         </p>
                         <h3 class="text-xl font-semibold">Ingredients</h3>
-                        <ul class="list-disc pl-5 mb-4">
-                            {{ $recipe->list_ingredients }}
+                        <ul>
+                            @foreach (explode(',', $recipe->list_ingredients) as $ingredient)
+                            <li>{{ $ingredient }}</li>
+                            @endforeach
                         </ul>
                         <h3 class="text-xl font-semibold">Steps</h3>
-                        <ol class="list-decimal pl-5 mb-4">
-                            <li>{{ $recipe->steps }}</li>
+                        <ol>
+                            @foreach (explode('.', $recipe->steps) as $step)
+                            <li>{{ $step }}</li>
+                            @endforeach
                         </ol>
                     </div>
 
