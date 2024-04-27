@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ForgotPasswordLinkController;
 use App\Http\Controllers\recipes\ThemeController;
 use App\Http\Controllers\recipes\HelpController;
@@ -69,7 +71,9 @@ Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
 
     Route::get('/home', [HelpController::class, 'last'])->name('latest-recipes');
 
+Route::resource('blog',ContentController::class);
 
+Route::resource('/comment',CommentController::class);
 
 
     Route::get('/More', [HomeController::class, 'more'])->name('more');

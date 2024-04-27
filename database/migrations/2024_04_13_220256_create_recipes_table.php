@@ -21,6 +21,7 @@ class CreateRecipesTable extends Migration
             $table->foreignId('theme_id')->constrained('themes');
             $table->text('steps');
             $table->text('list_ingredients');
+            $table->integer('number_of_persons');
             $table->integer('duration_preparation'); 
             $table->enum('level', ['biginner', 'intermediate', 'advanced', 'expert']);
             $table->enum('season', ['winter', 'spring', 'summer', 'autumn' ,' all seasn']);

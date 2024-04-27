@@ -78,14 +78,14 @@ public function update(Request $request, Theme $theme)
         $theme->image()->create(['url' => $path]); 
     }
     $theme->save();
-    return redirect()->back()->with('success', 'Theme updated successfully!');
+    return redirect()->back()->with('success', 'Theme updated successfully!');  return redirect()->back()->with('success', 'Theme updated successfully!');
 }
 
 
 
 public function destroy($id)
 {
-    if ($this->themes->delete($id)) {
+    if   ($this->themes->delete($id)) {
         return redirect()->back()->with('success', 'Theme deleted successfully.');
 
     } else {

@@ -111,6 +111,13 @@
                     placeholder="Entrez la durée de préparation en minutes"
                     value="{{ $recipe->duration_preparation }}">
             </div>
+
+            <div class="mb-4">
+                <label for="number of persons" class="block text-sm font-medium text-gray-700">Number of persons</label>
+                <input type="number" id="number_of_persons" name="number_of_persons" 
+                    class="focus:ring-red-300 focus:border-red-300 block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md"
+                    placeholder="Entrez the number of persons">
+            </div>
             <div class="mb-4">
                 <label for="level" class="block text-sm font-medium text-gray-700">Difficulty Level</label>
                 <select id="level" name="level" required

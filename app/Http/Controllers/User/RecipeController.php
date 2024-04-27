@@ -74,7 +74,6 @@ class RecipeController extends Controller
         $data['user_id'] = $userID;
         $recipe = Recipe::create($data);
         $recipe->ingredients()->attach($data['ingredients']);
-
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             try {
                 $path = $request->file('image')->store('images', 'public');

@@ -9,6 +9,7 @@ use App\Models\Recipe;
 use App\Models\Review;
 use App\Models\Ingrediant;
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 
 class HelpController extends Controller 
 {
@@ -61,7 +62,8 @@ use season;
     public function show()
     {
         $userId = auth()->user()->id;
+        $comments = Comment::all(); 
         $recipes = Recipe::where('user_id',  $userId)->get();
-        return view('user.ownRecipe', compact('recipes'));
+        return view('user.ownRecipe', compact('recipes','comments'));
     }
 }

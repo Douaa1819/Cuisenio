@@ -27,11 +27,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Recipe::class);
     }
-  
+
+    public function blog()
+    {
+        return $this->hasMany(Content::class);
+    }
 
 
     public function favoris()
     {
         return $this->hasMany(favoris::class, 'user_id');
-    }
+    } 
+
+
 }
+
+

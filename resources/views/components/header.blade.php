@@ -10,7 +10,7 @@
             class="{{ $page == 'home' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
             Home
         </a>
-        <a href="{{ route('urblog') }}"
+        <a href="{{ route('blog.index') }}"
             class="{{ $page == 'blog' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
             Blog
         </a>

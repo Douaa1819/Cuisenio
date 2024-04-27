@@ -28,6 +28,7 @@ class RecipeRequest extends FormRequest
             'list_ingredients' => 'required',
             'image' => 'sometimes|file|image|max:2048|mimes:jpeg,png,jpg,gif,svg,webp',
             'duration_preparation'=>'required|int',
+            'number_of_persons'=>'required|int',
             'ingredients.*' => 'exists:ingrediants,id',
             'steps' => 'required|string',
             'level' => 'required|in:easy,intermediate,advanced,expert',
