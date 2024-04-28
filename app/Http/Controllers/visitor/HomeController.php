@@ -39,13 +39,16 @@ class HomeController extends Controller
         $this->ingrediant = Theme::query();
         $ingrediant = Ingrediant::paginate(6);
         $allRecipes = Recipe::latest()->take(6)->get();
-
+        $featuredRecipes=Recipe::withCount('favoris')
+        ->orderByDesc('favoris_count')
+        ->take(3)
+        ->get();
 
         $firstThreeRecipes = $allRecipes->take(3);
         $nextThreeRecipes = $allRecipes->slice(3, 3);
         $season = $this->GetSeason();
         $recipeseason=Recipe::where('season',$season)->limit(3)->get();
-        return view('visitor.index', compact('themes', 'recipeseason','ingrediant', 'firstThreeRecipes', 'nextThreeRecipes'));
+        return view('visitor.index', compact('themes', 'recipeseason','ingrediant', 'firstThreeRecipes', 'nextThreeRecipes','featuredRecipes'));
     }
 
 
@@ -70,12 +73,20 @@ class HomeController extends Controller
 
 
         $allRecipes = Recipe::latest()->take(6)->get();
-
+        // $topRatedRecipes = Recipe::withCount('reviews')
+        // ->withAvg('reviews', 'nbr_stars')
+        // ->orderByDesc('reviews_avg_nbr_stars')
+        // ->take(3)
+        // ->get();
+        $featuredRecipes=Recipe::withCount('favoris')
+             ->orderByDesc('favoris_count')
+             ->take(3)
+             ->get();
         $firstThreeRecipes = $allRecipes->take(3);
         $nextThreeRecipes = $allRecipes->slice(3, 3);
         $season = $this->GetSeason();
         $recipeseason = Recipe::where('season', $season)->limit(3)->get();
-        return view('user.index', compact('themes', 'ingrediant', 'recipes', 'recipeseason', 'firstThreeRecipes', 'nextThreeRecipes'));
+        return view('user.index', compact('themes', 'ingrediant', 'recipes', 'recipeseason', 'firstThreeRecipes', 'nextThreeRecipes','featuredRecipes'));
     }
     public function blog()
     {

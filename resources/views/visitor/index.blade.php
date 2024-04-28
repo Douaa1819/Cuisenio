@@ -148,80 +148,42 @@
             </svg>
         </div>
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16">Top Recipes</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Recipe Card 1 -->
-                <div
-                    class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
-                    <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <img class="w-full h-48 object-cover"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/e346f3e1aec6f957e9b120bc7764ca2d98cc3c3a9bb5386daa382eedb07f1543?apiKey=93bb9bcd81d443648999334442ead41e&"
-                        alt="Healthy Breakfast Bowl">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg">Healthy Breakfast Bowl</h3>
-                        
-                        <div class="flex justify-end items-center">
-                            <span
-                                class="inline-block bg-green-rounded-full px-3 py-1 text-sm font-semibold text-green-800">
-                                <span><i class="far fa-clock"></i> 15 min</span>
+            <h2 class="text-4xl font-bold text-center  mt-16 mb-16">Top Recipes</h2>
+            <div class="max-w-6xl mx-auto mb-8 px-4">
+                <div class="grid md:grid-cols-3 gap-8">
+                    @foreach ($featuredRecipes as $recipe)
+                        <div
+                            class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
+                            <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            @if ($recipe->image)
+                                <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image"
+                                    class="w-full h-56 object-cover">
+                            @endif
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                                    <i class="fas fa-utensils text-gray-500 mr-2"></i>{{ $recipe->title }}
+                                </h3>
+    
+    
+                                <p class="text-gray-600 text-sm">
+                                    {{ \Illuminate\Support\Str::limit($recipe->description, 50, '...') }}
+                                    <a href="{{ route('recipes.more', $recipe->id) }}"
+                                        class="text-blue-400 hover:text-green-400 font-semibold cursor-pointer">Read
+                                        more...</a>
+                                </p>
+                                <div class="flex items-center mt-4">
+                                    @if ($recipe->theme)
+                                        <span
+                                            class="inline-block mr-4 bg-red-200 rounded-full px-3 py-1 text-sm font-semibold text-red-800 ">
+                                            {{ $recipe->theme->name }}
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex flex-wrap items-center gap-3">
-                            <img src='https://readymadeui.com/team-1.webp' class="w-9 h-9 rounded-full" />
-                            <p class="text-xs text-gray-400">BY JOHN DOE</p>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
-                    <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <img class="w-full h-48 object-cover"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/8c4c84e7ba66404ed44d2a56bd635b767eab121e2df8ed983ce292f0ad43ef9b?apiKey=93bb9bcd81d443648999334442ead41e&"
-                        alt="Vegetarian Taco">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg">Cauliflower Walnut Vegetarian Taco Meat</h3>
-                        <p class="text-gray-700 my-2">
-                            A delicious and healthy alternative to traditional taco meat.
-                        </p>
-                        <div class="flex justify-end items-center">
-                            <span
-                                class="inline-block bg-green-rounded-full px-3 py-1 text-sm font-semibold text-green-800">
-                                <span><i class="far fa-clock"></i> 20 min</span>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-3">
-                            <img src='https://readymadeui.com/team-1.webp' class="w-9 h-9 rounded-full" />
-                            <p class="text-xs text-gray-400">BY JOHN DOE</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recipe Card 3 -->
-                <div
-                    class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
-                    <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <img class="w-full h-48 object-cover"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/97b02af90ef8d27744d299532adb312372718335a24a2e2bce17a09cac041631?apiKey=93bb9bcd81d443648999334442ead41e&"
-                        alt="Rainbow Chicken Salad">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg">Rainbow Chicken Salad with Almond Honey Mustard Dressing</h3>
-                        <p class="text-gray-700 my-2">
-                            A colorful salad that's as nutritious as it is delicious.
-                        </p>
-                        <div class="flex justify-end items-center">
-                            <span
-                                class="inline-block bg-green-rounded-full px-3 py-1 text-sm font-semibold text-green-800">
-                                <span><i class="far fa-clock"></i> 30 min</span>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-3">
-                            <img src='https://readymadeui.com/team-1.webp' class="w-9 h-9 rounded-full" />
-                            <p class="text-xs text-gray-400">BY JOHN DOE</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="text-right">

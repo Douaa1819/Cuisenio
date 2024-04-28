@@ -1,8 +1,8 @@
 @props(['page'])
 <div class="flex gap-5 justify-around items-start px-2 py-1 text-sm font-bold bg-white text-stone-300 shadow-xlg">
-    <div>
+    <a href="{{ route('home') }}">
         <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-32 h-24">
-    </div>
+    </a>    
     <div class="flex gap-5 justify-center my-auto items-center">
         <a href="{{ route('home') }}" @class([
             'px-3 py-2 rounded text-black bg-opacity-10 bg-stone-300 hover:bg-opacity-100 hover:text-black',

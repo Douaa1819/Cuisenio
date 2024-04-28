@@ -56,7 +56,7 @@
                     @endif
 
                     <div class="flex items-center gap-4  mt-4 mb-8">
-                        <img src="{{ $recipe->user->profile_photo_url ?? 'https://via.placeholder.com/40x40' }}"
+                        <img src="{{ $recipe->user->profile_photo_url ?? asset('images/cheef.jpg') }}"
                             alt="Author Avatar" class="w-10 h-10 rounded-full">
                         <div>
                             <p class="font-bold">{{ $recipe->user->name }}</p>
@@ -149,13 +149,9 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Sidebar with nutritional info and related recipes -->
                 <aside class="lg:w-1/4 bg-gray-100 p-4 rounded-lg">
-                    <h4 class="font-semibold text-lg mb-2">Nutritional Information</h4>
-                    <p>Approximate calories per serving: 250 kcal</p>
 
-                    <h4 class="font-semibold text-lg mt-4 mb-2">Other Recipes</h4>
+                    <h4 class="font-semibold text-lg mt-2 mb-6">Other Recipes</h4>
                     <div class="grid grid-cols-1 gap-4">
                         @foreach ($randomRecipes as $recipe)
                             <div class="flex items-center gap-4">
@@ -163,7 +159,7 @@
                                     class="w-20 h-20 object-cover rounded-lg">
                                 <div>
                                     <a href="{{ route('recipes.more', $recipe->id) }}"
-                                        class="text-red-500 hover:text-red-600 font-medium">{{ $recipe->title }}</a>
+                                        class="text-gray-800 hover:text-red-600 font-medium">{{ $recipe->title }}</a>
                                 </div>
                             </div>
                         @endforeach

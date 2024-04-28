@@ -1,7 +1,9 @@
 @props(['page'])
 <div class="flex justify-between items-center px-4 py-3 bg-white shadow-lg">
     <div>
-        <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-32 h-24">
+        <a href="{{ route('user.index') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-32 h-24">
+        </a>        
     </div>
 
     <div class="flex gap-5">
@@ -16,7 +18,7 @@
         </a>
         <a href="{{ route('favoris.index') }}"
             class="{{ $page == 'favoris' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">
-            favorites list
+            Favorites list
         </a>
         <a href="javascript:void(0);" onclick="displayBooklistPage()"
             class="{{ $page == 'contact' ? 'text-black bg-stone-300' : 'text-black' }} px-3 py-2 rounded hover:bg-stone-300 hover:text-black transition-colors">

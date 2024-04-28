@@ -17,7 +17,7 @@ use season;
 
     public function details(Recipe $recipe)
     {
-        $randomRecipes = Recipe::inRandomOrder()->take(4)->get();
+        $randomRecipes = Recipe::inRandomOrder()->take(12)->get();
         $countStars = Review::where('recipe_id', $recipe->id)->count();   
         $nbr_stars = Review::where('recipe_id', $recipe->id)->avg('nbr_stars');
         $stars = intval($nbr_stars);

@@ -20,6 +20,7 @@ class Recipe extends Model
         'level',
         'season'
     ];
+    
 
     public function theme()
     {
@@ -49,7 +50,7 @@ class Recipe extends Model
 
     public function favoris()
     {
-        return $this->hasMany(favoris::class);
+        return $this->hasMany(favoris::class, 'recipe_id');
     }   
     
     
