@@ -36,7 +36,7 @@
             <img class="w-8 h-8 rounded-full" src="{{ asset('storage/' . Auth::user()->profile_image) }}" alt="Profile">
                 
             @else
-            <img class="w-8 h-8 rounded-full" src="{{ asset('') }}"alt="Profile">
+            <img class="w-8 h-8 rounded-full" src="{{ asset('images/cheef.jpg') }}"alt="Profile">
             @endif
             <p class="hidden lg:block text-gray-700">Dev</p> <!-- Changed text from 'Chef' to 'Dev' -->
             <i class="fas fa-chevron-down text-gray-700"></i>

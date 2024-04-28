@@ -88,28 +88,32 @@
                 <div class="w-full lg:w-5/12 flex flex-col gap-4">
 
                     @foreach ($firstThreeRecipes as $recipe)
-                   
+                    <a href="{{ route('recipes.more', $recipe->id) }}"> 
                     <div
                         class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
+                 
                         <img src="{{ Storage::url($recipe->image->url) }}" alt="Default Image" class="mr-4  w-28 h-28 object-cover">
                         <div>
                             <h3 class="text-xl font-bold">{{ $recipe->title }}</h3>
-                            <p class="mb-4">Day of the Week</p>
+                         
                         </div>
                     </div>
+                    </a>
                     @endforeach
                 </div>
 
 
                 <div class="w-full lg:w-5/12 flex flex-col gap-4 ">
                     @foreach ($nextThreeRecipes as $recipe)
+                    <a href="{{ route('recipes.more', $recipe->id) }}">
                     <div class="flex items-center border-b border-gray-300 transition-all duration-300 ease-in hover:border-gray-400 hover:shadow-lg p-4 hover:rounded-lg ">
+                        
                         <img src="{{ Storage::url($recipe->image->url) }}" alt="Default Image" class="mr-4 w-28 h-28 object-cover">
                         <div>
                             <h3 class="text-xl font-bold">{{ $recipe->title }}</h3>
-                            <p class="mb-4">Day of the Week</p>
                         </div>
                     </div>
+                    </a>
                 @endforeach
 
                     
@@ -155,6 +159,7 @@
                         <div
                             class="bg-white rounded-lg overflow-hidden shadow hover:shadow-2xl transition duration-300 relative">
                             <div class="absolute right-2 top-2 text-gray-600 hover:text-red-500 cursor-pointer">
+                                <a href="{{ route('recipes.more', $recipe->id) }}">
                                 <i class="fas fa-heart"></i>
                             </div>
                             @if ($recipe->image)
@@ -183,6 +188,7 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -239,16 +245,20 @@
         @foreach ($recipeseason as $season )
         <div
             class="relative shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white rounded-lg overflow-hidden">
+            <a href="{{ route('recipes.more',  $season->id) }}">
             <div class="absolute top-2 right-2 text-gray-700 hover:text-red-500 cursor-pointer">
                 <i class="fas fa-heart"></i>
             </div>
-            <img class="w-full h-40 object-cover" src="https://via.placeholder.com/150" alt="Recipe Image">
+            @if ($recipe->image)
+            <img src="{{ Storage::url($season->image->url) }}" alt="Recipe Image"
+                class="w-full h-56 object-cover">
+        @endif
             <div class="p-4">
                 <h3 class="text-xl font-bold mb-2">{{ $season->title}}</h3>
                 <div class="text-yellow-400 mb-2">★★★★☆</div>
             
             </div>
-
+            </a>
         </div>
         @endforeach
     </div>

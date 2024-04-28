@@ -1,5 +1,6 @@
 <x-dashboard>
     <div class="flex-grow p-6 lg:pl-80 pt-28">
+        <x-flash/>
         <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md ml-10">
             <div class="pb-4 flex justify-between items-center">
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Ingrediant Management</h2>
@@ -27,7 +28,7 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                         @if ($ingrediant->image) <!-- Check if an image exists -->
                             <td class="py-6 px-6">
-                                <img src="{{ Storage::url($ingrediant->image->url) }}" alt="Ingredient Image" style="width: 100px; height: auto;">
+                                <img src="{{ Storage::url($ingrediant->image->url) }}" alt="Ingredient Image" class ="border rounded-lg  w-32">
                             </td>
                         @endif
                         <td class="py-6 px-6">{{ $ingrediant->name }}</td>
@@ -48,20 +49,7 @@
                             <div class="bg-white rounded-lg mx-auto p-5 relative max-w-lg w-full">
                                 <span class="absolute top-0 right-0 m-3 cursor-pointer text-gray-400 hover:text-gray-600" onclick="closeModa('{{$ingrediant->id}}')">&times;</span>
                                 <h2 id="modalTitle" class="text-xl mb-4">Edite Ingrediant</h2>
-                                @if (session('success'))
-                                    <div class="p-3 bg-green-300 text-green-800 rounded shadow-sm mb-4">
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
-                                @if ($errors->any())
-                                    <div class="p-3 bg-red-300 text-red-800 rounded shadow-sm mb-4">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
+                               
                     
                                 <form method="POST" action="{{ route('ingrediants.update', ['ingrediant' => $ingrediant->id]) }}" enctype="multipart/form-data">
                                     @csrf
@@ -70,7 +58,7 @@
                                 <div class="font-[sans-serif] max-w-md mx-auto">
                                     <label class="text-sm text-black mb-2 block">Upload file</label>
                                     <input type="file" name="ingrediant_file"
-                                      class="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black rounded" />
+                                    class="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black rounded" />
                                     <p class="text-xs text-gray-400  mb-5 mt-2">PNG, JPG SVG, WEBP, and GIF are Allowed.</p>
                                   </div>
                                   <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Save Theme</button>

@@ -39,9 +39,11 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
         <h2 class="text-4xl font-bold text-center mb-16"></h2>
         <div class="grid md:grid-cols-3 gap-8">
             @foreach ($recipes as $recipe)
+
                 <div
                     class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out relative">
                     <div class="relative">
+                        <a href="{{ route('recipes.more', $recipe->id) }}">
                         @if ($recipe->image)
                             <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image"
                                 class="w-full h-56 object-cover">
@@ -81,11 +83,12 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
 
                     </div>
                     <div class="p-4">
+                        
                         <h3 class="text-lg font-semibold text-gray-800 mb-1">
                             {{ $recipe->title }}
                         </h3>
                         <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <img src="{{ asset('https://via.placeholder.com/40x40') }}" alt="User avatar"
+                           <img src="{{ $recipe->user->profile_photo_url ?? asset('images/cheef.jpg') }}"
                                 class="w-6 h-6 rounded-full mr-2">
                             By {{ $recipe->user->name }} on :<time
                                 class=" mr-2 ml-2 ">{{ $recipe->created_at->format('M d, Y') }}</time>
@@ -106,6 +109,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
                                 <i class="far fa-clock mr-1"></i> {{ $recipe->duration_preparation }} min
                             </span>
                         </div>
+                        </a>
                     </div>
                 </div>
             @endforeach

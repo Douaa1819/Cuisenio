@@ -16,6 +16,7 @@ class Recipe extends Model
         'user_id',
         'duration_preparation',
         'steps',
+        'number_of_persons',
         'list_ingredients',
         'level',
         'season'

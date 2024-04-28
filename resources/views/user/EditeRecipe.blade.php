@@ -7,6 +7,8 @@
         <a href="">
             <i class="fa-solid fa-backward fa-2xl"></i>
         </a>
+        <x-flash/>
+ 
     </div>
     <div class="max-w-4xl mx-auto p-8">
         <form action="{{ route('recipes.update', $recipe) }}" method="POST" class="bg-white p-6 rounded-lg shadow-lg"
@@ -63,31 +65,14 @@
                     placeholder="Listez les ingrédients, séparés par des virgules ou sauts de ligne">{{ $recipe->list_ingredients }}</textarea>
             </div>
 
-            <div class="mb-4">
-                <div class="mb-4">
-                    <label for="ingredients" class="block text-sm font-medium text-gray-700">Ingredients</label>
-                    <div class="grid grid-cols-3 gap-4">
-                        @foreach ($ingrediants as $index => $ingredient)
-                            @if ($recipe->ingredient && in_array($recipe->ingredient->name, $ingredient->name))
-                                <div>
-                                    <!-- Utilisez l'ID de l'ingrédient comme valeur -->
-                                    <input type="checkbox" id="ingredient{{ $index }}" name="ingredients[]"
-                                        value="{{ $ingredient->id }}"
-                                        {{ in_array($ingredient->id, $recipeIngredientIds) ? 'checked' : '' }}>
-                                    <label for="ingredient{{ $index }}">{{ $ingredient->name }}</label>
-                                </div>
-                            @endif
-                            <div>
-                                <input type="checkbox" id="ingredient{{ $index }}" name="ingredients[]"
-                       value="{{ $ingredient->id }}" {{ in_array($ingredient->id, $recipeIngredientIds) ? 'checked' : '' }}>
-                <label for="ingredient{{ $index }}">{{ $ingredient->name }}</label>
-                            </div>
-                        @endforeach
-                    </div>
+                        @foreach ($ingrediants as $ingredient)
+                <div>
+                    <input type="checkbox" id="ingredient{{ $ingredient->id }}" name="ingredients[]"
+                        value="{{ $ingredient->id }}" {{ $recipe->ingredients->contains($ingredient->id) ? 'checked' : '' }}>
+                    <label for="ingredient{{ $ingredient->id }}">{{ $ingredient->name }}</label>
                 </div>
+            @endforeach
 
-
-            </div>
 
             <div class="mb-4">
                 <label for="steps" class="block text-sm font-medium text-gray-700">Steps</label>
@@ -116,28 +101,29 @@
                 <label for="number of persons" class="block text-sm font-medium text-gray-700">Number of persons</label>
                 <input type="number" id="number_of_persons" name="number_of_persons" 
                     class="focus:ring-red-300 focus:border-red-300 block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="Entrez the number of persons">
+                    placeholder="Entrez the number of persons" value="{{ $recipe->number_of_persons}}">
             </div>
             <div class="mb-4">
                 <label for="level" class="block text-sm font-medium text-gray-700">Difficulty Level</label>
-                <select id="level" name="level" required
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
+                <select id="level" name="level" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
                     <option value="easy" {{ $recipe->level == 'easy' ? 'selected' : '' }}>Easy</option>
-                    <option value="average" {{ $recipe->level == 'average' ? 'selected' : '' }}>Average</option>
-                    <option value="advance" {{ $recipe->level == 'advance' ? 'selected' : '' }}>Advanced</option>
+                    <option value="intermediate" {{ $recipe->level == 'intermediate' ? 'selected' : '' }}>Intermediate</option>
+                    <option value="advanced" {{ $recipe->level == 'advanced' ? 'selected' : '' }}>Advanced</option>
+                    <option value="expert" {{ $recipe->level == 'expert' ? 'selected' : '' }}>Expert</option>
                 </select>
+                
             </div>
 
             <div class="mb-4">
                 <label for="season" class="block text-sm font-medium text-gray-700">Season</label>
-                <select id="season" name="season" required
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
-                    <option value="season" {{ $recipe->season == 'All season' ? 'selected' : '' }}>All Season</option>
+                <select id="season" name="season" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
                     <option value="winter" {{ $recipe->season == 'winter' ? 'selected' : '' }}>Winter</option>
                     <option value="spring" {{ $recipe->season == 'spring' ? 'selected' : '' }}>Spring</option>
                     <option value="summer" {{ $recipe->season == 'summer' ? 'selected' : '' }}>Summer</option>
                     <option value="autumn" {{ $recipe->season == 'autumn' ? 'selected' : '' }}>Autumn</option>
+                    <option value="all season" {{ $recipe->season == 'all season' ? 'selected' : '' }}>All Season</option>
                 </select>
+                
             </div>
 
             <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded shadow">
