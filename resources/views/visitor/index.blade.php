@@ -76,11 +76,6 @@
        </section>
 
 
-
-
-
-    {{-- Astuces --}}
-
     <section class="pt-16 pb-10 px-10">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold mb-16">Check out the latest tips</h2>
@@ -138,10 +133,6 @@
     </section>
 
 
-
-
-
-    <!-- Recipe Cards Section -->
     <section class="px-10 pb-16 pt-32 bg-white rounded-b-3xl relative">
         <div class="absolute top-0 left-0 z-10 w-full h-auto -mt-1">
             <svg enable-background="new 0 0 1504 131.3" viewBox="0 0 1504 131.3" xmlns="http://www.w3.org/2000/svg"

@@ -34,28 +34,28 @@ class CommentController extends Controller
         $commentable_id = $request->input('commentable_id');
         $body = $request->input('body');
         $userID = Auth::user()->id;
-    
+
         $commentable = $commentable_type::find($commentable_id);
-    
+
         if (!$commentable) {
-            return back()->with('error', 'Commentable entity not found');
+            return response()->json(['error' => 'Commentable entity not found'], 404);
         }
-    
+
         $comment = $commentable->comment()->create([
             'body' => $body,
             'user_id' => $userID
         ]);
-    
+
         if ($comment) {
-            return back()->with('success', 'Comment added successfully!');
+            return response()->json(['success' => 'Comment added successfully!', 'comment' => $comment], 201);
         } else {
-            return back()->with('error', 'Failed to add comment');
+            return response()->json(['error' => 'Failed to add comment'], 500);
         }
     }
-    
 
 
-    
+
+
 
     /**
      * Display the specified resource.
@@ -73,12 +73,20 @@ class CommentController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Comment $comment)
+
+    public function update(CommentRequest $request, Comment $comment)
     {
-        //
+        if ($comment->user_id !== Auth::user()->id) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $updated = $comment->update($request->validated());
+
+        if ($updated) {
+            return response()->json(['success' => 'Comment updated successfully!', 'comment' => $comment], 200);
+        } else {
+            return response()->json(['error' => 'Failed to update comment'], 500);
+        }
     }
 
     /**
@@ -86,6 +94,14 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        if ($comment->user_id !== Auth::user()->id) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        if ($comment->delete()) {
+            return response()->json(['success' => 'Comment deleted successfully!'], 200);
+        } else {
+            return response()->json(['error' => 'Failed to delete comment'], 500);
+        }
     }
 }

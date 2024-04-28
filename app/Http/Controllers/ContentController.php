@@ -14,7 +14,7 @@ class ContentController extends Controller
      */
     public function index()
     {
-            return view('user.blog');
+        return view('user.blog');
     }
 
     /**
@@ -25,24 +25,23 @@ class ContentController extends Controller
         //
     }
 
-   
+
     public function store(ContentRequest $request)
     {
-        try{
-       $data = $request->validated();
-       $userId = Auth::user()->id;
-       $data['userId']=$userId;
-       $data=Content::create($data);
-        }catch(\Exception $e){
+        try {
+            $data = $request->validated();
+            $userId = Auth::user()->id;
+            $data['userId'] = $userId;
+            Content::create($data);
 
-            Log::error("Failed to creat blog: " . $e->getMessage());
-            return back()->withErrors('Failed creat blog. Please try again.');
+            return redirect()->back()->with('success', 'Blog created successfully!');
+        } catch (\Exception $e) {
+            Log::error("Failed to create blog: " . $e->getMessage());
+            return back()->withErrors('Failed to create blog. Please try again.');
         }
-
-        return redirect()->back()->with('success', 'Blog created successfully!');
     }
 
- 
+
     public function show(Content $content)
     {
         //
@@ -57,26 +56,25 @@ class ContentController extends Controller
 
     public function update(ContentRequest $request, Content $content)
     {
-        try{
+        try {
             $data = $request->validated();
             $userId = Auth::user()->id;
-            $data['userId']=$userId;
-            $data->update();
-             }catch(\Exception $e){
-     
-                 Log::error("Failed to update blog: " . $e->getMessage());
-                 return back()->withErrors('Failed update blog. Please try again.');
-             }
-     
-             return redirect()->back()->with('success', 'Blog updated successfully!');
+            $data['userId'] = $userId;
+            $content->update($data);
+            return redirect()->back()->with('success', 'Blog updated successfully!');
+        } catch (\Exception $e) {
+            Log::error("Failed to update blog: " . $e->getMessage());
+            return back()->withErrors('Failed to update blog. Please try again.');
+        }
     }
+
 
     public function destroy(Content $content)
     {
-   if($content->delete()) {
-    return redirect()->back()->with('success', 'Blog deleted successfully!');
-   }else{
-    return redirect()->back()->with('error', 'Blog deleted successfully!');
-   }
+        if ($content->delete()) {
+            return redirect()->back()->with('success', 'Blog deleted successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Blog deleted successfully!');
+        }
     }
 }

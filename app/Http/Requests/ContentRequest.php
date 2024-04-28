@@ -24,7 +24,7 @@ class ContentRequest extends FormRequest
         return [
             'title'=>'required|string|max:255',
             'description'=>'required|string',
-            'type'=>'required|in:conseil,blog,astuce'
+            'type' => 'required|in:conseil,blog,astuce'
 
         ];
     }
