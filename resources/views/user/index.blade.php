@@ -101,7 +101,7 @@
         <div class="flex justify-end">
             <button
                 class="overflow-hidden px-4 py-2 mt-5 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
-                <a href="{{ route('viewMore') }}">
+                <a href="{{ route('theme')}}">
                 View More <span
                     class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
                 <span
@@ -245,7 +245,7 @@
 
 
 
-    {{-- <-- Ingredient Section --> --}}
+
     <section id="inspiration" class="pt-16 pb-20 px-6 bg-white">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold mb-16">Filter by the ingredients you have available</h2>
@@ -267,6 +267,7 @@
             </div>
         </div>
         <div class="text-right">
+            <a href="{{ route('ingredients') }}">
             <button
                 class="overflow-hidden px-4 py-2 mt-10 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
                 View More <span
@@ -279,6 +280,7 @@
                     class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2 left-4 z-10">Let's
                     Goo ! </span>
             </button>
+            </a>
         </div>
     </section>
 

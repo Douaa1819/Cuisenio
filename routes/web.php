@@ -33,7 +33,11 @@ Route::get('/register', [CustomAuthController::class, 'register'])->name('regist
 Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
 Route::post('/register', [CustomAuthController::class, 'registerUser'])->name('register-user');
 Route::post('/login', [CustomAuthController::class, 'loginUser'])->name('login-user');
-Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');
+Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');;
+Route::get('/Theme/Search', [LiveSearchController::class, 'theme'])->name('themes');
+
+Route::get('/User/Search', [LiveSearchController::class, 'user'])->name('users');
+Route::get('/Ingredients/Search', [LiveSearchController::class, 'ingredients'])->name('ingredient.search');
 
 
 
@@ -52,7 +56,8 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/Theme/{theme}', [HelpController::class, 'filtreParTheme'])->name('filtre');
-
+Route::get('/Theme', [HelpController::class, 'theme'])->name('theme');
+Route::get('/Ingredient', [HelpController::class, 'ingredients'])->name('ingredients');
 //----------------------------------User------------------------------------------------
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/urblog', [HomeController::class, 'urblog'])->name('urblog');
@@ -71,9 +76,9 @@ Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
 
     Route::get('/home', [HelpController::class, 'last'])->name('latest-recipes');
 
-Route::resource('blog',ContentController::class);
+    Route::resource('blog', ContentController::class);
 
-Route::resource('/comment',CommentController::class);
+    Route::resource('/comment', CommentController::class);
 
 
     Route::get('/More', [HomeController::class, 'more'])->name('more');

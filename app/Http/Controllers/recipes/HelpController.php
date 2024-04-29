@@ -66,4 +66,14 @@ use season;
         $recipes = Recipe::where('user_id',  $userId)->get();
         return view('user.ownRecipe', compact('recipes','comments'));
     }
+
+    public function theme(){
+
+        $themes=Theme::all();
+        return view('user.Theme',compact('themes'));
+    }
+    public function ingredients(){
+        $ingrediant=Ingrediant::all();
+        return view('user.Ingredient',compact('ingrediant'));
+    }
 }

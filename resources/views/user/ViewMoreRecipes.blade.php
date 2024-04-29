@@ -37,58 +37,69 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
 <div class="max-w-6xl mx-auto mb-8 px-4">
     <div class="container mx-auto">
         <h2 class="text-4xl font-bold text-center mb-16"></h2>
-        <div class="grid md:grid-cols-3 gap-8">
+        <div id="recipes" class="grid md:grid-cols-3 gap-8">
             @foreach ($recipes as $recipe)
-
                 <div
                     class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out relative">
                     <div class="relative">
                         <a href="{{ route('recipes.more', $recipe->id) }}">
-                        @if ($recipe->image)
-                            <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image"
-                                class="w-full h-56 object-cover">
-                        @endif
-                        @if (Auth::user()->favoris->contains('recipe_id', $recipe->id))
-                            @php
-                                $favoris = Auth::user()
-                                    ->favoris->where('recipe_id', $recipe->id)
-                                    ->first();
-                            @endphp
-                            <form method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button onclick="removefavori(this,'{{ $favoris->id }}')"
-                                    class="absolute right-2 top-2 text-red-500 focus:outline-none hover:text-red-600 p-2 rounded-full text-lg">
-                                     {{ $recipe->favoris()->count() }}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                        viewBox="0 0 48 48">
-                                        <path fill="currentColor"
-                                            d="M34 9c-4.2 0-7.9 2.1-10 5.4C21.9 11.1 18.2 9 14 9C7.4 9 2 14.4 2 21c0 11.9 22 24 22 24s22-12 22-24c0-6.6-5.4-12-12-12" />
-                                    </svg>
-                                   
-                                </button>
-                            </form>
-                        @else
-                            <form method="POST">
-                                @csrf
-                                @method('POST')
-                                <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
-                                
-                                <button onclick="addfavori(this)"
-                                    class="absolute right-2 top-2 text-red-500 focus:outline-none hover:text-red-600    p-2 rounded-full text-lg">
-                                    <i class="far fa-heart "></i>{{ $recipe->favoris()->count() }}
-                                </button>
-                            </form>
-                        @endif
-
+                            @if ($recipe->image)
+                                <img src="{{ Storage::url($recipe->image->url) }}" alt="Recipe Image"
+                                    class="w-full h-56 object-cover">
+                            @endif
                     </div>
                     <div class="p-4">
-                        
-                        <h3 class="text-lg font-semibold text-gray-800 mb-1">
-                            {{ $recipe->title }}
-                        </h3>
+                        <div class="flex justify-between items-start w-full">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-1">
+                                {{ $recipe->title }}
+                            </h3>
+                            @if (Auth::user()->favoris->contains('recipe_id', $recipe->id))
+                                @php
+                                    $favoris = Auth::user()
+                                        ->favoris->where('recipe_id', $recipe->id)
+                                        ->first();
+                                @endphp
+                                <form method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button onclick="removefavori(this,'{{ $favoris->id }}')"
+                                        class="flex mt-1 focus:outline-none">
+                                        <svg class="text-red-600 mr-1" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" width="24" height="24" color="#000000"
+                                            fill="none">
+                                            <path
+                                                d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z"
+                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                            <path
+                                                d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z"
+                                                stroke="currentColor" stroke-width="1.5" />
+                                        </svg><span id="countLiked">{{ $recipe->favoris()->count() }}</span>
+
+                                    </button>
+                                </form>
+                            @else
+                                <form method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
+
+                                    <button onclick="addfavori(this)" class="flex mt-1 focus:outline-none ">
+                                        <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                            width="24" height="24" color="#000000" fill="none">
+                                            <path
+                                                d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z"
+                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                            <path
+                                                d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z"
+                                                stroke="currentColor" stroke-width="1.5" />
+                                        </svg><span id="countUnliked">{{ $recipe->favoris()->count() }}</span>
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
+
                         <div class="flex items-center text-sm text-gray-500 mb-3">
-                           <img src="{{ $recipe->user->profile_photo_url ?? asset('images/cheef.jpg') }}"
+                            <img src="{{ $recipe->user->profile_photo_url ?? asset('images/cheef.jpg') }}"
                                 class="w-6 h-6 rounded-full mr-2">
                             By {{ $recipe->user->name }} on :<time
                                 class=" mr-2 ml-2 ">{{ $recipe->created_at->format('M d, Y') }}</time>
@@ -144,7 +155,15 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
                 dataType: 'json',
                 success: function(data) {
                     console.log(data);
-                    renderRecipes(data);
+                    if (data.length > 0) {
+                        document.getElementById("recipes").innerHTML = "";
+                        for (var i = 0; i < data.length; i++) {
+                            createRecipe(data[i]);
+                        }
+                    } else {
+                        document.getElementById("recipes").innerHTML =
+                            `'<p class="text-center">No Data Found</p>'`;
+                    }
                 },
                 error: function() {
                     console.error('Error fetching data.');
@@ -152,33 +171,79 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
             });
         }
 
-        function renderRecipes(data) {
-            let html = '';
-            if (data.length > 0) {
-                data.forEach(recipe => {
-                    let imageHtml = '';
-                    if (recipe.image) {
-                        imageHtml = `<img src="/storage/${recipe.image.url}" class="h-24 w-24">`;
-                    }
+        // function renderRecipes(data) {
+        //     let html = '';
+        //     if (data.length > 0) {
+        //         data.forEach(recipe => {
+        //             let imageHtml = '';
+        //             if (recipe.image) {
+        //                 imageHtml = `<img src="/storage/${recipe.image.url}" class="h-24 w-24">`;
+        //             }
 
-                    html += `<div class="recipe-item mt-4 flex space-x-4 px-3">
-                        ${imageHtml}
-                        <div class="flex flex-col">
-                            <p class="text-black capitalize text-xl hover:underline">${recipe.title}</p>
-                            <p class="text-gray-400 text-center text-sm">${recipe.season}</p>
-                        </div>
-                        <div class="border border-black dark:border-gray-500 my-2"></div>
-                    </div>`;
-                });
-            } else {
-                html = '<p class="text-center">No Data Found</p>';
-            }
-            $('#search-results').html(html);
-        }
+        //             html += `<div class="recipe-item mt-4 flex space-x-4 px-3">
+        //                 ${imageHtml}
+        //                 <div class="flex flex-col">
+        //                     <p class="text-black capitalize text-xl hover:underline">${recipe.title}</p>
+        //                     <p class="text-gray-400 text-center text-sm">${recipe.season}</p>
+        //                 </div>
+        //                 <div class="border border-black dark:border-gray-500 my-2"></div>
+        //             </div>`;
+        //         });
+        //     } else {
+        //         html = '<p class="text-center">No Data Found</p>';
+        //     }
+        //     $('#search-results').html(html);
+        // }
 
     });
 
+    function createRecipe(recipe) {
+      const cardDiv = document.createElement("div");
+      cardDiv.setAttribute('class', 'bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out relative');
+      const cardContent = `
+      <div class="relative">
+                        <a href="">
+                            ${recipe.image ? `
+                                <img src="{{ Storage::url('${recipe.image.url}') }}" alt="Recipe Image"
+                                    class="w-full h-56 object-cover">
+                            ` : 
+                            ``}
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start w-full">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-1">
+                                ${recipe.title}
+                            </h3>                          
+                        </div>
 
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <img src="{{asset('images/cheef.jpg') }}"
+                                class="w-6 h-6 rounded-full mr-2">
+                            By ${recipe.user.name} on :<time
+                                class=" mr-2 ml-2 ">{{ $recipe->created_at->format('M d, Y') }}</time>
+                        </div>
+                        <p class="text-gray-600">
+                            ${recipe.description.substring(0, 100) + '...'}
+                            <a href=""
+                                class="text-blue-500 hover:text-blue-600 font-semibold">Read more</a>
+                        </p>
+                        <div class="flex items-center mt-2 text-gray-700">
+                            ${recipe.theme ? `
+                                <span
+                                    class="bg-blue-200  mr-36 text-blue-800 text-xs font-semibold  px-2.5 py-0.5 rounded">
+                                    ${recipe.theme.name}
+                                </span>
+                            ` : ``}
+                            <span class="flex items-center">
+                                <i class="far fa-clock mr-1"></i> ${recipe.duration_preparation} min
+                            </span>
+                        </div>
+                        </a>
+                    </div>
+    `;
+    cardDiv.innerHTML = cardContent;
+      document.getElementById('recipes').appendChild(cardDiv);
+    }
 
     function addfavori(button) {
         var form = button.closest('form')
@@ -189,14 +254,19 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
                 data: jQuery(form).serialize(),
                 method: 'POST',
                 success: function(result) {
+                    var likeCount = parseInt(document.getElementById('countUnliked').textContent);
                     const newForm = `
-                            @csrf
-                            @method('DELETE')
-                            <button onclick="removefavori(this,${result.favori})" class="absolute right-2 top-2 text-red-500 focus:outline-none hover:text-red-600    p-2 rounded-full text-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 48 48">
-                                        <path fill="currentColor" d="M34 9c-4.2 0-7.9 2.1-10 5.4C21.9 11.1 18.2 9 14 9C7.4 9 2 14.4 2 21c0 11.9 22 24 22 24s22-12 22-24c0-6.6-5.4-12-12-12"/>
-                                    </svg>
-                            </button>`;
+                    @csrf
+                                @method('DELETE')
+                                <button onclick="removefavori(this, ${result.favori})"
+                                    class="flex mt-1 focus:outline-none">
+                                     <svg class="text-red-600 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                                        <path d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                        <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5" />
+                                    </svg><span id="countLiked">${likeCount + 1}</span>
+                                    
+
+                                </button>`;
                     $(form).html(newForm);
                     $(form).unbind();
                 },
@@ -214,17 +284,23 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
         $(form).on('submit', function(event) {
             event.preventDefault();
             $.ajax({
-                url: '{{ route('favoris.destroy',':id') }}'.replace(':id',id),
+                url: '{{ route('favoris.destroy', ':id') }}'.replace(':id', id),
                 data: jQuery(form).serialize(),
                 method: 'DELETE',
                 success: function(result) {
+                    var likeCount = parseInt(document.getElementById('countLiked').textContent);
                     const newForm = `
-                        @csrf
-                        @method('post')
-                        <input type="hidden" value="${result.recipe}" name="recipe_id">
-                        <button onclick="addfavori(this)" class="absolute right-2 top-2 text-red-500 focus:outline-none hover:text-red-600  p-2 rounded-full text-lg">
-                            <i class="far fa-heart "></i>
-                        </button>`;
+                         @csrf
+                                @method('POST')
+                                <input type="hidden" name="recipe_id" value="${result.recipe}">
+                                
+                                <button onclick="addfavori(this)"
+                                    class="flex mt-1 focus:outline-none ">
+                                    <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                                        <path d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                        <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5" />
+                                    </svg><span id="countUnliked">${likeCount - 1}</span>
+                                </button>`;
 
                     $(form).html(newForm);
                     $(form).unbind();

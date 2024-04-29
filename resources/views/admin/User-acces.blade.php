@@ -5,9 +5,10 @@
             <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md w-full max-w-4xl">
                 <div class="pb-4 flex justify-between items-center">
                     <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">User Management</h2>
-                    <input type="text"
+                    <input type="text" id="search"
                         class="block w-1/4 text-sm py-2 px-4 rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-500"
                         placeholder="Search users...">
+                        <div id="search-results"></div>
                 </div>
                 <div class="">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -57,3 +58,54 @@
         © 2024 Cuisénio. All rights reserved.
     </div>
 </div>
+
+    <script>
+    $(document).ready(function() {
+        $('#search').keyup(function(event) {
+            event.preventDefault();
+            var query = $(this).val();
+            fetch_customer_data(query);
+        });
+
+        function fetch_customer_data(query = '') {
+            $.ajax({
+                url: "{{ route('users') }}",
+                method: 'GET',
+                data: {
+                    query: query
+                },
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    renderUsers(data);
+                },
+                error: function() {
+                    console.error('Error fetching data.');
+                }
+            });
+        }
+
+        function renderUsers(data) {
+            let html = '';
+            if (data.length > 0) {
+                data.forEach(user => {
+                    let imageHtml = '';
+                   
+                    html += `<div class="user-item mt-4 flex space-x-4 px-3">
+                        ${imageHtml}
+                        <div class="flex flex-col">
+                            <p class="text-black capitalize text-xl hover:underline">${user.name}</p>
+                            <p class="text-black capitalize text-xl hover:underline">${user.email}</p>
+                        </div>
+                        <div class="border border-black dark:border-gray-500 my-2"></div>
+                    </div>`;
+                });
+            } else {
+                html = '<p class="text-center">No Data Found</p>';
+            }
+            $('#search-results').html(html);
+        }
+
+    });
+
+</script>

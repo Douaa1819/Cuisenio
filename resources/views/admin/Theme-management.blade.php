@@ -7,7 +7,12 @@
 
             <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Theme Management</h2>
             <div class="flex items-center">
-                <input type="text" id="searchInput" onkeyup="searchTheme()" placeholder="Search themes..." class="text-sm py-2 px-4 rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-500 mr-2">
+                <input type="text" id="search" placeholder="Search themes..." class="text-sm py-2 px-4 rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-500 mr-2">
+                <div id="search-results"></div>
+                <button type="button"
+                class="px-6 py-4 text-white text-sm font-medium hover:bg-gray-800 transition-colors rounded-md">
+                <span id="total_records"></span>Search
+            </button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded text-sm flex items-center" onclick="openModa()">
                     <i class="fas fa-plus mr-2"></i>Add Theme
                 </button>
@@ -142,6 +147,56 @@
     }
 
 
+
+    $(document).ready(function() {
+        $('#search').keyup(function(event) {
+            event.preventDefault();
+            var query = $(this).val();
+            fetch_customer_data(query);
+        });
+
+        function fetch_customer_data(query = '') {
+            $.ajax({
+                url: "{{ route('themes') }}",
+                method: 'GET',
+                data: {
+                    query: query
+                },
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    renderThemes(data);
+                },
+                error: function() {
+                    console.error('Error fetching data.');
+                }
+            });
+        }
+
+        function renderThemes(data) {
+            let html = '';
+            if (data.length > 0) {
+                data.forEach(Theme => {
+                    let imageHtml = '';
+                    if (Theme.image) {
+                        imageHtml = `<img src="/storage/${Theme.image.url}" class="h-24 w-24">`;
+                    }
+
+                    html += `<div class="Theme-item mt-4 flex space-x-4 px-3">
+                        ${imageHtml}
+                        <div class="flex flex-col">
+                            <p class="text-black capitalize text-xl hover:underline">${Theme.name}</p>
+                        </div>
+                        <div class="border border-black dark:border-gray-500 my-2"></div>
+                    </div>`;
+                });
+            } else {
+                html = '<p class="text-center">No Data Found</p>';
+            }
+            $('#search-results').html(html);
+        }
+
+    });
 
 
 
