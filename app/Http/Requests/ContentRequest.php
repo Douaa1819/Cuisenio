@@ -24,6 +24,7 @@ class ContentRequest extends FormRequest
         return [
             'title'=>'required|string|max:255',
             'description'=>'required|string',
+            'image' => 'sometimes|file|image|max:2048|mimes:jpeg,png,jpg,gif,svg,webp',
             'type' => 'required|in:conseil,blog,astuce'
 
         ];

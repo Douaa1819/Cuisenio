@@ -166,7 +166,7 @@
                                 <p class="text-gray-600 text-sm">
                                     {{ \Illuminate\Support\Str::limit($recipe->description, 50, '...') }}
                                     <a href="{{ route('recipes.more', $recipe->id) }}"
-                                        class="text-blue-400 hover:text-green-400 font-semibold cursor-pointer">Read
+                                        class="text-blue-400 hover:text-gray-400 font-semibold cursor-pointer">Read
                                         more...</a>
                                 </p>
                                 <div class="flex items-center mt-4">

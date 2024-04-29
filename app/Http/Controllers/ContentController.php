@@ -6,34 +6,31 @@ use App\Http\Requests\ContentRequest;
 use App\Models\Content;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('user.blog');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
     }
-
 
     public function store(ContentRequest $request)
     {
         try {
             $data = $request->validated();
-            $userId = Auth::user()->id;
-            $data['userId'] = $userId;
-            Content::create($data);
+            $data['user_id'] = Auth::user()->id;
 
+            $content = Content::create($data);
+
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $path = $request->file('image')->store('images', 'public');
+                $content->image()->create(['url' => $path]);
+            }
             return redirect()->back()->with('success', 'Blog created successfully!');
         } catch (\Exception $e) {
             Log::error("Failed to create blog: " . $e->getMessage());
@@ -41,25 +38,22 @@ class ContentController extends Controller
         }
     }
 
-
-    public function show(Content $content)
-    {
-        //
-    }
-
-
-    public function edit(Content $content)
-    {
-        //
-    }
-
-
     public function update(ContentRequest $request, Content $content)
     {
         try {
             $data = $request->validated();
-            $userId = Auth::user()->id;
-            $data['userId'] = $userId;
+            $data['user_id'] = Auth::user()->id;
+
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $existingImage = $content->image;
+                if ($existingImage) {
+                    Storage::delete($existingImage->url);
+                    $existingImage->delete();
+                }
+                $path = $request->file('image')->store('images', 'public');
+                $content->image()->create(['url' => $path]);
+            }
+
             $content->update($data);
             return redirect()->back()->with('success', 'Blog updated successfully!');
         } catch (\Exception $e) {
@@ -68,13 +62,12 @@ class ContentController extends Controller
         }
     }
 
-
     public function destroy(Content $content)
     {
         if ($content->delete()) {
             return redirect()->back()->with('success', 'Blog deleted successfully!');
         } else {
-            return redirect()->back()->with('error', 'Blog deleted successfully!');
+            return back()->with('error', 'Error deleting blog.');
         }
     }
 }

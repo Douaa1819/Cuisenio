@@ -59,7 +59,7 @@ Route::get('/urblog', [HomeController::class, 'urblog'])->name('urblog');
 
 //--------------------------------Recipes---------------------------------------------------
 Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
-
+    Route::resource('blog', ContentController::class);
     Route::get('/Show/Recipe', [HelpController::class, 'show'])->name('My.recipe');
 
     Route::resource('/favoris', FavorisController::class);
@@ -119,3 +119,8 @@ Route::post('/new-password', [ForgotPasswordLinkController::class, 'NewPassword'
 Route::get('/newsletter/details', [NewsletterController::class, 'showListDetails']);
 Route::post('/', [NewsletterController::class, 'store'])->name('news.store');
 Route::get('/logout', [UserAccesController::class, 'logout'])->name('logout');
+
+
+Route::get('/singleblog', function () {
+    return view('user.singleBlog');
+})->name('blog.page');

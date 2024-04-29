@@ -47,7 +47,7 @@ class CommentController extends Controller
         ]);
 
         if ($comment) {
-            return response()->json(['success' => 'Comment added successfully!', 'comment' => $comment], 201);
+            return response()->json(['success' => 'Comment added successfully!', 'comment' => $comment], 200);
         } else {
             return response()->json(['error' => 'Failed to add comment'], 500);
         }

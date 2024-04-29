@@ -123,13 +123,13 @@
                 
                 <div class="mt-6 bg-gray-100 p-4 rounded-lg shadow">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Add a Comment</h3>
-                    <form action="{{ route('comment.store') }}" method="POST" class="space-y-4">
+                    <form  method="POST" class="space-y-4">
                         @csrf
+                        @method('POST')
                         <input type="hidden" name="commentable_type" value="Recipe">
                       <input type="hidden" name="commentable_id" value="{{$recipe->id }}">
-
                         <textarea name="body" rows="4" class="w-full p-2 border border-gray-300 rounded-md focus:ring-red-300 focus:border-red-300" placeholder="Write your comment here..." required></textarea>
-                        <button type="submit" class="px-6 py-2 bg-red-300 text-white rounded-full hover:bg-red-400 transition-colors">Submit Comment</button>
+                        <button onclick="addComment(this)" class="px-6 py-2 bg-red-300 text-white rounded-full hover:bg-red-400 transition-colors">Submit Comment</button>
                     </form>
                 </div>
 
@@ -233,5 +233,25 @@
         let booklist = JSON.parse(localStorage.getItem('booklist')) || [];
         let listHtml = booklist.map(id => `<li>Recipe ID: ${id}</li>`).join('');
         document.getElementById('booklistView').innerHTML = listHtml;
+    }
+
+
+    function addComment(button)
+    {
+        var form = button.closest('form');
+
+        $(form).on('submit', function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: '{{ route('comment.store') }}',
+                data: jQuery(form).serialize(),
+                method: 'POST',
+                success: function(result) {
+                    jQuery(form)[0].reset();
+                    $(form).unbind();
+                    
+                }
+            });
+        })
     }
 </script>
