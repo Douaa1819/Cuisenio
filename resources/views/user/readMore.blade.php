@@ -189,36 +189,24 @@
                                 Comment</button>
                         </form>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 pt-4 antialiased flex max-w-full">
-                        <img class="rounded-full h-10 w-10 mr-2 mt-1 " src="{{ $recipe->user->profile_photo_url ?? asset('images/cheef.jpg') }}" />
-                        <div>
-                            <div class="bg-gray-100 w-full dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-                                <div class="font-semibold text-sm leading-relaxed">Jon Doe</div>
-                                <div class="text-normal leading-snug md:leading-normal">Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                    deserunt mollit anim id est laborum.</div>
-                            </div>
-                            <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">1d ago</div>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 pt-4 antialiased flex max-w-full">
-                        <img class="rounded-full h-10 w-10 mr-2 mt-1 " src="{{ $recipe->user->profile_photo_url ?? asset('images/cheef.jpg') }}" />
-                        <div>
-                            <div class="bg-gray-100 w-full dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-                                <div class="font-semibold text-sm leading-relaxed">Jon Doe</div>
-                                <div class="text-normal leading-snug md:leading-normal">Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                </div>
-                            </div>
-                            <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">1d ago</div>
-                        </div>
-                    </div>
-                </div>
+                    @foreach ($recipe->comments as $comment)
+    <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 pt-4 antialiased flex max-w-full">
+        <img class="rounded-full h-10 w-10 mr-2 mt-1" src="{{ $comment->user->profile_photo_url ?? asset('images/cheef.jpg') }}" alt="User Image">
+        <div>
+            <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                <div class="font-semibold text-sm leading-relaxed">{{ $comment->user->name }}</div>
+                <div class="text-normal leading-snug md:leading-normal">{{ $comment->body }}</div>
+            </div>
+            <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">{{ $comment->created_at->diffForHumans() }}</div>
+            @if ($comment->user_id === Auth::id())
+                <button onclick="editComment({{ $comment->id }})" class="text-xs text-blue-500">Edit</button>
+                <button onclick="deleteComment({{ $comment->id }})" class="text-xs text-red-500">Delete</button>
+            @endif
+        </div>
+    </div>
+@endforeach
+
+                   
 
                 <aside class="lg:w-1/4 bg-gray-100 p-4 rounded-lg">
 
@@ -324,4 +312,22 @@
             });
         })
     }
+
+
+    function deleteComment(commentId) {
+    if (!confirm("Are you sure you want to delete this comment?")) return;
+
+    $.ajax({
+        url: '{{ route('comment.destroy') }}',
+        type: 'DELETE',
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function(result) {
+            alert('Comment deleted successfully');
+            $(`#comment-${commentId}`).fadeOut();
+        },
+        error: function(xhr) {
+            alert('Error deleting comment');
+        }
+    });
+}
 </script>

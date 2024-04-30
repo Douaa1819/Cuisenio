@@ -44,7 +44,7 @@ class PrintController extends Controller
             return abort(404, 'No recipes found.');
         }
 
-        $view = view('print_recipes', compact('recipes'))->render();
+        $view = view('printBook', compact('recipes'))->render();
         $dompdf = new Dompdf();
         $dompdf->loadHtml($view);
         $dompdf->setPaper('A4', 'portrait');

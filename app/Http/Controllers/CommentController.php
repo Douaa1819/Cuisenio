@@ -14,7 +14,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+   $comment=Comment::all();
+   return view('user.readMore',compact('comment'));
     }
 
     /**
@@ -74,20 +75,7 @@ class CommentController extends Controller
     }
 
 
-    public function update(CommentRequest $request, Comment $comment)
-    {
-        if ($comment->user_id !== Auth::user()->id) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        $updated = $comment->update($request->validated());
-
-        if ($updated) {
-            return response()->json(['success' => 'Comment updated successfully!', 'comment' => $comment], 200);
-        } else {
-            return response()->json(['error' => 'Failed to update comment'], 500);
-        }
-    }
+    
 
     /**
      * Remove the specified resource from storage.
