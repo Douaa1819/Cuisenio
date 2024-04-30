@@ -189,9 +189,12 @@
                                 Comment</button>
                         </form>
                     </div>
-                    @foreach ($recipe->comments as $comment)
+                    @foreach ($recipe->comment as $comment)
     <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 pt-4 antialiased flex max-w-full">
-        <img class="rounded-full h-10 w-10 mr-2 mt-1" src="{{ $comment->user->profile_photo_url ?? asset('images/cheef.jpg') }}" alt="User Image">
+        <img class="rounded-full h-10 w-10 mr-2 mt-1"
+        src="{{ $comment->user->profile_image ? asset('storage/' . $comment->user->profile_image) : asset('images/cheef.jpg') }}"
+        alt="User Image">
+   
         <div>
             <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
                 <div class="font-semibold text-sm leading-relaxed">{{ $comment->user->name }}</div>
@@ -199,12 +202,13 @@
             </div>
             <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">{{ $comment->created_at->diffForHumans() }}</div>
             @if ($comment->user_id === Auth::id())
-                <button onclick="editComment({{ $comment->id }})" class="text-xs text-blue-500">Edit</button>
+
                 <button onclick="deleteComment({{ $comment->id }})" class="text-xs text-red-500">Delete</button>
             @endif
         </div>
     </div>
 @endforeach
+                </div>
 
                    
 
@@ -318,7 +322,7 @@
     if (!confirm("Are you sure you want to delete this comment?")) return;
 
     $.ajax({
-        url: '{{ route('comment.destroy') }}',
+        url: `/comment/${commentId}`,
         type: 'DELETE',
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         success: function(result) {

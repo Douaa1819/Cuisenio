@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
+use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +16,7 @@ class CommentController extends Controller
     public function index()
     {
    $comment=Comment::all();
+   
    return view('user.readMore',compact('comment'));
     }
 
@@ -42,7 +44,7 @@ class CommentController extends Controller
             return response()->json(['error' => 'Commentable entity not found'], 404);
         }
 
-        $comment = $commentable->comment()->create([
+        $comment = $commentable->comments()->create([
             'body' => $body,
             'user_id' => $userID
         ]);
@@ -61,11 +63,18 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
-    {
-        //
+    public function show($id)
+{
+    $content = Content::with('comments.user')->find($id);
+    if (!$content) {
+        return redirect()->back()->with('error', 'Content not found!');
     }
+    return view('user.blog', compact('content'));
+}
 
+    
+
+    
     /**
      * Show the form for editing the specified resource.
      */

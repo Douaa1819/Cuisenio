@@ -10,10 +10,16 @@ use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
-    public function index()
-    {
-        return view('user.blog');
-    }
+ // In your ContentController
+
+public function index()
+{
+     $contents = Content::with(['comments.user', 'user'])->get();
+    return view('user.blog', compact('contents'));
+}
+
+
+
 
     public function create()
     {

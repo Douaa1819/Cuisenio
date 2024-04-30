@@ -70,15 +70,7 @@
                             id="email" name="email" type="email" placeholder="Enter your email"
                             value="{{ auth()->user()->email }}">
                     </div>
-                    <div class="mb-6">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
-                            Phone
-                        </label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            name="phone" id="phone" type="text" placeholder="Enter your phone number"
-                            value="{{ auth()->user()->phone }}">
-                    </div>
+                   
                     <div class="mb-6">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="profile_image">
                             Profile Image
