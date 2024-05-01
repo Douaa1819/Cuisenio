@@ -45,15 +45,13 @@
     <!-- Home -->
 
 
-    <div class="flex justify-evenly p-16 items-center md:gap-4 gap-8  text-[#333] bg-[#F2F2F2]">
-        <div class="max-md:order-1 max-md:text-center w-1/2">
-            <h3 class="md:text-5xl text-2xl md:leading-10 font-bold ">Welcome to Cuisénio!</h3>
-            <p class="mt-4 text-xl">Discover and prepare a variety of recipes with ease. Join our community and
-                explore
-                the art of cooking like never before.</p>
+    <div class="flex flex-col md:flex-row justify-evenly p-16 items-center gap-8 bg-[#F2F2F2]">
+        <div class="md:w-1/2 text-center md:text-left">
+            <h3 class="text-2xl md:text-5xl font-bold">Welcome to Cuisénio!</h3>
+            <p class="text-xl mt-4">Discover and prepare a variety of recipes with ease. Join our community and explore the art of cooking like never before.</p>
             <button
-                class="overflow-hidden px-4 py-2 mt-5 bg-black text-white border-none rounded-md text-md font-semibold cursor-pointer relative z-10 group">
-                <a href="<?php echo e(route('viewMore')); ?>">
+            class=" overflow-hidden  m  border-none rounded-md text-md cursor-pointer relative z-10 group inline-block mt-5 bg-black text-white px-4 py-2 font-semibold">
+                <a href="#">
                 View More <span
                     class="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
                 <span
@@ -66,9 +64,11 @@
                 </a>
             </button>
         </div>
-        <div class="w-1/2">
-            <img src="<?php echo e(asset('images/visii.jpg')); ?>" class=" w-auto h-full md:object-contain rounded-3xl shadow-xl" />
+        <div class="md:w-1/2">
+            <img src="<?php echo e(asset('images/visii.jpg')); ?>" class="rounded-3xl shadow-xl w-full h-auto object-cover">
         </div>
+    </div>
+        
     </div>
 
 
