@@ -20,17 +20,7 @@ class CommentController extends Controller
         return view('user.readMore', compact('comment'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(CommentRequest $request)
     {
         $commentable_type = 'App\Models\\' . $request->input('commentable_type');
@@ -62,28 +52,6 @@ class CommentController extends Controller
 
 
 
-    /**
-     * Display the specified resource.
-     */
-
-
-
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
-    {
-        //
-    }
-
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Comment $comment)
     {
         if ($comment->user_id !== Auth::user()->id) {

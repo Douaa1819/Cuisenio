@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 //---------------------------------------Visiteur-----------------------------------------
 
-Route::get('/print-booklist', [PrintController::class, 'printBooklist'])->name('print.booklist');
-Route::get('/download-booklist', [PrintController::class, 'Booklist'])->name('download.booklist');
+
 Route::post('/profile', [HomeController::class, 'updateProfile'])->name('update.profile');
 Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
 
@@ -75,6 +74,10 @@ Route::get('/urblog', [HomeController::class, 'urblog'])->name('urblog');
 
 //--------------------------------Recipes---------------------------------------------------
 Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
+    Route::get('/print-booklist', [PrintController::class, 'printBooklist'])->name('print.booklist');
+    Route::get('/download-booklist', [PrintController::class, 'Booklist'])->name('download.booklist');
+
+
     Route::get('/Theme/{theme}', [HelpController::class, 'filtreParTheme'])->name('filtre');
     Route::get('/Theme', [HelpController::class, 'theme'])->name('theme');
     Route::get('/Ingredient', [HelpController::class, 'ingredients'])->name('ingredients');
@@ -119,13 +122,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/user-acces', [UserAccesController::class, 'index'])->name('user');
     Route::post('/user-acces/{user}/toggle-block', [UserAccesController::class, 'toggleBlock'])->name('user.toggle-block');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    //--------------------------Themes------------------------------------------//
-
 
     Route::resource('themes', ThemeController::class);
 
     //--------------------------Ingrediants------------------------------------------//
     Route::resource('ingrediants', IngrediantController::class);
+    //--------------------------Themes------------------------------------------//
+
+
+
     //---------------------------------------------------------------------------------------
 
 
