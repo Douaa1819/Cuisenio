@@ -309,4 +309,4 @@
 
 
 
-<?php /**PATH C:\laragon\www\Cuisenio\resources\views/user/profile.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\Cuisenio\resources\views\user\profile.blade.php ENDPATH**/ ?>

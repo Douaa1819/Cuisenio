@@ -79,18 +79,49 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-6">
-                                <button class="" title="like">
-                                    <svg class=" hover:text-red-600 transition-all duration-300 ease-in"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                        height="24" color="#000000" fill="none">
-                                        <path
-                                            d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z"
-                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                        <path
-                                            d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z"
-                                            stroke="currentColor" stroke-width="1.5" />
-                                    </svg>
-                                </button>
+                                @if (Auth::user()->favoris->contains('recipe_id', $recipe->id))
+                                @php
+                                    $favoris = Auth::user()
+                                        ->favoris->where('recipe_id', $recipe->id)
+                                        ->first();
+                                @endphp
+                                <form method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button onclick="removefavori(this,'{{ $favoris->id }}')"
+                                        class="flex mt-1 focus:outline-none">
+                                        <svg class="text-red-600 mr-1" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" width="24" height="24" color="#000000"
+                                            fill="none">
+                                            <path
+                                                d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z"
+                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                            <path
+                                                d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z"
+                                                stroke="currentColor" stroke-width="1.5" />
+                                        </svg><span id="countLiked">{{ $recipe->favoris()->count() }}</span>
+
+                                    </button>
+                                </form>
+                            @else
+                                <form method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
+
+                                    <button onclick="addfavori(this)" class="flex mt-1 focus:outline-none ">
+                                        <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                            width="24" height="24" color="#000000" fill="none">
+                                            <path
+                                                d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z"
+                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                            <path
+                                                d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z"
+                                                stroke="currentColor" stroke-width="1.5" />
+                                        </svg><span id="countUnliked">{{ $recipe->favoris()->count() }}</span>
+                                    </button>
+                                </form>
+                            @endif
                                 <button onclick="openReview()" class="focus:outline-none focus:border-none"
                                     title="rate">
                                     <svg class=" hover:text-yellow-500 transition-all duration-300 ease-in"
@@ -176,21 +207,19 @@
 
                     <div class="mt-6 bg-gray-100 p-4 rounded-lg shadow">
                         <h3 class="text-xl font-semibold mb-4 text-gray-800">Add a Comment</h3>
-                        <form method="POST" class="space-y-4">
+                        <form class="space-y-4" method="post" action="{{route('comment.store')}}">
                             @csrf
                             @method('POST')
                             <input type="hidden" name="commentable_type" value="Recipe">
                             <input type="hidden" name="commentable_id" value="{{ $recipe->id }}">
-                            <textarea name="body" rows="4"
-                                class="w-full p-2 border border-gray-300 rounded-md focus:ring-red-300 focus:border-red-300"
-                                placeholder="Write your comment here..." required></textarea>
-                            <button onclick="addComment(this)"
+                            <textarea name="body" rows="4" id="comment" class="w-full p-2 border border-gray-300 rounded-md focus:ring-red-300 focus:border-red-300" placeholder="Write your comment here..." ></textarea>
+                            <button type="submit"
                                 class="px-6 py-2 bg-red-300 text-white rounded-full hover:bg-red-400 transition-colors">Add
                                 Comment</button>
                         </form>
                     </div>
                     @foreach ($recipe->comment as $comment)
-    <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 pt-4 antialiased flex max-w-full">
+        <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 pt-4 antialiased flex max-w-full">
         <img class="rounded-full h-10 w-10 mr-2 mt-1"
         src="{{ $comment->user->profile_image ? asset('storage/' . $comment->user->profile_image) : asset('images/cheef.jpg') }}"
         alt="User Image">
@@ -299,24 +328,7 @@
     }
 
 
-    function addComment(button) {
-        var form = button.closest('form');
-
-        $(form).on('submit', function(event) {
-            event.preventDefault();
-            $.ajax({
-                url: '{{ route('comment.store') }}',
-                data: jQuery(form).serialize(),
-                method: 'POST',
-                success: function(result) {
-                    jQuery(form)[0].reset();
-                    $(form).unbind();
-
-                }
-            });
-        })
-    }
-
+   
 
     function deleteComment(commentId) {
     if (!confirm("Are you sure you want to delete this comment?")) return;
@@ -334,4 +346,84 @@
         }
     });
 }
+</script>
+<script>
+    //  function addComment(button) {
+    //     var form = button.closest('form');
+
+    //     $(form).on('submit', function(event) {
+    //         event.preventDefault();
+    //         $.ajax({
+    //             url: '{{ route('comment.store') }}',
+    //             data: jQuery(form).serialize(),
+    //             method: 'POST',
+    //             success: function(result) {
+    //                 jQuery(form)[0].reset();
+    //                 $(form).unbind();
+
+    //             }
+    //         });
+    //     })
+    // }
+    function addfavori(button) {
+                var form = button.closest('form')
+                $(form).on('submit', function(event) {
+                    event.preventDefault();
+                    $.ajax({
+                        url: "{{ route('favoris.store') }}",
+                        data: jQuery(form).serialize(),
+                        method: 'POST',
+                        success: function(result) {
+                            var likeCount = parseInt(document.getElementById('countUnliked').textContent);
+                            const newForm = `
+                    @csrf
+                                @method('DELETE')
+                                <button onclick="removefavori(this, ${result.favori})"
+                                    class="flex mt-1 focus:outline-none">
+                                     <svg class="text-red-600 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                                        <path d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                        <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5" />
+                                    </svg><span id="countLiked">${likeCount + 1}</span>
+                                    
+
+                                </button>`;
+                            $(form).html(newForm);
+                            $(form).unbind();
+                        },
+                    });
+
+                })
+            }
+
+            function removefavori(button, id) {
+                var form = button.closest('form');
+
+                $(form).on('submit', function(event) {
+                    event.preventDefault();
+                    $.ajax({
+                        url: '{{ route('favoris.destroy', ':id') }}'.replace(':id', id),
+                        data: jQuery(form).serialize(),
+                        method: 'DELETE',
+                        success: function(result) {
+                            var likeCount = parseInt(document.getElementById('countLiked').textContent);
+                            const newForm = `
+                         @csrf
+                                @method('POST')
+                                <input type="hidden" name="recipe_id" value="${result.recipe}">
+                                
+                                <button onclick="addfavori(this)"
+                                    class="flex mt-1 focus:outline-none ">
+                                    <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                                        <path d="M8.26872 8.49708C9.60954 7.67461 10.7798 8.00606 11.4828 8.53401C11.7711 8.75048 11.9152 8.85871 12 8.85871C12.0848 8.85871 12.2289 8.75048 12.5172 8.53401C13.2202 8.00606 14.3905 7.67461 15.7313 8.49708C17.491 9.57647 17.8891 13.1374 13.8302 16.1417C13.0571 16.7139 12.6706 17 12 17C11.3294 17 10.9429 16.7139 10.1698 16.1417C6.11086 13.1374 6.50903 9.57647 8.26872 8.49708Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                        <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-width="1.5" />
+                                    </svg><span id="countUnliked">${likeCount - 1}</span>
+                                </button>`;
+
+                            $(form).html(newForm);
+                            $(form).unbind();
+                        },
+
+                    });
+                })
+            }
 </script>

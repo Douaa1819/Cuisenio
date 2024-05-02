@@ -79,5 +79,4 @@
             alert('Your booklist is empty.');
         }
     }
-</script>
-<?php /**PATH C:\laragon\www\Cuisenio\resources\views/components/header.blade.php ENDPATH**/ ?>
+</script><?php /**PATH C:\laragon\www\Cuisenio\resources\views/components/header.blade.php ENDPATH**/ ?>

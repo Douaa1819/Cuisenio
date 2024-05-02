@@ -111,9 +111,9 @@
             <div class="mb-4">
                 <label for="level" class="block text-sm font-medium text-gray-700">Difficulty Level</label>
                 <select id="level" name="level" required
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">        
                     <option></option>
-                    <option value="easy">Easy</option>
+                    <option value="biginner">Beginner</option>
                     <option value="intermediate">Intermediate</option>
                     <option value="advanced">Advanced</option> 
                     <option value="expert">Expert</option>

@@ -5,9 +5,6 @@
             <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md w-full max-w-4xl">
                 <div class="pb-4 flex justify-between items-center">
                     <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">User Management</h2>
-                    <input type="text" id="search"
-                        class="block w-1/4 text-sm py-2 px-4 rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-500"
-                        placeholder="Search users...">
                         <div id="search-results"></div>
                 </div>
                 <div class="">

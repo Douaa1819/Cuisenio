@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="flex items-center mt-4">
                                     <i class="fas fa-clock text-gray-400"></i>
-                                    <span class="ml-2 text-sm text-gray-500">{{ $recipe->updated_at }}s</span>
+                                    <span class="ml-2 text-sm text-gray-500">{{ $recipe->updated_at->format('M d, Y') }}</span>
                                 </div>
                             </div>
                         </div>

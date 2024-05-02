@@ -27,43 +27,65 @@ Route::post('/profile', [HomeController::class, 'updateProfile'])->name('update.
 Route::get('/profile', [HomeController::class, 'profile'])->name('user.profile');
 
 
+Route::post('/', [NewsletterController::class, 'store'])->name('news.store');
+Route::get('/logout', [UserAccesController::class, 'logout'])->name('logout');
+
+
+
 Route::patch('/profile', [HomeController::class, 'password'])->name('password');
 //------------------------------------auth---------------------------------------
 Route::get('/register', [CustomAuthController::class, 'register'])->name('register');
 Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
 Route::post('/register', [CustomAuthController::class, 'registerUser'])->name('register-user');
 Route::post('/login', [CustomAuthController::class, 'loginUser'])->name('login-user');
-Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');;
-Route::get('/Theme/Search', [LiveSearchController::class, 'theme'])->name('themes');
 
-Route::get('/User/Search', [LiveSearchController::class, 'user'])->name('users');
-Route::get('/Ingredients/Search', [LiveSearchController::class, 'ingredients'])->name('ingredient.search');
+Route::get('/forget-password', [ForgotPasswordLinkController::class, 'index'])->name('forgetPassword');
+
+Route::post('/forget-password', [ForgotPasswordLinkController::class, 'forgetPasswordPost'])->name('post.forget');
+
+Route::get('/reset-password/{token}', [ForgotPasswordLinkController::class, 'ResetPassword'])->name('getRsetPassword');
+
+Route::post('/new-password', [ForgotPasswordLinkController::class, 'NewPassword'])->name('NewPassword');
+
+
+Route::get('/newsletter/details', [NewsletterController::class, 'showListDetails']);
+
+
+
 
 
 
 // Route::get('/recipes', [PrintController::class, 'index']);
 
-Route::get('/recipes/download/{id}', [PrintController::class, 'downloadPDF'])->name('recipes.download');
+
 
 
 Route::post('/subscribe', [NewsletterController::class, 'subscribe']);
 
 
-Route::get('/Recipes/View-More', [HelpController::class, 'viewMore'])->name('viewMore');
-Route::get('/Recipe/Ingrediants/{ingrediants}', [HelpController::class, 'filtreParIngrediant'])->name('ingrediant');
+
 
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-Route::get('/Theme/{theme}', [HelpController::class, 'filtreParTheme'])->name('filtre');
-Route::get('/Theme', [HelpController::class, 'theme'])->name('theme');
-Route::get('/Ingredient', [HelpController::class, 'ingredients'])->name('ingredients');
 //----------------------------------User------------------------------------------------
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/urblog', [HomeController::class, 'urblog'])->name('urblog');
 
 //--------------------------------Recipes---------------------------------------------------
 Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
+    Route::get('/Theme/{theme}', [HelpController::class, 'filtreParTheme'])->name('filtre');
+    Route::get('/Theme', [HelpController::class, 'theme'])->name('theme');
+    Route::get('/Ingredient', [HelpController::class, 'ingredients'])->name('ingredients');
+    Route::get('/Recipes/View-More/Search', [LiveSearchController::class, 'action'])->name('action');
+
+    Route::get('/Ingredients/Search', [LiveSearchController::class, 'ingredients'])->name('ingredient.search');
+    Route::get('/Recipes/View-More', [HelpController::class, 'viewMore'])->name('viewMore');
+    Route::get('/Recipe/Ingrediants/{ingrediants}', [HelpController::class, 'filtreParIngrediant'])->name('ingrediant');
+
+
+    Route::get('/recipes/download/{id}', [PrintController::class, 'downloadPDF'])->name('recipes.download');
+
     Route::resource('blog', ContentController::class);
     Route::get('/Show/Recipe', [HelpController::class, 'show'])->name('My.recipe');
 
@@ -72,7 +94,6 @@ Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
     Route::get('/Recipe/{recipe}', [HelpController::class, 'details'])->name('recipes.more');
     Route::get('/RecipeOfSeason', [HelpController::class, 'season']);
     Route::resource('recipes', RecipeController::class);
-
 
     Route::get('/home', [HelpController::class, 'last'])->name('latest-recipes');
 
@@ -84,6 +105,9 @@ Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
     Route::get('/More', [HomeController::class, 'more'])->name('more');
 
     Route::get('/home', [HomeController::class, 'see'])->name('user.index');
+
+
+        
 });
 
 
@@ -112,20 +136,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 //---------------------------news.store--------------------------------------------
 
 
-Route::get('/forget-password', [ForgotPasswordLinkController::class, 'index'])->name('forgetPassword');
-
-Route::post('/forget-password', [ForgotPasswordLinkController::class, 'forgetPasswordPost'])->name('post.forget');
-
-Route::get('/reset-password/{token}', [ForgotPasswordLinkController::class, 'ResetPassword'])->name('getRsetPassword');
-
-Route::post('/new-password', [ForgotPasswordLinkController::class, 'NewPassword'])->name('NewPassword');
 
 
-Route::get('/newsletter/details', [NewsletterController::class, 'showListDetails']);
-Route::post('/', [NewsletterController::class, 'store'])->name('news.store');
-Route::get('/logout', [UserAccesController::class, 'logout'])->name('logout');
 
-
-Route::get('/singleblog', function () {
-    return view('user.singleBlog');
-})->name('blog.page');

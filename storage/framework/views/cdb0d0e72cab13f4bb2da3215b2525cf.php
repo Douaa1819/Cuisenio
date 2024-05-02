@@ -19,21 +19,18 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 w-full max-w-6xl">
                 <div class="bg-white rounded-lg shadow p-4 space-y-2">
                     <span class="text-gray-700 font-semibold">number of users:</span>
-                    <span class="text-2xl font-bold"><?php echo e($user); ?></span>
-                    <div class="text-green-500"><i class="fas fa-arrow-up"></i> 12%</div>
+                    <span class="text-2xl  text-green-500  font-bold"><?php echo e($user); ?></span>
                 </div>
 
                 <div class="bg-white rounded-lg shadow p-4 space-y-2">
                     <span class="text-gray-700 font-semibold">number of recipes:</span>
-                    <span class="text-2xl font-bold"><?php echo e($recipes); ?></span>
-                    <div class="text-green-500"><i class="fas fa-arrow-up"></i> <?php echo e($user); ?></div>
+                    <span class="text-2xl text-green-500 font-bold"><?php echo e($recipes); ?></span>
                 </div>
 
 
                 <div class="bg-white rounded-lg shadow p-4 space-y-2">
                     <span class="text-gray-700 font-semibold">number of Themes:</span>
-                    <span class="text-2xl font-bold"><?php echo e($themes); ?></span>
-                    <div class="text-green-500"><i class="fas fa-arrow-up"></i> <?php echo e($user); ?></div>
+                    <span class="text-2xl  text-green-500 font-bold"><?php echo e($themes); ?></span>
                 </div>
                
             </div>
@@ -56,4 +53,4 @@
             © 2024 Cuisénio. All rights reserved.
         </div>
         </div>
-        </footer><?php /**PATH C:\laragon\www\Cuisenio\resources\views/admin/index.blade.php ENDPATH**/ ?>
+        </footer><?php /**PATH C:\laragon\www\Cuisenio\resources\views\admin\index.blade.php ENDPATH**/ ?>

@@ -10,21 +10,18 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 w-full max-w-6xl">
                 <div class="bg-white rounded-lg shadow p-4 space-y-2">
                     <span class="text-gray-700 font-semibold">number of users:</span>
-                    <span class="text-2xl font-bold">{{$user}}</span>
-                    <div class="text-green-500"><i class="fas fa-arrow-up"></i> 12%</div>
+                    <span class="text-2xl  text-green-500  font-bold">{{$user}}</span>
                 </div>
 
                 <div class="bg-white rounded-lg shadow p-4 space-y-2">
                     <span class="text-gray-700 font-semibold">number of recipes:</span>
-                    <span class="text-2xl font-bold">{{$recipes}}</span>
-                    <div class="text-green-500"><i class="fas fa-arrow-up"></i> {{$user}}</div>
+                    <span class="text-2xl text-green-500 font-bold">{{$recipes}}</span>
                 </div>
 
 
                 <div class="bg-white rounded-lg shadow p-4 space-y-2">
                     <span class="text-gray-700 font-semibold">number of Themes:</span>
-                    <span class="text-2xl font-bold">{{$themes}}</span>
-                    <div class="text-green-500"><i class="fas fa-arrow-up"></i> {{$user}}</div>
+                    <span class="text-2xl  text-green-500 font-bold">{{$themes}}</span>
                 </div>
                
             </div>

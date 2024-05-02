@@ -20,10 +20,14 @@ public function index()
 
 
 
+public function show(Content $blog)
 
-    public function create()
-    {
-    }
+{
+
+    return view('user.singleBlog',compact('blog'));
+}
+
+
 
     public function store(ContentRequest $request)
     {

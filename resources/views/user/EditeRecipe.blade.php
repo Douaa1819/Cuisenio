@@ -106,7 +106,7 @@
             <div class="mb-4">
                 <label for="level" class="block text-sm font-medium text-gray-700">Difficulty Level</label>
                 <select id="level" name="level" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-300 focus:border-red-300">
-                    <option value="easy" {{ $recipe->level == 'easy' ? 'selected' : '' }}>Easy</option>
+                    <option value="biginner" {{ $recipe->level == 'biginner' ? 'selected' : '' }}>Biginner</option>
                     <option value="intermediate" {{ $recipe->level == 'intermediate' ? 'selected' : '' }}>Intermediate</option>
                     <option value="advanced" {{ $recipe->level == 'advanced' ? 'selected' : '' }}>Advanced</option>
                     <option value="expert" {{ $recipe->level == 'expert' ? 'selected' : '' }}>Expert</option>

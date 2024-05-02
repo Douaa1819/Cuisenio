@@ -31,7 +31,7 @@ class RecipeRequest extends FormRequest
             'number_of_persons'=>'required|int',
             'ingredients.*' => 'exists:ingrediants,id',
             'steps' => 'required|string',
-            'level' => 'required|in:easy,intermediate,advanced,expert',
+            'level' => 'required|in:biginner,intermediate,advanced,expert',
             'season' => 'required|in:winter,spring,summer,autumn,all season'
         ];
     }

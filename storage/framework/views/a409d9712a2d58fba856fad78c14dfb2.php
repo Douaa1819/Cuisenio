@@ -22,18 +22,15 @@
 <body class="bg-gray-100 dark:bg-gray-800">
     <header class="flex items-center justify-between w-full h-16 bg-red-300 text-gray-600 dark:text-gray-300 px-6 shadow-lg fixed top-0 left-0 right-0 z-50">
         <div class="flex items-center">
-            <!-- Enhanced Cuisénio title with an icon -->
             <i class="fas fa-utensils text-white mr-2"></i>
             <h1 class="text-white text-2xl hover:text-gray-200 cursor-pointer">Cuisénio</h1>
         </div>
 
-        <!-- Burger Menu for Responsive -->
         <div class="block lg:hidden">
             <button id="sidebarToggle" class="text-white focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-        <!-- Profile Dropdown -->
         <div class="relative hidden lg:block">
             <button id="profileDropdown"
                 class="flex items-center space-x-2 bg-red-300 rounded-full p-1 hover:bg-pink-200 focus:outline-none">
@@ -85,13 +82,11 @@
     <main class="relative min-h-screen flex flex-col">
 
 
-        <!-- Sidebar -->
 
         <?php echo e($slot); ?>
 
 
-        <!-- Content -->
-
+    
 
 
     </main>
@@ -114,4 +109,4 @@
 </body>
 
 </html>
-<?php /**PATH C:\laragon\www\Cuisenio\resources\views/components/dashboard.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\Cuisenio\resources\views\components\dashboard.blade.php ENDPATH**/ ?>

@@ -32,50 +32,8 @@ class LiveSearchController extends Controller
         }
     }
 
-    public function user(Request $request)
-    {
-        try {
-            $query = $request->get('query', '');
-            $users = User::where('role', 'user')
-                ->where('name', 'like', '%' . $query . '%')
-                ->orWhere('email', 'like', '%' . $query . '%')
-                ->orderBy('name')
-                ->get();
-            return response()->json($users);
-        } catch (\Exception $e) {
-            Log::error("Error processing request: " . $e->getMessage());
-            return response()->json(['error' => 'Internal Server Error'], 500);
-        }
-    }
+  
 
-    public function theme(Request $request)
-    {
-
-        try {
-            $query = $request->get('query', '');
-            $themes = Theme::with('image')
-                ->where('name', 'like', '%' . $query . '%')
-                ->orderBy('name')
-                ->get();
-            return response()->json($themes);
-        } catch (\Exception $e) {
-            Log::error("Error processing request: " . $e->getMessage());
-            return response()->json(['error' => 'Internal Server Error'], 500);
-        }
-    }
-
-    public function ingredients(Request $request)
-    {
-        try {
-            $query = $request->get('query', '');
-            $ingredients = Ingrediant::with('image')
-                ->where('name', 'like', '%' . $query . '%')
-                ->orderBy('name')
-                ->get();
-            return response()->json($ingredients);
-        } catch (\Exception $e) {
-            Log::error("Error processing request: " . $e->getMessage());
-            return response()->json(['error' => 'Internal Server Error'], 500);
-        }
-    }
+    
+    
 }

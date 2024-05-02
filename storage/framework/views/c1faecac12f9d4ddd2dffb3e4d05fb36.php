@@ -33,8 +33,7 @@
             <div class="pb-4 flex justify-between items-center">
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Ingrediant Management</h2>
                 <div class="flex items-center">
-                    <input type="text" id="search"  placeholder="Search Ingrediants..."
-                        class="text-sm py-2 px-4 rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-500 mr-2">
+                    
                         <div id="search-results">
                             <button type="button"
                             class="px-6 py-4 text-white text-sm font-medium hover:bg-gray-800 transition-colors rounded-md">
@@ -236,4 +235,4 @@
 </footer>
 
 
-<?php /**PATH C:\laragon\www\Cuisenio\resources\views/admin/Ingrediants.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\Cuisenio\resources\views\admin\Ingrediants.blade.php ENDPATH**/ ?>

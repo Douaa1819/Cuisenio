@@ -15,9 +15,9 @@ class CommentController extends Controller
      */
     public function index()
     {
-   $comment=Comment::all();
-   
-   return view('user.readMore',compact('comment'));
+        $comment = Comment::all();
+
+        return view('user.readMore', compact('comment'));
     }
 
     /**
@@ -41,18 +41,20 @@ class CommentController extends Controller
         $commentable = $commentable_type::find($commentable_id);
 
         if (!$commentable) {
-            return response()->json(['error' => 'Commentable entity not found'], 404);
+            return redirect()->back()->with('error' , 'Commentable entity not found');
+
         }
 
-        $comment = $commentable->comments()->create([
+        $comment = $commentable->comment()->create([
             'body' => $body,
             'user_id' => $userID
         ]);
 
         if ($comment) {
-            return response()->json(['success' => 'Comment added successfully!', 'comment' => $comment], 200);
+            return redirect()->back()->with('success' , 'Comment added successfully!');
         } else {
-            return response()->json(['error' => 'Failed to add comment'], 500);
+            return redirect()->back()->with('error' , 'Failed to add comment');
+
         }
     }
 
@@ -63,18 +65,16 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
-{
-    $content = Content::with('comments.user')->find($id);
-    if (!$content) {
-        return redirect()->back()->with('error', 'Content not found!');
+    public function show(Content $content)  
+    {
+        $comments = Comment::where('commentable_type', 'App\Models\Content')->where('commentable_id',$content->id)->get();
+
+        return response()->json(['comments'=> $comments]);
     }
-    return view('user.blog', compact('content'));
-}
 
-    
 
-    
+
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -84,7 +84,7 @@ class CommentController extends Controller
     }
 
 
-    
+
 
     /**
      * Remove the specified resource from storage.
