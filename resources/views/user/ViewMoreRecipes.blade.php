@@ -171,30 +171,7 @@ https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
             });
         }
 
-        // function renderRecipes(data) {
-        //     let html = '';
-        //     if (data.length > 0) {
-        //         data.forEach(recipe => {
-        //             let imageHtml = '';
-        //             if (recipe.image) {
-        //                 imageHtml = `<img src="/storage/${recipe.image.url}" class="h-24 w-24">`;
-        //             }
-
-        //             html += `<div class="recipe-item mt-4 flex space-x-4 px-3">
-        //                 ${imageHtml}
-        //                 <div class="flex flex-col">
-        //                     <p class="text-black capitalize text-xl hover:underline">${recipe.title}</p>
-        //                     <p class="text-gray-400 text-center text-sm">${recipe.season}</p>
-        //                 </div>
-        //                 <div class="border border-black dark:border-gray-500 my-2"></div>
-        //             </div>`;
-        //         });
-        //     } else {
-        //         html = '<p class="text-center">No Data Found</p>';
-        //     }
-        //     $('#search-results').html(html);
-        // }
-
+      
     });
 
     function createRecipe(recipe) {

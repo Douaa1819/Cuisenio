@@ -348,23 +348,7 @@
 }
 </script>
 <script>
-    //  function addComment(button) {
-    //     var form = button.closest('form');
-
-    //     $(form).on('submit', function(event) {
-    //         event.preventDefault();
-    //         $.ajax({
-    //             url: '{{ route('comment.store') }}',
-    //             data: jQuery(form).serialize(),
-    //             method: 'POST',
-    //             success: function(result) {
-    //                 jQuery(form)[0].reset();
-    //                 $(form).unbind();
-
-    //             }
-    //         });
-    //     })
-    // }
+   
     function addfavori(button) {
                 var form = button.closest('form')
                 $(form).on('submit', function(event) {

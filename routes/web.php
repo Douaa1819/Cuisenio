@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContentCommentController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ForgotPasswordLinkController;
 use App\Http\Controllers\recipes\ThemeController;
@@ -96,6 +97,9 @@ Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
     Route::resource('recipes', RecipeController::class);
 
     Route::get('/home', [HelpController::class, 'last'])->name('latest-recipes');
+    Route::get('/commentContent/{id}', [ContentCommentController::class, 'show'])->name('commentContent.show');
+    Route::post('/commentContent', [ContentCommentController::class, 'store'])->name('commentContent.store');
+    Route::delete('/comment/delete/{id}', [ContentCommentController::class, 'destroy'])->name('commentContent.delete');
 
     Route::resource('blog', ContentController::class);
 
@@ -105,9 +109,6 @@ Route::middleware(['auth', 'role:user', 'isBanned'])->group(function () {
     Route::get('/More', [HomeController::class, 'more'])->name('more');
 
     Route::get('/home', [HomeController::class, 'see'])->name('user.index');
-
-
-        
 });
 
 
@@ -134,8 +135,3 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 //---------------------------news.store--------------------------------------------
-
-
-
-
-

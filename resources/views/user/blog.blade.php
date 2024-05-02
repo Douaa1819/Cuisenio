@@ -183,7 +183,7 @@
                                         stroke="currentColor" stroke-width="1.5" />
                                 </svg>
                             </a>
-                            <a onclick="toggleCommentsModal(1);" class="cursor-pointer">
+                            <div onclick="openComment(this,'{{ $content->id }}')" class="cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                                     height="24" color="#000000" fill="none">
                                     <path d="M8 13.5H16M8 8.5H12" stroke="currentColor" stroke-width="1.5"
@@ -192,7 +192,7 @@
                                         d="M6.09881 19C4.7987 18.8721 3.82475 18.4816 3.17157 17.8284C2 16.6569 2 14.7712 2 11V10.5C2 6.72876 2 4.84315 3.17157 3.67157C4.34315 2.5 6.22876 2.5 10 2.5H14C17.7712 2.5 19.6569 2.5 20.8284 3.67157C22 4.84315 22 6.72876 22 10.5V11C22 14.7712 22 16.6569 20.8284 17.8284C19.6569 19 17.7712 19 14 19C13.4395 19.0125 12.9931 19.0551 12.5546 19.155C11.3562 19.4309 10.2465 20.0441 9.14987 20.5789C7.58729 21.3408 6.806 21.7218 6.31569 21.3651C5.37769 20.6665 6.29454 18.5019 6.5 17.5"
                                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                 </svg>
-                            </a>
+                            </div>
                             <a href="{{ route('blog.show', $content->id) }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
                                     height="24" color="#000000" fill="none">
@@ -334,8 +334,7 @@
                         class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-red-400 rounded-lg focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 hover:bg-red-500">
                         Post comment
                     </button>
-                    <button onclick="openComment(this,'{{ $content->id }}')" data-modal-hide="static-modal"
-                        type="button"
+                    <button data-modal-hide="static-modal" type="button"
                         class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
                 </div>
             </form>
@@ -382,23 +381,54 @@
 
     function openComment(button, id) {
         $(button).on('click', function(event) {
-            $.ajax({
-                url: "{{ route('comment.show', '') }}" + '/' + id,
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data.authId);
-                    var popup = $('#comment-popup');
-                    popup.removeClass('hidden');
-                    $('.comments-container').empty();
-                    console.log(data.id);
-                    data.comments.forEach(function(comment) {
-                        var commentHtml = `
+
+            showComment(id)
+        });
+    }
+
+
+    function addComment(button) {
+
+        var form = button.closest('form');
+
+        console.log(jQuery(form).serialize(), );
+        $.ajax({
+            url: "{{ route('commentContent.store') }}",
+            data: jQuery(form).serialize(),
+            method: 'POST',
+            success: function(result) {
+
+
+
+
+                showComment(result.idComent)
+
+
+            },
+        });
+
+
+    }
+
+    function showComment(id) {
+        $.ajax({
+            url: "{{ route('commentContent.show', '') }}" + '/' + id,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                var popup = $('#comment-popup');
+                popup.removeClass('hidden');
+                $('.comments-container').empty();
+                console.log(data.id);
+                data.comments.forEach(function(comment) {
+                    var commentHtml = `
                                       <div class="flex items-center space-x-2">
                                     <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
                                     ${comment.user.profile_photo_url
                                           ? `<img src="/storage/${comment.user.profile_photo_url}" alt="" class="h-8 w-8 object-fill rounded-full">` 
-                                          :''
+                                          :`<img src="{{ asset('images/cheef.jpg') }}" alt="" class="h-8 w-8 object-fill rounded-full">`
+                                          
                                       }
                                     </div>
                                     <div class="flex justify-between w-full bg-gray-100 rounded-xl">
@@ -407,144 +437,58 @@
                                              
                                                     <small>${comment.user.name}</small>
                                             </div>
-                                            <div class="text-xs">${comment.content}</div>
+                                            <div class="text-xs">${comment.body}</div>
                                         </div>
-                                        ${comment.user.id === data.authId ? 
+                                        ${comment.user_id == data.authId ? 
                                           `<form method="post">
                                           @csrf
                                           @method('DELETE')
-                                          <button onclick="deleteComment(this,${comment.id})" class=" pt-3">
+                                          <button onclick="deleteComment(this,${comment.id},${id})" class=" pt-3">
                                               delete
                                           </button>
                                       </form>` : ``}
                                     </div>
                                 </div>
                                       `;
-                        $('.comments-container').append(commentHtml);
-                    });
-                    var form = `
-                                     @csrf
-                                        @method('POST')
-                                        <div class="flex items-center border border-gray-300 bg-white px-2 py-1 rounded-xl">
-                                            <input type="hidden" name="post_id" value="${id}">
-                                          <input type="text" name="content" class="w-full rounded-md focus:outline-none" placeholder="Write a comment...">
-                                            <button onclick="addComment(this)" class="bg-gray-500 text-black px-3 py-1 rounded-md ml-2">
-                                                <span class="fas fa-paper-plane"></span> 
-                                            </button>
-                                        </div>
+                    $('.comments-container').append(commentHtml);
+                });
+                var form = `
+                                  
+                                <form id="addCommentForm" class="space-y-4" method="post">
+                                 @method('POST')
+                                    @csrf
+                                    <input type="hidden" name="commentable_type" value="Content">
+                                    <input type="hidden" name="commentable_id" value="${id}">
+                                    
+                                    <textarea name="body" rows="4" class="w-full p-2 border border-gray-300 rounded-md focus:ring-red-300 focus:border-red-300" placeholder="Write your comment here..."></textarea>
+                                    <button type="button" onclick="addComment(this)" class="px-6 py-2 bg-red-300 text-white rounded-full hover:bg-red-400 transition-colors">Add Comment</button>
                                      `;
-                    $('#commentForm').html(form);
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
+                $('#commentForm').html(form);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
         });
     }
 
-    function addComment(button) {
-        var form = button.closest('form');
-        $(form).on('submit', function(event) {
-            event.preventDefault();
-            $.ajax({
-                url: "{{ route('comment.store') }}",
-                data: jQuery(form).serialize(),
-                method: 'POST',
-                success: function(result) {
-                    console.log(result.authId);
-                    var popup = $('#comment-popup');
-                    popup.removeClass('hidden');
-                    $('.comments-container').empty();
-                    console.log(result.authId);
-                    result.comments.forEach(function(comment) {
-                        var commentHtml = `
-                              <div class="flex items-center space-x-2">
-                                    <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
-                                    ${comment.client.image 
-                                          ? `<img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">` 
-                                          : (comment.client.gender === 'female' 
-                                              ? `<img src="{{ asset('imgs/profileFemale.png') }}" alt="" class="h-8 w-8 object-fill rounded-full">` 
-                                              : `<img src="{{ asset('imgs/profileMale.png') }}" alt="" class="h-8 w-8 object-fill rounded-full">`)
-                                      }                                    </div>
-                                    <div class="flex justify-between w-full bg-gray-100 rounded-xl">
-                                        <div class="w-auto px-2 pb-2">
-                                            <div class="font-medium">
-                                                <a href="/${comment.client.user.username}" class="hover:underline text-sm flex">
-                                                    <small>${comment.client.user.name}</small>
-                                                </a>
-                                            </div>
-                                            <div class="text-xs">${comment.content}</div>
-                                        </div>
-                                        ${comment.client.id === result.authId ? 
-                                          `<form method="post">
-                                          @csrf
-                                          @method('DELETE')
-                                          <button onclick="deleteComment(this,${comment.id})" class="text-xs pt-1">
-delete                                          </button>
-                                      </form>` : ``}
-                                    </div>
-                                </div>
-                              `;
-                        $('.comments-container').append(commentHtml);
-                    });
-                    jQuery(form)[0].reset();
-                    $(form).unbind();
-                },
-            });
-        })
 
-    }
+    function deleteComment(button, id, idC) {
+        if (confirm('Are you sure you want to delete this comment?')) {
 
 
-    function deleteComment(button, id) {
-        var form = button.closest('form');
-        $(form).on('submit', function(event) {
-            event.preventDefault();
-            $.ajax({
-                url: '/comment/delete/' + id,
-                data: jQuery(form).serialize(),
-                method: 'DELETE',
-                success: function(result) {
-                    var popup = $('#comment-popup');
-                    popup.removeClass('hidden');
-                    $('.comments-container').empty();
-
-                    result.comments.forEach(function(comment) {
-                        var commentHtml = `
-                                <div class="flex items-center space-x-2">
-                                    <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
-                                    ${comment.client.image 
-                                          ? `<img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">` 
-                                          : (comment.client.gender === 'female' 
-                                              ? `<img src="{{ asset('imgs/profileFemale.png') }}" alt="" class="h-8 w-8 object-fill rounded-full">` 
-                                              : `<img src="{{ asset('imgs/profileMale.png') }}" alt="" class="h-8 w-8 object-fill rounded-full">`)
-                                      }                                    </div>
-                                    <div class="flex justify-between w-full bg-gray-100 rounded-xl">
-                                        <div class="w-auto px-2 pb-2">
-                                            <div class="font-medium">
-                                                <a href="/${comment.client.user.username}" class="hover:underline text-sm flex">
-                                                    <small>${comment.client.user.name}</small>
-                                                </a>
-                                            </div>
-                                            <div class="text-xs">${comment.content}</div>
-                                        </div>
-                                        ${comment.client.id == result.authId ?
-                                           `<form method="post">
-                                          @csrf
-                                          @method('DELETE')
-                                          <button onclick="deleteComment(this,${comment.id})">
-delete                                          </button>
-                                      </form>` : ``}
-                                    </div>
-                                </div>
-                            `;
-                        $('.comments-container').append(commentHtml);
-                    });
-                    $(form).unbind();
-                }
-            });
-        })
-
+            var form = button.closest('form');
+            $(form).on('submit', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '/comment/delete/' + id,
+                    data: jQuery(form).serialize(),
+                    method: 'DELETE',
+                    success: function(result) {
+                        showComment(idC)
+                    }
+                });
+            })
+        }
     }
 </script>
 

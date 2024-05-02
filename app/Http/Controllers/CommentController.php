@@ -65,12 +65,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Content $content)  
-    {
-        $comments = Comment::where('commentable_type', 'App\Models\Content')->where('commentable_id',$content->id)->get();
 
-        return response()->json(['comments'=> $comments]);
-    }
 
 
 
